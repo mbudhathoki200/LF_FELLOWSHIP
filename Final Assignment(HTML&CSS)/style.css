@@ -604,11 +604,13 @@ nav {
 }
 /* footer */
 .footer {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   background: var(--purple);
-  height: 416px;
-
+  padding-top: 29px;
   flex-shrink: 0;
+  gap: 36px;
 }
 .footer__contains {
   color: #fff;
@@ -629,4 +631,108 @@ nav {
   font-weight: 700;
   line-height: 46px; /* 191.667% */
   letter-spacing: 0.48px;
+}
+.footer__socials {
+  width: 90%;
+  margin: auto;
+}
+.footer__socials__list {
+  display: flex;
+  gap: 32px;
+  /* justify-content: center; */
+}
+.footer__socials__img {
+  width: 28.198px;
+  height: 29.549px;
+}
+.footer__socials__img__container {
+  width: 40.604px;
+  height: 42.551px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer__socials__title {
+  color: #fff;
+  font-family: "Proxima Nova";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px; /* 250% */
+  letter-spacing: 0.72px;
+}
+.footer__newsletter {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.footer__newsletter__title {
+  color: #fff;
+  font-family: "Proxima Nova";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 46px; /* 191.667% */
+  letter-spacing: 0.72px;
+}
+.footer__newsletter__buttons__input {
+  width: 84%;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 2px solid #f14a16;
+  background: #370665;
+}
+.footer__newsletter__buttons__input::placeholder {
+  padding: 9px 21px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Proxima Nova";
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 36px; /* 171.429% */
+  letter-spacing: 0.63px;
+}
+.footer__newsletter__button {
+  width: 200px;
+  height: 51.822px;
+  border-radius: 20px;
+  background: #f14a16;
+  color: #fff;
+  font-family: "Proxima Nova";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 46px; /* 176.923% */
+  letter-spacing: 1.3px;
+}
+.footer__newsletter__buttons__container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+.footer__newsletter__copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer__newsletter__copyright__image {
+  width: 193.965px;
+  height: 172.241px;
+}
+.footer__newsletter__copyright__text {
+  color: #fff;
+  font-family: "Proxima Nova";
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 46px; /* 219.048% */
+  letter-spacing: 1.05px;
 }
