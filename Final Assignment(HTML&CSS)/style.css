@@ -40,46 +40,88 @@ body {
   justify-content: center;
   align-items: center;
   gap: 32px;
+  position: relative;
+}
+
+/* ellipse */
+.background__ellipse__purple {
+  border-radius: 443.813px;
+  background: #370665;
+  filter: blur(300px);
+  position: absolute;
+  width: 443.813px;
+  height: 443.813px;
+  flex-shrink: 0;
+  top: 0;
+  left: 50;
+  border: 2px solid red;
+}
+.background__ellipse__blue {
+  border-radius: 420.552px;
+  background: #35589a;
+  position: absolute;
+  filter: blur(250px);
+  width: 420.552px;
+  height: 420.552px;
+  flex-shrink: 0;
+  top: 466;
+  left: 11;
 }
 
 /* nav bar */
 
 nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-left: 20px;
-  margin-right: 23px;
+  /* margin-left: 20px;
+  margin-right: 23px; */
   margin-top: 26px;
-  gap: 138px;
+  /* gap: 100px; */
   width: 90%;
 }
 .nav__left {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  /* justify-content: center; */
+  /* width: 50%; */
 }
 .left__image {
   width: 21px;
   height: 12.857px;
 }
 .nav__right {
+  /* width: 50%; */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 43px;
+  gap: 38px;
 }
-.musify__logo {
+.nav__right__logo {
   width: 60px;
   height: 60px;
 }
+
+.nav__right__logo__image {
+  width: 100%;
+  height: 100%;
+}
+.nav__right__converter {
+}
+.nav__right__converter__image {
+  width: 100%;
+  height: 100%;
+}
+
 .converter__image {
   width: 60px;
   height: 27px;
 }
-.cart__image {
-  width: 17.8px;
-  height: 17.8px;
+.nav__right__cart__image {
+  width: 100%;
+  height: 100%;
+}
+.nav__right__cart {
+  /* width: 17.8px;
+  height: 17.8px; */
 }
 
 /* searchbar */
@@ -254,7 +296,7 @@ nav {
 .scroll_down {
   width: 60px;
   height: 60px;
-  margin: 53px 0px;
+  margin-top: 53px;
 }
 
 /* popular trends */
@@ -378,7 +420,7 @@ nav {
   align-items: center;
   /* justify-content: center; */
   gap: 19px;
-  width: 285px;
+  width: 68%;
   height: 484px;
   flex-shrink: 0;
   border-radius: 25px;
@@ -393,7 +435,7 @@ nav {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  width: 190px;
+  width: 80%;
 }
 .buy__card {
   display: flex;
