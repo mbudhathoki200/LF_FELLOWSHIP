@@ -2,6 +2,7 @@
   --background: #070606;
   --hero-highlight: #f14a16;
   --purple: #370665;
+  --blue: #35589a;
 }
 @font-face {
   font-family: "Proxima Nova";
@@ -41,25 +42,27 @@ body {
   align-items: center;
   gap: 32px;
   position: relative;
+  z-index: 1;
 }
 
 /* ellipse */
-.background__ellipse__purple {
-  border-radius: 443.813px;
-  background: #370665;
-  filter: blur(300px);
+.background__ellipse {
+  z-index: -1;
   position: absolute;
+}
+.ellipse__purple {
+  border-radius: 443.813px;
+  background: var(--purple);
+  filter: blur(300px);
   width: 443.813px;
   height: 443.813px;
   flex-shrink: 0;
   top: 0;
   left: 50;
-  border: 2px solid red;
 }
-.background__ellipse__blue {
+.ellipse__blue {
   border-radius: 420.552px;
-  background: #35589a;
-  position: absolute;
+  background: var(--blue);
   filter: blur(250px);
   width: 420.552px;
   height: 420.552px;
