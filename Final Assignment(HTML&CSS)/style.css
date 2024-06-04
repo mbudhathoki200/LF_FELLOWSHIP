@@ -81,6 +81,15 @@ body.light-mode {
 .light-mode .offer__title {
   color: var(--background);
 }
+.light-mode .nav__right-cart {
+  filter: brightness(0%);
+}
+.light-mode .nav__search {
+  filter: brightness(0%);
+}
+.light-mode .nav__left-image {
+  filter: brightness(0%);
+}
 
 /* ellipse */
 .ellipse {
@@ -424,8 +433,6 @@ input:checked + .slider:before {
   height: 210px;
   object-fit: cover;
   border-radius: 50px 50px 0px 0px;
-  background: url(<path-to-image>) lightgray 0px -53.067px / 100% 161.301% no-repeat,
-    #c4c4c4;
 }
 .trends__buttons {
   display: flex;
