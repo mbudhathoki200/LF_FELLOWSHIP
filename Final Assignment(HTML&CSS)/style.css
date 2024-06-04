@@ -50,6 +50,9 @@ body {
   color: white;
   background-color: var(--background);
 }
+html {
+  scroll-behavior: smooth;
+}
 body.light-mode {
   color: var(--background);
 }
@@ -208,6 +211,8 @@ body.light-mode {
   position: relative;
   width: 50px;
   height: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 25px;
 }
 
 .btn input {
@@ -235,13 +240,13 @@ body.light-mode {
   width: 19px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: #878787;
   transition: 0.4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: var(--bg-dark);
+  background-color: var(--background);
 }
 
 input:checked + .slider:before {
@@ -1106,7 +1111,7 @@ input:checked + .slider:before {
     top: 0px;
     z-index: -1;
     right: 0px;
-    height: 1082px;
+    height: 865px;
   }
   .hero__button:hover {
     scale: 1.05;
@@ -1135,22 +1140,32 @@ input:checked + .slider:before {
     margin-top: 73px;
   }
   .hero__title {
-    width: 33%;
+    width: 45%;
     font-size: 85px;
     font-style: normal;
     font-weight: 700;
     line-height: 100px; /* 117.647% */
     letter-spacing: 4.25px;
   }
+
   .hero__body {
+    width: 727px;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 250;
+    line-height: 40px;
+    letter-spacing: 0.64px;
+    /* height: auto; */
+  }
+  /* .hero__body {
     width: 50%;
     font-size: 32px;
     font-style: normal;
     font-weight: 250;
-    line-height: 40px; /* 125% */
+    line-height: 40px; 
     letter-spacing: 0.64px;
     height: auto;
-  }
+  } */
 
   /* popular trends */
   .trends__cards-container {
