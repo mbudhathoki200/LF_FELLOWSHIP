@@ -149,6 +149,27 @@ body.light-mode {
   width: 21px;
   height: 12.857px;
 }
+.hero__background-image {
+  display: none;
+}
+.hero__body {
+  overflow: hidden;
+}
+.footer__country {
+  display: none;
+}
+.nav__list {
+  display: none;
+}
+.nav__search {
+  display: none;
+}
+.nav--button {
+  display: none;
+}
+.footer__country {
+  display: none;
+}
 
 .nav__right {
   display: flex;
@@ -931,439 +952,9 @@ input:checked + .slider:before {
 }
 /* media queries */
 
-@media screen and (min-width: 1728px) {
-  /* ellipse */
-  .ellipse--blue {
-    width: 700px;
-    height: 700px;
-    flex-shrink: 0;
-    border-radius: 904px;
-    background: #35589a;
-    filter: blur(250px);
-    top: 274px;
-    left: 15px;
-  }
-
-  .ellipse--purple {
-    width: 840px;
-    height: 840px;
-    flex-shrink: 0;
-    border-radius: 954px;
-    background: #370665;
-    filter: blur(300px);
-    top: 0px;
-    right: 0px;
-  }
-
-  .body {
-    overflow-x: hidden;
-  }
-  .section--title {
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 40px; /* 62.5% */
-    letter-spacing: 1.28px;
-    margin: 100px 0px;
-  }
-
-  /* scanner section */
-  .scanner {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 183px;
-    margin: 100px 0;
-  }
-  .scanner__qr__image {
-    width: 350px;
-    height: 350px;
-  }
-  .scanner__contents__title {
-    font-size: 56px;
-  }
-  .scanner__contents__body {
-    font-size: 32px;
-  }
-  .scanner__contents__buttons__container {
-    flex-direction: row;
-    justify-content: center;
-  }
-  .scanner__contents__buttons {
-    width: 278px;
-  }
-  .scanner__contents__buttons__adjust {
-    width: 410px;
-  }
-
-  /* accessories section */
-  .accessories__container {
-    display: flex;
-    gap: 30px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .accessories__image {
-    width: 720px;
-    height: 400px;
-  }
-  .accessories--title {
-    font-size: 65px;
-  }
-
-  /* offer section */
-  .offer {
-    height: 721px;
-    align-items: center;
-    justify-content: center;
-  }
-  .offer__image {
-    order: -1;
-    width: 725px;
-    height: 720px;
-  }
-  .offer__title {
-    font-size: 65px;
-  }
-  .offer__timer-title {
-    font-size: 36px;
-  }
-  .offer__countdown-time-text {
-    font-size: 36px;
-  }
-  .offer__countdown-time {
-    font-size: 60px;
-  }
-  .timer-custom {
-    width: 225px;
-    height: 75px;
-    font-size: 26px;
-  }
-
-  /* Buy Section
-   */
-  .buy {
-    width: 90%;
-    gap: 39px;
-    height: 232px;
-    justify-content: center;
-    margin: 100px 0;
-  }
-  .buy__title {
-    font-size: 45px;
-  }
-  .buy__contents {
-    flex-direction: row;
-  }
-  .buy__card__image {
-    width: 64.043px;
-    height: 58px;
-  }
-
-  .buy__card__content {
-    color: #fff;
-    font-family: "Proxima Nova";
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 1.08px;
-  }
-  /* hero section */
-  .hero_contents {
-    display: flex;
-  }
-  .searchbar {
-    display: none;
-  }
-  .hero__background-image img {
-    position: absolute;
-    top: 0px;
-    z-index: -1;
-    right: 0;
-    height: 945px;
-  }
-
-  /* headphones */
-
-  .headphone {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .headphone__container {
-    justify-content: end;
-    width: auto;
-  }
-  .headphone__scroll-down {
-    display: flex;
-    width: 28%;
-    height: 80px;
-    justify-content: center;
-  }
-  .hero {
-    margin-top: 297px;
-    color: #e5e5e5;
-    margin-top: 73px;
-  }
-  .hero__title {
-    width: 33%;
-    font-size: 85px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100px; /* 117.647% */
-    letter-spacing: 4.25px;
-  }
-  .hero__body {
-    width: 50%;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 250;
-    line-height: 40px; /* 125% */
-    letter-spacing: 0.64px;
-    height: auto;
-  }
-
-  /* popular trends */
-  .trends__cards-container {
-    gap: 124px;
-  }
-  .trends__card {
-    width: 376px;
-    height: 696px;
-  }
-  .popular__trends__image {
-    width: 376px;
-    height: 331px;
-    object-fit: cover;
-  }
-  .trends__contents-title {
-    width: 329px;
-    font-size: 26px;
-    font-weight: 400;
-    line-height: 36px; /* 138.462% */
-    letter-spacing: 0.52px;
-    padding-bottom: 20px;
-  }
-  .trends__contents {
-    gap: 12px;
-  }
-  .trends__contents-features {
-    color: #fff;
-    width: 211px;
-    font-family: "Proxima Nova";
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 36px; /* 200% */
-    letter-spacing: 0.36px;
-  }
-  .trends__contents-price {
-    /* width: 79px; */
-    color: #fc9918;
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 36px; /* 128.571% */
-    letter-spacing: 0.56px;
-  }
-  .trends__button {
-    width: 150px;
-    height: 50px;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.8px;
-  }
-  .trends__button--skin2 {
-    font-size: 16px;
-    border-radius: 50px;
-    /* background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.7) 0%,
-      rgba(255, 255, 255, 0.1) 100%
-    ); */
-    background: transparent;
-  }
-  /* new arrivals */
-  #button--purple {
-    background: var(--purple);
-  }
-
-  /* footer */
-
-  .footer {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 170px;
-    position: relative;
-  }
-
-  .footer__newsletter {
-    /* display: none; */
-  }
-  .footer__newsletter {
-    position: absolute;
-    width: 423px;
-    top: 747px;
-    left: 137px;
-  }
-  .footer__newsletter__title {
-    font-size: 32px;
-  }
-  .footer__newsletter__buttons__container {
-    flex-direction: row;
-  }
-  .footer__newsletter__copyright {
-    order: -1;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 1000px;
-  }
-  .footer__newsletter__copyright__text {
-    /* display: none; */
-    position: absolute;
-    bottom: 18px;
-    left: 40%;
-    font-size: 32px;
-  }
-  .footer__contains {
-    width: auto;
-  }
-  .footer__newsletter__copyright__image {
-    width: 365.517px;
-    height: 324.579px;
-    flex-shrink: 0;
-  }
-  .footer__contains__title {
-    font-size: 32px;
-  }
-  .footer__item {
-    font-size: 28px;
-    font-weight: 400;
-  }
-  .footer__contains {
-    display: flex;
-    flex-direction: column;
-    gap: 94px;
-  }
-  .footer__left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .footer__newsletter__button {
-    width: 246px;
-    height: 64px;
-    flex-shrink: 0;
-  }
-
-  /* navbar */
-  .nav__left {
-    display: none;
-  }
-  .nav__right {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-  }
-  .nav__logo {
-    width: 125px;
-    height: 111px;
-  }
-  .nav__logo img {
-    width: 100%;
-    height: 100%;
-  }
-  .nav__cart__image {
-    width: 29.667px;
-    height: 29.667px;
-    flex-shrink: 0;
-  }
-  .nav__search {
-    color: white;
-  }
-  .nav__cart {
-    color: white;
-  }
-  .nav__buttons {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-  }
-  .nav--button {
-    width: 127px;
-    height: 52px;
-    color: var(--hero-highlight);
-    background: transparent;
-    border-radius: 15px;
-    border: 1px solid #f14a16;
-    color: #f14a16;
-    font-family: "Proxima Nova";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 0.8px;
-  }
-  .nav__list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .nav__list ul {
-    display: flex;
-    gap: 50px;
-    align-items: center;
-    justify-content: center;
-  }
-  .nav__list li a {
-    color: #fff;
-    text-decoration: none;
-    font-family: "Proxima Nova";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.96px;
-  }
-
-  .nav__inner {
-    display: flex;
-    gap: 70px;
-    justify-content: center;
-    align-items: center;
-  }
-  .nav__cart {
-    width: 30px;
-    height: 30px;
-  }
-  .nav__cart img {
-    width: 100%;
-    height: 100%;
-  }
-  .button--skin1 {
-    width: 223px;
-    height: 64px;
-    font-size: 24px;
-  }
-  .button--skin2 {
-    width: 223px;
-    height: 64px;
-    font-size: 24px;
-  }
-  .light-mode .headphone__card {
-    background: linear-gradient(
-      116deg,
-      rgba(192, 192, 192, 0.63) -10.88%,
-      rgba(255, 255, 255, 0.49) -10.87%,
-      rgba(255, 255, 255, 0.07) 74.79%
-    );
-  }
-}
 @media screen and (min-width: 1400px) {
   /* ellipse */
+
   .ellipse--blue {
     width: 700px;
     height: 700px;
@@ -1435,8 +1026,8 @@ input:checked + .slider:before {
     justify-content: center;
   }
   .accessories__image {
-    width: 720px;
-    height: 400px;
+    width: 35%;
+    height: 35%;
   }
   .accessories--title {
     font-size: 65px;
@@ -1507,12 +1098,19 @@ input:checked + .slider:before {
   .searchbar {
     display: none;
   }
+  .hero__background-image {
+    display: block;
+  }
   .hero__background-image img {
     position: absolute;
     top: 0px;
     z-index: -1;
-    right: -97px;
+    right: 0px;
     height: 1082px;
+  }
+  .hero__button:hover {
+    scale: 1.05;
+    transition: all 3ms ease-in-out;
   }
 
   /* headphones */
@@ -1793,27 +1391,438 @@ input:checked + .slider:before {
     );
   }
 }
+@media screen and (min-width: 1728px) {
+  /* ellipse */
+  .ellipse--blue {
+    width: 700px;
+    height: 700px;
+    flex-shrink: 0;
+    border-radius: 904px;
+    background: #35589a;
+    filter: blur(250px);
+    top: 274px;
+    left: 15px;
+  }
 
-@media screen and (max-width: 415px) {
-  .hero__background-image {
+  .ellipse--purple {
+    width: 840px;
+    height: 840px;
+    flex-shrink: 0;
+    border-radius: 954px;
+    background: #370665;
+    filter: blur(300px);
+    top: 0px;
+    right: 0px;
+  }
+
+  .body {
+    overflow-x: hidden;
+  }
+  .section--title {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 40px; /* 62.5% */
+    letter-spacing: 1.28px;
+    margin: 100px 0px;
+  }
+
+  /* scanner section */
+  .scanner {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 183px;
+    margin: 100px 0;
+  }
+  .scanner__qr__image {
+    width: 350px;
+    height: 350px;
+  }
+  .scanner__contents__title {
+    font-size: 56px;
+  }
+  .scanner__contents__body {
+    font-size: 32px;
+  }
+  .scanner__contents__buttons__container {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .scanner__contents__buttons {
+    width: 278px;
+  }
+  .scanner__contents__buttons__adjust {
+    width: 410px;
+  }
+
+  /* accessories section */
+  .accessories__container {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .accessories__image {
+    width: 720px;
+    height: 400px;
+  }
+  .accessories--title {
+    font-size: 65px;
+  }
+
+  /* offer section */
+  .offer {
+    height: 721px;
+    align-items: center;
+    justify-content: center;
+  }
+  .offer__image {
+    order: -1;
+    width: 725px;
+    height: 720px;
+  }
+  .offer__title {
+    font-size: 65px;
+  }
+  .offer__timer-title {
+    font-size: 36px;
+  }
+  .offer__countdown-time-text {
+    font-size: 36px;
+  }
+  .offer__countdown-time {
+    font-size: 60px;
+  }
+  .timer-custom {
+    width: 225px;
+    height: 75px;
+    font-size: 26px;
+  }
+
+  /* Buy Section
+   */
+  .buy {
+    width: 90%;
+    gap: 39px;
+    height: 232px;
+    justify-content: center;
+    margin: 100px 0;
+  }
+  .buy__title {
+    font-size: 45px;
+  }
+  .buy__contents {
+    flex-direction: row;
+  }
+  .buy__card__image {
+    width: 64.043px;
+    height: 58px;
+  }
+
+  .buy__card__content {
+    color: #fff;
+    font-family: "Proxima Nova";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.08px;
+  }
+  /* hero section */
+  .hero_contents {
+    display: flex;
+  }
+  .searchbar {
     display: none;
+  }
+  .hero__background-image img {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    right: 0;
+    height: 945px;
+  }
+  .hero__button:hover {
+    scale: 1.05;
+    transition: all 3ms ease-in-out;
+  }
+
+  /* headphones */
+
+  .headphone {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .headphone__container {
+    justify-content: end;
+    width: auto;
+  }
+  .headphone__scroll-down {
+    display: flex;
+    width: 28%;
+    height: 80px;
+    justify-content: center;
+  }
+  .hero {
+    margin-top: 297px;
+    color: #e5e5e5;
+    margin-top: 73px;
+  }
+  .hero__title {
+    width: 33%;
+    font-size: 85px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100px; /* 117.647% */
+    letter-spacing: 4.25px;
   }
   .hero__body {
-    overflow: hidden;
+    width: 50%;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 250;
+    line-height: 40px; /* 125% */
+    letter-spacing: 0.64px;
+    height: auto;
   }
-  .footer__country {
+
+  /* popular trends */
+  .trends__cards-container {
+    gap: 124px;
+  }
+  .trends__card {
+    width: 376px;
+    height: 696px;
+  }
+  .popular__trends__image {
+    width: 376px;
+    height: 331px;
+    object-fit: cover;
+  }
+  .trends__contents-title {
+    width: 329px;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 36px; /* 138.462% */
+    letter-spacing: 0.52px;
+    padding-bottom: 20px;
+  }
+  .trends__contents {
+    gap: 12px;
+  }
+  .trends__contents-features {
+    color: #fff;
+    width: 211px;
+    font-family: "Proxima Nova";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px; /* 200% */
+    letter-spacing: 0.36px;
+  }
+  .trends__contents-price {
+    /* width: 79px; */
+    color: #fc9918;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 36px; /* 128.571% */
+    letter-spacing: 0.56px;
+  }
+  .trends__button {
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.8px;
+  }
+  .trends__button--skin2 {
+    font-size: 16px;
+    border-radius: 50px;
+    /* background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    ); */
+    background: transparent;
+  }
+  /* new arrivals */
+  #button--purple {
+    background: var(--purple);
+  }
+
+  /* footer */
+
+  .footer {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 170px;
+    position: relative;
+  }
+
+  .footer__newsletter {
+    /* display: none; */
+  }
+  .footer__newsletter {
+    position: absolute;
+    width: 423px;
+    top: 747px;
+    left: 137px;
+  }
+  .footer__newsletter__title {
+    font-size: 32px;
+  }
+  .footer__newsletter__buttons__container {
+    flex-direction: row;
+  }
+  .footer__newsletter__copyright {
+    order: -1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1000px;
+  }
+  .footer__newsletter__copyright__text {
+    /* display: none; */
+    position: absolute;
+    bottom: 18px;
+    left: 40%;
+    font-size: 32px;
+  }
+  .footer__contains {
+    width: auto;
+  }
+  .footer__newsletter__copyright__image {
+    width: 365.517px;
+    height: 324.579px;
+    flex-shrink: 0;
+  }
+  .footer__contains__title {
+    font-size: 32px;
+  }
+  .footer__item {
+    font-size: 28px;
+    font-weight: 400;
+  }
+  .footer__contains {
+    display: flex;
+    flex-direction: column;
+    gap: 94px;
+  }
+  .footer__left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer__newsletter__button {
+    width: 246px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  /* navbar */
+  .nav__left {
     display: none;
   }
-  .nav__list {
-    display: none;
+  .nav__right {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav__logo {
+    width: 125px;
+    height: 111px;
+  }
+  .nav__logo img {
+    width: 100%;
+    height: 100%;
+  }
+  .nav__cart__image {
+    width: 29.667px;
+    height: 29.667px;
+    flex-shrink: 0;
   }
   .nav__search {
-    display: none;
+    color: white;
+  }
+  .nav__cart {
+    color: white;
+  }
+  .nav__buttons {
+    display: flex;
+    gap: 40px;
+    align-items: center;
   }
   .nav--button {
-    display: none;
+    width: 127px;
+    height: 52px;
+    color: var(--hero-highlight);
+    background: transparent;
+    border-radius: 15px;
+    border: 1px solid #f14a16;
+    color: #f14a16;
+    font-family: "Proxima Nova";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.8px;
   }
-  .footer__country {
-    display: none;
+  .nav__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav__list ul {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav__list li a {
+    color: #fff;
+    text-decoration: none;
+    font-family: "Proxima Nova";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.96px;
+  }
+
+  .nav__inner {
+    display: flex;
+    gap: 70px;
+    justify-content: center;
+    align-items: center;
+  }
+  .nav__cart {
+    width: 30px;
+    height: 30px;
+  }
+  .nav__cart img {
+    width: 100%;
+    height: 100%;
+  }
+  .button--skin1 {
+    width: 223px;
+    height: 64px;
+    font-size: 24px;
+  }
+  .button--skin2 {
+    width: 223px;
+    height: 64px;
+    font-size: 24px;
+  }
+  .light-mode .headphone__card {
+    background: linear-gradient(
+      116deg,
+      rgba(192, 192, 192, 0.63) -10.88%,
+      rgba(255, 255, 255, 0.49) -10.87%,
+      rgba(255, 255, 255, 0.07) 74.79%
+    );
   }
 }
