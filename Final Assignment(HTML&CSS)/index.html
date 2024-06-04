@@ -22,8 +22,8 @@
   </head>
   <body>
     <!-- elipse -->
-    <div class="ellipse ellipse--blue"></div>
-    <div class="ellipse ellipse--purple"></div>
+    <div class="ellipse ellipse--blue" id="blue"></div>
+    <div class="ellipse ellipse--purple" id="purple"></div>
     <!-- nav start -->
 
     <nav class="nav">
@@ -44,15 +44,22 @@
 
         <div class="nav__list">
           <ul>
-            <li class="nav__item"><a href="#">Home</a></li>
-            <li class="nav__item"><a href="#">Explore</a></li>
-            <li class="nav__item"><a href="#">Contact Us</a></li>
+            <li class="nav__item">
+              <a href="#">Home</a>
+            </li>
+            <li class="nav__item">
+              <a href="#">Explore</a>
+            </li>
+            <li class="nav__item">
+              <a href="#">Contact Us</a>
+            </li>
           </ul>
         </div>
 
         <div class="nav__inner">
-          <div class="nav__converter">
-            <img src="./images/navbar/Converter.svg" alt="switch" />
+          <div class="btn">
+            <input type="checkbox" name="" id="lightModeButton" />
+            <label for="lightModeButton" class="slider"></label>
           </div>
           <div class="nav__buttons">
             <div class="nav__search">
@@ -388,7 +395,6 @@
             <div class="trends__buttons">
               <button
                 class="trends__button trends__button--skin2 arrival__button__skin2"
-                id="button--purple"
               >
                 <span
                   ><i class="fa-sx fa-solid fa-cart-shopping"></i>&nbsp;</span
@@ -422,7 +428,6 @@
             <div class="trends__buttons">
               <button
                 class="trends__button trends__button--skin2 arrival__button__skin2"
-                id="button--purple"
               >
                 <span
                   ><i class="fa-sx fa-solid fa-cart-shopping"></i>&nbsp;</span
@@ -456,7 +461,6 @@
             <div class="trends__buttons">
               <button
                 class="trends__button trends__button--skin2 arrival__button__skin2"
-                id="button--purple"
               >
                 <span
                   ><i class="fa-sx fa-solid fa-cart-shopping"></i>&nbsp;</span
@@ -641,5 +645,6 @@
         </p>
       </div>
     </section>
+    <script src="./script.js"></script>
   </body>
 </html>

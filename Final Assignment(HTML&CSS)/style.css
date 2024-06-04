@@ -47,6 +47,39 @@ body {
   position: relative;
   z-index: 1;
   overflow-x: hidden;
+  color: white;
+  background-color: var(--background);
+}
+body.light-mode {
+  color: var(--background);
+}
+
+.light-mode .ellipse {
+  display: none;
+}
+.light-mode .hero__title {
+  color: var(--background);
+}
+.light-mode .offer__timer-title {
+  color: var(--background);
+}
+.light-mode .offer__countdown-time-text {
+  color: var(--background);
+}
+.light-mode .accessories--title {
+  color: var(--background);
+}
+.light-mode .nav__item a {
+  color: var(--background);
+}
+.light-mode .headphone__card-title {
+  color: var(--background);
+}
+.light-mode .headphone-price-old {
+  color: var(--background);
+}
+.light-mode .offer__title {
+  color: var(--background);
 }
 
 /* ellipse */
@@ -78,7 +111,6 @@ body {
 
 .section--title {
   text-align: center;
-  color: #fff;
   font-family: "Proxima Nova";
   font-size: 46px;
   font-style: normal;
@@ -137,6 +169,61 @@ body {
 }
 .nav__cart {
   color: white;
+}
+
+.btn {
+  position: relative;
+  width: 50px;
+  height: 25px;
+}
+
+.btn input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fafafa;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--bg-dark);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+.light-mode {
+  background-color: #e5e5e5;
+}
+
+.dark-text-color {
+  color: var(--bg-dark) !important;
+}
+
+.dark-bg-color {
+  background-color: var(--bg-dark) !important;
 }
 
 /* searchbar */
@@ -202,7 +289,7 @@ body {
   background: var(--hero-highlight);
 }
 .button--skin2 {
-  background: #070606;
+  background: transparent;
   color: var(--hero-highlight);
 }
 .hero__title {
@@ -379,6 +466,11 @@ body {
     rgba(255, 255, 255, 0.1) 100%
   );
 }
+
+.light-mode .trends__card {
+  background-color: #282828;
+}
+
 .popular__trends__image {
   width: 250px;
   height: 220.08px;
@@ -1075,11 +1167,12 @@ body {
   .trends__button--skin2 {
     font-size: 16px;
     border-radius: 50px;
-    background: linear-gradient(
+    /* background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.7) 0%,
       rgba(255, 255, 255, 0.1) 100%
-    );
+    ); */
+    background: transparent;
   }
   /* new arrivals */
   #button--purple {
@@ -1193,7 +1286,7 @@ body {
     width: 127px;
     height: 52px;
     color: var(--hero-highlight);
-    background: #370665;
+    background: transparent;
     border-radius: 15px;
     border: 1px solid #f14a16;
     color: #f14a16;
