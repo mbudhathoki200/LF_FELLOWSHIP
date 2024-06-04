@@ -54,8 +54,29 @@ body {
   z-index: -1;
   position: absolute;
 }
+.ellipse--blue {
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+  border-radius: 904px;
+  background: #35589a;
+  filter: blur(250px);
+  top: 438px;
+  left: 17px;
+}
 
-.section__title {
+.ellipse--purple {
+  width: 300px;
+  height: 300px;
+  flex-shrink: 0;
+  border-radius: 904px;
+  background: var(--purple);
+  filter: blur(250px);
+  top: 68px;
+  right: 17px;
+}
+
+.section--title {
   text-align: center;
   color: #fff;
   font-family: "Proxima Nova";
@@ -64,8 +85,7 @@ body {
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1.84px;
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin: auto;
 }
 /* nav bar */
 .nav {
@@ -91,37 +111,31 @@ body {
   gap: 38px;
 }
 
-.nav__right-logo {
+.nav__logo {
   width: 60px;
   height: 60px;
 }
 
-.nav__right-logo__image {
+.nav__logo img {
   width: 100%;
   height: 100%;
 }
 
-.nav__right-converter {
-}
-
-.nav__right-converter__image {
+.nav__converter img {
   width: 100%;
   height: 100%;
 }
 
-.nav__right-cart {
-}
-
-.nav__right-cart__image {
+.nav__cart__image {
   width: 100%;
   height: 100%;
 }
-.nav__right__inner {
+.nav__inner {
   display: flex;
   align-items: center;
   gap: 36px;
 }
-.nav__right-cart {
+.nav__cart {
   color: white;
 }
 
@@ -182,12 +196,12 @@ body {
   letter-spacing: 0.68px;
   border: 3px solid var(--hero-highlight);
 }
-.button_skin1 {
+.button--skin1 {
   color: #e5e5e5;
   filter: drop-shadow(0px 0px 21px var(--hero-highlight));
   background: var(--hero-highlight);
 }
-.button_skin2 {
+.button--skin2 {
   background: #070606;
   color: var(--hero-highlight);
 }
@@ -223,7 +237,7 @@ body {
   flex-direction: column-reverse;
   width: 90%;
 }
-.scroll_down {
+.headphone__scroll-down {
   align-self: center;
   margin-top: 20px;
 }
@@ -264,7 +278,7 @@ body {
   top: -70px;
 }
 
-.headphone__title {
+.headphone__card-title {
   color: #fff;
   font-family: "Proxima Nova";
   font-size: 16px;
@@ -276,7 +290,7 @@ body {
   height: 28.571px;
   flex-shrink: 0;
 }
-.headphone__new__price {
+.headphone-price-new {
   color: #fc9918;
   font-family: "Proxima Nova";
   font-size: 16px;
@@ -288,7 +302,7 @@ body {
   height: 28.571px;
   flex-shrink: 0;
 }
-.headphone__old__price {
+.headphone-price-old {
   color: #fff;
   font-family: "Proxima Nova";
   font-size: 12px;
@@ -301,7 +315,7 @@ body {
   height: 28.571px;
   flex-shrink: 0;
 }
-.headphone__card__contents {
+.headphone__card-contents {
   margin-top: auto;
 }
 
@@ -326,11 +340,11 @@ body {
   background: url(<path-to-image>) lightgray 0px -53.067px / 100% 161.301% no-repeat,
     #c4c4c4;
 }
-.popular__trends__buttons {
+.trends__buttons {
   display: flex;
   gap: 10px;
 }
-.popular__trends__button {
+.trends__button {
   width: 102px;
   height: 33.245px;
   border-radius: 20px;
@@ -346,11 +360,11 @@ body {
   background: #f14a16;
   filter: drop-shadow(0px 0px 21px #f14a16);
 }
-.popular__trends__button__skin2 {
+.trends__button--skin2 {
   color: var(--hero-highlight);
   background: #070606;
 }
-.popular__trends__card {
+.trends__card {
   display: flex;
   flex-direction: column;
   gap: 11px;
@@ -371,13 +385,13 @@ body {
   flex-shrink: 0;
   border-radius: 50px 50px 0px 0px;
 }
-.popular__trends__contents {
+.trends__contents {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 }
-.popular__trends__contents__title {
+.trends__contents-title {
   color: #fff;
   font-family: "Proxima Nova";
   font-size: 16px;
@@ -389,7 +403,7 @@ body {
   height: 47.872px;
   flex-shrink: 0;
 }
-.popular__trends__contents__features {
+.trends__contents-features {
   list-style: disc;
   color: #fff;
   font-family: "Proxima Nova";
@@ -399,7 +413,7 @@ body {
   line-height: 20px;
   letter-spacing: 0.24px;
 }
-.popular__trends__contents__price {
+.trends__contents-price {
   color: #fc9918;
   font-family: "Proxima Nova";
   font-size: 20px;
@@ -413,10 +427,11 @@ body {
 .popular__trends {
   width: 90%;
 }
-.popular__trends__cards__container {
+.trends__cards-container {
   display: flex;
   gap: 30px;
   overflow-x: auto;
+  margin: 30px 0px;
 }
 
 /* buy section starts */
@@ -506,7 +521,7 @@ body {
   align-items: center;
   gap: 25px;
 }
-.offer__timer__title {
+.offer__timer-title {
   color: #fff;
   font-family: "Proxima Nova";
   font-size: 36px;
@@ -519,11 +534,11 @@ body {
   display: flex;
   gap: 17px;
 }
-.offer__countdown__container {
+.offer__countdown-container {
   display: flex;
   flex-direction: column;
 }
-.offer__countdown__time {
+.offer__countdown-time {
   width: 91px;
   height: 91px;
   display: flex;
@@ -538,7 +553,7 @@ body {
   font-weight: 700;
   letter-spacing: 2.3px;
 }
-.offer_countdown__time__text {
+.offer__countdown-time-text {
   text-align: center;
   color: #fff;
   font-family: "Proxima Nova";
@@ -548,7 +563,7 @@ body {
   line-height: normal;
   letter-spacing: 0.64px;
 }
-.offer__timer__custom {
+.timer-custom {
   width: 165px;
   height: 55px;
   font-size: 18px;
@@ -575,7 +590,7 @@ body {
   flex-direction: column;
   gap: 15px;
 }
-.accessories__title {
+.accessories--title {
   color: #fff;
   font-family: "Proxima Nova";
   font-size: 28px;
@@ -622,6 +637,7 @@ body {
   height: 485px;
   display: flex;
   flex-direction: column;
+  margin: auto;
 }
 .scanner__qr {
   display: flex;
@@ -683,21 +699,7 @@ body {
   flex-shrink: 0;
   gap: 36px;
 }
-/* .footer__contains {
-  color: #fff;
-  font-family: "Proxima Nova";
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 46px;
-  letter-spacing: 0.48px;
-  width: 90%;
-  margin: auto;
-} */
-/* .footer__contains {
-  width: 90%;
-  margin: auto;
-} */
+
 .footer__item {
   color: #fff;
   font-family: "Proxima Nova";
@@ -829,7 +831,7 @@ body {
 
 @media (min-width: 1728px) {
   /* ellipse */
-  .ellipse__blue {
+  .ellipse--blue {
     width: 700px;
     height: 700px;
     flex-shrink: 0;
@@ -840,7 +842,7 @@ body {
     left: 15px;
   }
 
-  .ellipse__purple {
+  .ellipse--purple {
     width: 840px;
     height: 840px;
     flex-shrink: 0;
@@ -852,14 +854,14 @@ body {
   }
 
   .body {
-    overflow: hidden;
+    overflow-x: hidden;
   }
-  .section__title {
+  .section--title {
     font-size: 64px;
     font-weight: 700;
     line-height: 40px; /* 62.5% */
     letter-spacing: 1.28px;
-    margin-bottom: 100px;
+    margin: 100px 0px;
   }
 
   /* scanner section */
@@ -868,6 +870,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 183px;
+    margin: 100px 0;
   }
   .scanner__qr__image {
     width: 350px;
@@ -902,9 +905,10 @@ body {
     width: 720px;
     height: 400px;
   }
-  .accessories__title {
+  .accessories--title {
     font-size: 65px;
   }
+
   /* offer section */
   .offer {
     height: 721px;
@@ -919,16 +923,16 @@ body {
   .offer__title {
     font-size: 65px;
   }
-  .offer__timer__title {
+  .offer__timer-title {
     font-size: 36px;
   }
-  .offer_countdown__time__text {
+  .offer__countdown-time-text {
     font-size: 36px;
   }
-  .offer__countdown__time {
+  .offer__countdown-time {
     font-size: 60px;
   }
-  .offer__timer__custom {
+  .timer-custom {
     width: 225px;
     height: 75px;
     font-size: 26px;
@@ -941,6 +945,7 @@ body {
     gap: 39px;
     height: 232px;
     justify-content: center;
+    margin: 100px 0;
   }
   .buy__title {
     font-size: 45px;
@@ -969,7 +974,7 @@ body {
   .searchbar {
     display: none;
   }
-  .background__image img {
+  .hero__background-image img {
     position: absolute;
     top: 0px;
     z-index: -1;
@@ -987,7 +992,7 @@ body {
     justify-content: end;
     width: auto;
   }
-  .scroll_down {
+  .headphone__scroll-down {
     display: flex;
     width: 28%;
     height: 80px;
@@ -1017,10 +1022,10 @@ body {
   }
 
   /* popular trends */
-  .popular__trends__cards__container {
+  .trends__cards-container {
     gap: 124px;
   }
-  .popular__trends__card {
+  .trends__card {
     width: 376px;
     height: 696px;
   }
@@ -1029,7 +1034,7 @@ body {
     height: 331px;
     object-fit: cover;
   }
-  .popular__trends__contents__title {
+  .trends__contents-title {
     width: 329px;
     font-size: 26px;
     font-weight: 400;
@@ -1037,10 +1042,10 @@ body {
     letter-spacing: 0.52px;
     padding-bottom: 20px;
   }
-  .popular__trends__contents {
+  .trends__contents {
     gap: 12px;
   }
-  .popular__trends__contents__features {
+  .trends__contents-features {
     color: #fff;
     width: 211px;
     font-family: "Proxima Nova";
@@ -1050,7 +1055,7 @@ body {
     line-height: 36px; /* 200% */
     letter-spacing: 0.36px;
   }
-  .popular__trends__contents__price {
+  .trends__contents-price {
     /* width: 79px; */
     color: #fc9918;
     font-size: 28px;
@@ -1058,7 +1063,7 @@ body {
     line-height: 36px; /* 128.571% */
     letter-spacing: 0.56px;
   }
-  .popular__trends__button {
+  .trends__button {
     width: 150px;
     height: 50px;
     font-size: 20px;
@@ -1067,7 +1072,7 @@ body {
     line-height: normal;
     letter-spacing: 0.8px;
   }
-  .popular__trends__button__skin2 {
+  .trends__button--skin2 {
     font-size: 16px;
     border-radius: 50px;
     background: linear-gradient(
@@ -1160,23 +1165,23 @@ body {
     display: flex;
     justify-content: space-between;
   }
-  .nav__right-logo {
+  .nav__logo {
     width: 125px;
     height: 111px;
   }
-  .nav__right-logo__image {
+  .nav__logo img {
     width: 100%;
     height: 100%;
   }
-  .nav__right-cart__image {
+  .nav__cart__image {
     width: 29.667px;
     height: 29.667px;
     flex-shrink: 0;
   }
-  .nav__right__search {
+  .nav__search {
     color: white;
   }
-  .nav__right-cart {
+  .nav__cart {
     color: white;
   }
   .nav__buttons {
@@ -1221,34 +1226,34 @@ body {
     letter-spacing: 0.96px;
   }
 
-  .nav__right__inner {
+  .nav__inner {
     display: flex;
     gap: 70px;
     justify-content: center;
     align-items: center;
   }
-  .nav__right-cart {
+  .nav__cart {
     width: 30px;
     height: 30px;
   }
-  .nav__right-cart img {
+  .nav__cart img {
     width: 100%;
     height: 100%;
   }
-  .button_skin1 {
+  .button--skin1 {
     width: 223px;
     height: 64px;
     font-size: 24px;
   }
-  .button_skin2 {
+  .button--skin2 {
     width: 223px;
     height: 64px;
     font-size: 24px;
-    background: var(--blue);
   }
 }
+
 @media screen and (max-width: 415px) {
-  .background__image {
+  .hero__background-image {
     display: none;
   }
   .hero__body {
@@ -1260,7 +1265,7 @@ body {
   .nav__list {
     display: none;
   }
-  .nav__right__search {
+  .nav__search {
     display: none;
   }
   .nav--button {
