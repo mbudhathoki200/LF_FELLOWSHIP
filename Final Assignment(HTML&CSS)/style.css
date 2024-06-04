@@ -72,12 +72,12 @@ body.light-mode {
 .light-mode .nav__item a {
   color: var(--background);
 }
-.light-mode .headphone__card-title {
+/* .light-mode .headphone__card-title {
   color: var(--background);
 }
 .light-mode .headphone-price-old {
   color: var(--background);
-}
+} */
 .light-mode .offer__title {
   color: var(--background);
 }
@@ -89,6 +89,9 @@ body.light-mode {
 }
 .light-mode .nav__left-image {
   filter: brightness(0%);
+}
+.light-mode .headphone__card {
+  background: rgba(40, 40, 40, 0.7);
 }
 
 /* ellipse */
@@ -1349,6 +1352,14 @@ input:checked + .slider:before {
     width: 223px;
     height: 64px;
     font-size: 24px;
+  }
+  .light-mode .headphone__card {
+    background: linear-gradient(
+      116deg,
+      rgba(192, 192, 192, 0.63) -10.88%,
+      rgba(255, 255, 255, 0.49) -10.87%,
+      rgba(255, 255, 255, 0.07) 74.79%
+    );
   }
 }
 
