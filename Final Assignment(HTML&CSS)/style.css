@@ -1077,6 +1077,9 @@ input:checked + .slider:before {
     border: 2px solid #f14a16;
     background: #370665;
   }
+  .nav__list li a:hover {
+    color: var(--hero-highlight);
+  }
 }
 @media screen and (min-width: 1400px) {
   /* ellipse */
@@ -1216,6 +1219,7 @@ input:checked + .slider:before {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 1.08px;
+    flex-basis: content;
   }
   /* hero section */
   .hero_contents {
@@ -1652,6 +1656,8 @@ input:checked + .slider:before {
   }
   .buy__contents {
     flex-direction: row;
+    justify-content: center;
+    gap: 168px;
   }
   .buy__card__image {
     width: 64.043px;
@@ -1666,6 +1672,7 @@ input:checked + .slider:before {
     font-weight: 400;
     line-height: normal;
     letter-spacing: 1.08px;
+    flex-shrink: 0;
   }
   /* hero section */
   .hero_contents {
