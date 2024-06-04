@@ -1,4 +1,4 @@
-let lightModeEnabled = true;
+let lightModeEnabled = false;
 const lightModeButton = document.getElementById("lightModeButton");
 
 lightModeButton.addEventListener("click", () => {

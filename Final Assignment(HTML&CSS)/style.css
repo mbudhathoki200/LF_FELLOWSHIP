@@ -228,7 +228,7 @@ body.light-mode {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #fafafa;
+  background-color: var(--background);
   transition: 0.4s;
   border-radius: 25px;
 }
@@ -246,7 +246,7 @@ body.light-mode {
 }
 
 input:checked + .slider {
-  background-color: var(--background);
+  background-color: #fafafa;
 }
 
 input:checked + .slider:before {
