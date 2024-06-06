@@ -3,7 +3,7 @@
   --hero-highlight: #f14a16;
   --purple: #370665;
   --blue: #35589a;
-  --white: #ffff;
+  --white: #e5e5e5;
 }
 
 /* font import */
@@ -231,7 +231,7 @@ body.light-mode {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--background);
+  background-color: var(--white);
   transition: 0.4s;
   border-radius: 25px;
 }
