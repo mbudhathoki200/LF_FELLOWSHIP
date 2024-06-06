@@ -981,7 +981,7 @@ input:checked + .slider:before {
     gap: 0px;
   }
   .nav {
-    width: 80%;
+    width: 90%;
   }
   .nav__right {
     gap: 220px;
@@ -1399,7 +1399,7 @@ input:checked + .slider:before {
     display: none;
   }
   .nav__right {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
@@ -1441,6 +1441,7 @@ input:checked + .slider:before {
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.8px;
+    display: block;
   }
   .nav__list {
     display: flex;
