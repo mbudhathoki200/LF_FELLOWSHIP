@@ -1,11 +1,11 @@
-//body
+//body styling
 const body = document.querySelector("body");
 body.style.display = "flex";
 body.style.alignItems = "center";
 body.style.justifyContent = "center";
 body.style.minHeight = "100vh";
 
-//box
+//box styling
 
 const CONTAINER_WIDTH = window.innerWidth;
 const CONTAINER_HEIGHT = window.innerHeight;
@@ -13,7 +13,7 @@ const CONTAINER_HEIGHT = window.innerHeight;
 const box = document.getElementById("box");
 box.style.width = `${CONTAINER_WIDTH}px`;
 box.style.height = `${CONTAINER_HEIGHT}px`;
-box.style.background = "lightgrey";
+box.style.background = "#FFFAFA";
 box.style.position = "relative";
 box.style.overflow = "hidden";
 box.style.boxShadow =
@@ -25,8 +25,8 @@ const BOUNDARY_X_MAX = CONTAINER_WIDTH;
 const BOUNDARY_Y_MIN = 0;
 const BOUNDARY_Y_MAX = CONTAINER_HEIGHT;
 
-function getRandomInt(min, max) {
-  const minCeiled = Math.floor(min);
+function getRandomInt(min = 15, max = 30) {
+  const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
@@ -36,20 +36,11 @@ function getRandomColor(arr) {
 }
 
 class Ball {
-  constructor(
-    x = 0,
-    y = 0,
-    w = 30,
-    h = 30,
-    color = "#000",
-    dy = 1,
-    dx = 1,
-    speed = 5
-  ) {
+  constructor(x = 0, y = 0, s = 30, color = "#000", dy = 1, dx = 1, speed = 5) {
     this.x = x;
     this.y = y;
-    this.w = w;
-    this.h = h;
+    this.w = s;
+    this.h = s;
     this.color = color;
     this.dy = Math.random() < 0.5 ? -1 : 1;
     this.dx = Math.random() < 0.5 ? -1 : 1;
@@ -80,16 +71,18 @@ class Ball {
       this.dy *= -1;
     }
     if (this.y > BOUNDARY_Y_MAX - this.h) {
-      this.y = BOUNDARY_Y_MAX - this.w;
+      this.y = BOUNDARY_Y_MAX - this.h;
       this.dy *= -1;
     }
+
     //check horizontal boundary collision
     if (this.x < BOUNDARY_X_MIN) {
       this.x = BOUNDARY_X_MIN;
       this.dx *= -1;
     }
     if (this.x > BOUNDARY_X_MAX - this.w) {
-      this.dx = -1;
+      this.x = BOUNDARY_X_MAX - this.w;
+      this.dx *= -1;
     }
 
     //for ball collision
@@ -107,16 +100,33 @@ class Ball {
     return distance < radii;
   }
   handleCollision(otherball) {
+    //Exchange Velocities
     const tempDx = this.dx;
     const temDy = this.dy;
     this.dx = otherball.dx;
     this.dy = otherball.dy;
     otherball.dx = tempDx;
     otherball.dy = temDy;
+
+    //move balls apart
+    const overlap =
+      this.w / 2 +
+      otherball.w / 2 -
+      Math.sqrt((this.x - otherball.x) ** 2 + (this.y - otherball.y) ** 2);
+
+    const moveBy = overlap / 2;
+
+    const angle = Math.atan2(this.y - otherball.y, this.x - otherball.x);
+    this.x += Math.cos(angle) * moveBy;
+    this.y += Math.sin(angle) * moveBy;
+    otherball.x -= Math.cos(angle) * moveBy;
+    otherball.y -= Math.sin(angle) * moveBy;
   }
 }
-const BALL_COUNT = 50;
+const BALL_COUNT = 200;
+
 const ballArray = [];
+
 const colorArray = [
   "red",
   "green",
@@ -127,17 +137,25 @@ const colorArray = [
   "#fb8500",
   "#023047",
   "#ffafcc",
+  "purple",
 ];
 
 //createBall
 for (let i = 0; i < BALL_COUNT; i++) {
-  const ball = new Ball(
-    getRandomInt(BOUNDARY_X_MIN, BOUNDARY_X_MAX),
-    getRandomInt(BOUNDARY_Y_MIN, BOUNDARY_Y_MAX),
-    undefined,
-    undefined,
-    getRandomColor(colorArray)
-  );
+  let x, y, isOverlapping;
+  do {
+    x = getRandomInt(BOUNDARY_X_MIN, BOUNDARY_X_MAX);
+    y = getRandomInt(BOUNDARY_Y_MIN, BOUNDARY_Y_MAX);
+    isOverlapping = ballArray.some((ball) => {
+      const dx = x - ball.x;
+      const dy = y - ball.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const radius = ball.w / 2;
+      return distance < radius;
+    });
+  } while (isOverlapping);
+
+  const ball = new Ball(x, y, getRandomInt(), getRandomColor(colorArray));
   ballArray.push(ball);
 }
 
