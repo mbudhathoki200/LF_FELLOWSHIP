@@ -24,7 +24,7 @@ const CONTAINER_WIDTH = 700;
 const CONTAINER_HEIGHT = 600;
 
 function getRandomInt(min, max) {
-  const minCeiled = Math.ceil(min);
+  const minCeiled = Math.floor(min);
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
@@ -37,8 +37,8 @@ class Ball {
   constructor(
     x = 0,
     y = 0,
-    w = 30,
-    h = 30,
+    w = 50,
+    h = 50,
     color = "#000",
     dy = 1,
     dx = 1,
@@ -73,15 +73,15 @@ class Ball {
     this.element.style.top = `${this.y}px`;
 
     //check vertical boundary collision
-    if (this.y < 0 || this.y >= 570) this.dy *= -1;
+    if (this.y < BOUNDARY_Y_MIN || this.y >= BOUNDARY_Y_MAX - 25) this.dy *= -1;
 
     //check horizontal boundary collision
-    if (this.x < 0 || this.x > 670) this.dx *= -1;
+    if (this.x < BOUNDARY_X_MIN || this.x > BOUNDARY_X_MAX - 25) this.dx *= -1;
 
     //for ball collision
     balls.forEach((otherball) => {
       if (otherball !== this && this.isColliding(otherball)) {
-        console.log("collided");
+        this.handleCollision(otherball);
       }
     });
   };
@@ -89,11 +89,19 @@ class Ball {
     const dx = this.x - otherball.x;
     const dy = this.y - otherball.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    const minDistance = (this.w + otherball.w) / 2;
-    return minDistance < distance;
+    const radii = (this.w + otherball.w) / 2;
+    return distance < radii;
+  }
+  handleCollision(otherball) {
+    const tempDx = this.dx;
+    const temDy = this.dy;
+    this.dx = otherball.dx;
+    this.dy = otherball.dy;
+    otherball.dx = tempDx;
+    otherball.dy = temDy;
   }
 }
-const BALL_COUNT = 2;
+const BALL_COUNT = 4;
 const ballArray = [];
 const colorArray = [
   "red",
@@ -127,4 +135,4 @@ function animateBall() {
   ballArray.forEach((ball) => ball.move(ballArray));
   requestAnimationFrame(animateBall);
 }
-// animateBall();
+animateBall();
