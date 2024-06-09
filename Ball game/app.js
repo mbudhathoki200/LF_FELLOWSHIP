@@ -6,22 +6,24 @@ body.style.justifyContent = "center";
 body.style.minHeight = "100vh";
 
 //box
+
+const CONTAINER_WIDTH = window.innerWidth;
+const CONTAINER_HEIGHT = window.innerHeight;
+
 const box = document.getElementById("box");
-box.style.width = "700px";
-box.style.height = "600px";
+box.style.width = `${CONTAINER_WIDTH}px`;
+box.style.height = `${CONTAINER_HEIGHT}px`;
 box.style.background = "lightgrey";
 box.style.position = "relative";
+box.style.overflow = "hidden";
 box.style.boxShadow =
   "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px";
 
 const BOUNDARY_X_MIN = 0;
-const BOUNDARY_X_MAX = 680;
+const BOUNDARY_X_MAX = CONTAINER_WIDTH;
 
 const BOUNDARY_Y_MIN = 0;
-const BOUNDARY_Y_MAX = 570;
-
-const CONTAINER_WIDTH = 700;
-const CONTAINER_HEIGHT = 600;
+const BOUNDARY_Y_MAX = CONTAINER_HEIGHT;
 
 function getRandomInt(min, max) {
   const minCeiled = Math.floor(min);
@@ -37,8 +39,8 @@ class Ball {
   constructor(
     x = 0,
     y = 0,
-    w = 50,
-    h = 50,
+    w = 30,
+    h = 30,
     color = "#000",
     dy = 1,
     dx = 1,
@@ -49,8 +51,8 @@ class Ball {
     this.w = w;
     this.h = h;
     this.color = color;
-    this.dy = dy;
-    this.dx = dx;
+    this.dy = Math.random() < 0.5 ? -1 : 1;
+    this.dx = Math.random() < 0.5 ? -1 : 1;
     this.speed = speed;
 
     this.element = document.createElement("div");
@@ -73,10 +75,22 @@ class Ball {
     this.element.style.top = `${this.y}px`;
 
     //check vertical boundary collision
-    if (this.y < BOUNDARY_Y_MIN || this.y >= BOUNDARY_Y_MAX - 25) this.dy *= -1;
-
+    if (this.y < BOUNDARY_Y_MIN) {
+      this.y = BOUNDARY_Y_MIN;
+      this.dy *= -1;
+    }
+    if (this.y > BOUNDARY_Y_MAX - this.h) {
+      this.y = BOUNDARY_Y_MAX - this.w;
+      this.dy *= -1;
+    }
     //check horizontal boundary collision
-    if (this.x < BOUNDARY_X_MIN || this.x > BOUNDARY_X_MAX - 25) this.dx *= -1;
+    if (this.x < BOUNDARY_X_MIN) {
+      this.x = BOUNDARY_X_MIN;
+      this.dx *= -1;
+    }
+    if (this.x > BOUNDARY_X_MAX - this.w) {
+      this.dx = -1;
+    }
 
     //for ball collision
     balls.forEach((otherball) => {
@@ -101,7 +115,7 @@ class Ball {
     otherball.dy = temDy;
   }
 }
-const BALL_COUNT = 4;
+const BALL_COUNT = 50;
 const ballArray = [];
 const colorArray = [
   "red",
@@ -126,8 +140,6 @@ for (let i = 0; i < BALL_COUNT; i++) {
   );
   ballArray.push(ball);
 }
-// const ball = new Ball(200, 0, 70, 70, "red");
-// const ball2 = new Ball(500, 0, 70, 70, "green");
 
 //Animate
 
