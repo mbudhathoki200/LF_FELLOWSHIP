@@ -23,6 +23,23 @@ const BOUNDARY_X_MAX = CONTAINER_WIDTH;
 const BOUNDARY_Y_MIN = 0;
 const BOUNDARY_Y_MAX = CONTAINER_HEIGHT;
 
+const BALL_COUNT = 500;
+
+const ballArray = [];
+
+const colorArray = [
+  "red",
+  "green",
+  "blue",
+  "black",
+  "orange",
+  "yellow",
+  "#fb8500",
+  "#023047",
+  "#ffafcc",
+  "purple",
+];
+
 function getRandomInt(min = 10, max = 15) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
@@ -121,22 +138,6 @@ class Ball {
     otherball.y -= Math.sin(angle) * moveBy;
   }
 }
-const BALL_COUNT = 500;
-
-const ballArray = [];
-
-const colorArray = [
-  "red",
-  "green",
-  "blue",
-  "black",
-  "orange",
-  "yellow",
-  "#fb8500",
-  "#023047",
-  "#ffafcc",
-  "purple",
-];
 
 //createBall
 for (let i = 0; i < BALL_COUNT; i++) {
