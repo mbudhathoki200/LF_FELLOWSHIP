@@ -41,8 +41,8 @@ class Ball {
     this.h = s;
     this.color = color;
 
-    this.dx = Math.round(Math.random() * 10 + 1);
-    this.dy = Math.round(Math.random() * 10 + 1);
+    this.dx = Math.round(Math.random() * 10 - 5);
+    this.dy = Math.round(Math.random() * 10 - 5);
 
     this.element = document.createElement("div");
 
