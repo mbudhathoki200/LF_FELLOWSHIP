@@ -16,8 +16,6 @@ box.style.height = `${CONTAINER_HEIGHT}px`;
 box.style.background = "#FFFAFA";
 box.style.position = "relative";
 box.style.overflow = "hidden";
-box.style.boxShadow =
-  "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px";
 
 const BOUNDARY_X_MIN = 0;
 const BOUNDARY_X_MAX = CONTAINER_WIDTH;
@@ -25,7 +23,7 @@ const BOUNDARY_X_MAX = CONTAINER_WIDTH;
 const BOUNDARY_Y_MIN = 0;
 const BOUNDARY_Y_MAX = CONTAINER_HEIGHT;
 
-function getRandomInt(min = 15, max = 30) {
+function getRandomInt(min = 10, max = 15) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
@@ -36,15 +34,15 @@ function getRandomColor(arr) {
 }
 
 class Ball {
-  constructor(x = 0, y = 0, s = 30, color = "#000", dy = 1, dx = 1, speed = 5) {
+  constructor(x = 0, y = 0, s = 30, color = "#000", dy = 1, dx = 1) {
     this.x = x;
     this.y = y;
     this.w = s;
     this.h = s;
     this.color = color;
-    this.dy = Math.random() < 0.5 ? -1 : 1;
-    this.dx = Math.random() < 0.5 ? -1 : 1;
-    this.speed = speed;
+
+    this.dx = Math.round(Math.random() * 10 + 1);
+    this.dy = Math.round(Math.random() * 10 + 1);
 
     this.element = document.createElement("div");
 
@@ -59,8 +57,8 @@ class Ball {
     box.appendChild(this.element);
   }
   move = (balls) => {
-    this.x = this.x + this.dx * this.speed;
-    this.y = this.y + this.dy * this.speed;
+    this.x = this.x + this.dx;
+    this.y = this.y + this.dy;
 
     this.element.style.left = `${this.x}px`;
     this.element.style.top = `${this.y}px`;
@@ -123,7 +121,7 @@ class Ball {
     otherball.y -= Math.sin(angle) * moveBy;
   }
 }
-const BALL_COUNT = 200;
+const BALL_COUNT = 500;
 
 const ballArray = [];
 
