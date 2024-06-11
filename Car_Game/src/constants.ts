@@ -15,8 +15,8 @@ type car = {
 };
 
 export const CAR_DIMENSIONS: car = {
-  width: 150,
-  height: 150,
+  width: 120,
+  height: 120,
   SPEED: 3,
 };
 

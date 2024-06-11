@@ -1,9 +1,12 @@
+import { CAR_DIMENSIONS } from "../constants";
+
 interface ICar {
   x: number;
   y: number;
   w: number;
   h: number;
   image: HTMLImageElement;
+  collisionDetection(carArr: Array<object>): boolean;
 }
 
 export default class Car implements ICar {
@@ -20,5 +23,16 @@ export default class Car implements ICar {
     this.y = y;
     this.image = new Image();
     this.image.src = image;
+  }
+  collisionDetection(CarArr: Array<ICar>): boolean {
+    for (let car of CarArr) {
+      const distance = Math.sqrt(
+        Math.pow(this.x - car.x, 2) + Math.pow(this.y - car.y, 2)
+      );
+      if (distance < this.h) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -8,15 +8,15 @@ import Lane from "./Classes/Lane.ts";
 
 import { getRandomInt } from "./utils/Random.ts";
 
-import playerImg from "./assets/car-1.png";
-import carImg1 from "./assets/car-03.png";
+import playerImg from "./assets/playerCar.png";
+import carImg1 from "./assets/otherCar.png";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
 canvas.width = DIMENSIONS.CANVAS_WIDTH;
 canvas.height = DIMENSIONS.CANVAS_HEIGHT;
-
+let myReq: number;
 //lane
 const lane_line_1 = new Lane(
   DIMENSIONS.CANVAS_WIDTH * (1 / 3),
@@ -126,10 +126,14 @@ function draw() {
       lane.y = -120;
     }
   });
-  requestAnimationFrame(draw);
+  if (playerCar.collisionDetection(carArr)) {
+    cancelAnimationFrame(myReq);
+    return;
+  }
+
+  myReq = requestAnimationFrame(draw);
 }
 window.addEventListener("keypress", (event) => {
-  console.log(event.key);
   switch (event.key) {
     case "a": {
       playerCar.x -= 200;
