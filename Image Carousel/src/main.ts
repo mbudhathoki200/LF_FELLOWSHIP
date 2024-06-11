@@ -2,7 +2,7 @@ import "./reset.css";
 import "./style.css";
 
 const slider = function (): void {
-  const slides = document.querySelectorAll(".slide");
+  const slides: NodeListOf<Element> = document.querySelectorAll(".slide");
   const btnLeft = document.querySelector(".slider__btn--left");
   const btnRight = document.querySelector(".slider__btn--right");
   const dotsContainer = document.querySelector(".dots");
@@ -14,7 +14,10 @@ const slider = function (): void {
 
   const goToSlide = function (slide: number): void {
     slides.forEach(
-      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+      (s, i) =>
+        ((s as HTMLElement).style.transform = `translateX(${
+          100 * (i - slide)
+        }%)`)
     );
   };
 
@@ -77,9 +80,10 @@ const slider = function (): void {
   };
 
   dotsContainer?.addEventListener("click", (e) => {
-    if (e.target?.classList.contains("dots__dot")) {
+    if ((e.target as HTMLButtonElement).classList.contains("dots__dot")) {
       stopAutoSlide(); // Stop the auto-slide when a dot is clicked
-      const slide = e.target.dataset.slide;
+      const slide = Number((e.target as HTMLElement).dataset.slide!);
+
       goToSlide(slide);
       activateDots(slide);
     }
