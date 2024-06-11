@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <section class="carousel__container">
+      <div class="slide">
+        <img src="./images/img-1.jpeg" alt="Image-I" />
+      </div>
+      <div class="slide">
+        <img src="./images/img-2.jpeg" alt="Image-II" />
+      </div>
+      <div class="slide">
+        <img src="./images/img-3.jpeg" alt="Image-III" />
+      </div>
+      <div class="slide">
+        <img src="./images/img-4.jpeg" alt="Image-IV" />
+      </div>
+      <button class="slider__btn slider__btn--left">
+        <i class="fa-solid fa-caret-left"></i>
+      </button>
+      <button class="slider__btn slider__btn--right">
+        <i class="fa-solid fa-caret-right"></i>
+      </button>
+      <div class="dots"></div>
+    </section>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
