@@ -26,7 +26,7 @@ let score: number = 0;
 let carArr: Car[];
 let laneArr: Lane[];
 let playerCar: Car;
-let displacementX: number;
+let targetX: number;
 
 function intializeGame(): void {
   const lane_line_1 = new Lane(
@@ -73,6 +73,7 @@ function intializeGame(): void {
     CAR_DIMENSIONS.height,
     playerImg
   );
+  targetX = playerCar.x;
 
   const car1 = new Car(
     DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 - 200,
@@ -114,6 +115,18 @@ function draw() {
   ctx.fillStyle = "#343434";
   ctx.fillRect(0, 0, DIMENSIONS.CANVAS_WIDTH, DIMENSIONS.CANVAS_HEIGHT);
 
+  if (playerCar.x < targetX) {
+    playerCar.x += 10;
+    if (playerCar.x > targetX) {
+      playerCar.x = targetX;
+    }
+  } else if (playerCar.x > targetX) {
+    playerCar.x -= 10;
+    if (playerCar.x < targetX) {
+      playerCar.x = targetX;
+    }
+  }
+
   ctx.drawImage(
     playerCar.image,
     playerCar.x,
@@ -149,23 +162,24 @@ function draw() {
 
   myReq = requestAnimationFrame(draw);
 }
+
 window.addEventListener("keypress", (event) => {
   switch (event.key) {
     case "a": {
       if (
-        playerCar.x >
+        targetX >
         DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 - 200
       ) {
-        playerCar.x -= 200;
+        targetX -= 200;
       }
       break;
     }
     case "d": {
       if (
-        playerCar.x <
+        targetX <
         DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 + 200
       ) {
-        playerCar.x += 200;
+        targetX += 200;
       }
 
       break;
