@@ -10,6 +10,7 @@ import { getRandomInt } from "./utils/Random.ts";
 
 import carImg1 from "./assets/otherCar.png";
 import playerImg from "./assets/playerCar.png";
+import { hasSpace } from "./utils/spacing.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -27,39 +28,46 @@ let carArr: Car[];
 let laneArr: Lane[];
 let playerCar: Car;
 let moveX: number;
+const spaceBetweenCars: number = CAR_DIMENSIONS.height * 2;
 
 function intializeGame(): void {
   CAR_DIMENSIONS.SPEED = 3;
+
   const lane_line_1 = new Lane(
     DIMENSIONS.CANVAS_WIDTH * (1 / 3),
     0,
     LANE_DIMENSIONS.LANE_WIDTH,
     LANE_DIMENSIONS.LANE_HEIGHT
   );
+
   const lane_line_2 = new Lane(
     DIMENSIONS.CANVAS_WIDTH * (2 / 3),
     0,
     LANE_DIMENSIONS.LANE_WIDTH,
     LANE_DIMENSIONS.LANE_HEIGHT
   );
+
   const lane_line_3 = new Lane(
     DIMENSIONS.CANVAS_WIDTH * (1 / 3),
     300,
     LANE_DIMENSIONS.LANE_WIDTH,
     LANE_DIMENSIONS.LANE_HEIGHT
   );
+
   const lane_line_4 = new Lane(
     DIMENSIONS.CANVAS_WIDTH * (2 / 3),
     300,
     LANE_DIMENSIONS.LANE_WIDTH,
     LANE_DIMENSIONS.LANE_HEIGHT
   );
+
   const lane_line_5 = new Lane(
     DIMENSIONS.CANVAS_WIDTH * (1 / 3),
     600,
     LANE_DIMENSIONS.LANE_WIDTH,
     LANE_DIMENSIONS.LANE_HEIGHT
   );
+
   const lane_line_6 = new Lane(
     DIMENSIONS.CANVAS_WIDTH * (2 / 3),
     600,
@@ -75,30 +83,31 @@ function intializeGame(): void {
     playerImg
   );
   moveX = playerCar.x;
+  do {
+    const car1 = new Car(
+      DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 - 200,
+      getRandomInt(-600, 0),
+      CAR_DIMENSIONS.width,
+      CAR_DIMENSIONS.height,
+      carImg1
+    );
+    const car2 = new Car(
+      DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 + 200,
+      getRandomInt(-600, 0),
+      CAR_DIMENSIONS.width,
+      CAR_DIMENSIONS.height,
+      carImg1
+    );
 
-  const car1 = new Car(
-    DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 - 200,
-    getRandomInt(-600, 0),
-    CAR_DIMENSIONS.width,
-    CAR_DIMENSIONS.height,
-    carImg1
-  );
-  const car2 = new Car(
-    DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 + 200,
-    getRandomInt(-600, 0),
-    CAR_DIMENSIONS.width,
-    CAR_DIMENSIONS.height,
-    carImg1
-  );
-
-  const car3 = new Car(
-    DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2,
-    getRandomInt(-600, 0),
-    CAR_DIMENSIONS.width,
-    CAR_DIMENSIONS.height,
-    carImg1
-  );
-  carArr = [car1, car2, car3];
+    const car3 = new Car(
+      DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2,
+      getRandomInt(-600, 0),
+      CAR_DIMENSIONS.width,
+      CAR_DIMENSIONS.height,
+      carImg1
+    );
+    carArr = [car1, car2, car3];
+  } while (!hasSpace(carArr, spaceBetweenCars));
 
   laneArr = [
     lane_line_1,
@@ -143,7 +152,10 @@ function draw() {
     ctx.drawImage(car.image, car.x, car.y, car.w, car.h);
     car.y += CAR_DIMENSIONS.SPEED;
     if (car.y > DIMENSIONS.CANVAS_HEIGHT) {
-      car.y = getRandomInt(-300, 0);
+      do {
+        car.y = getRandomInt(-600, 0);
+      } while (!hasSpace(carArr, spaceBetweenCars));
+
       score++;
       gameScore.innerHTML = `Score: ${score}`;
     }
