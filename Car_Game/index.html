@@ -2,13 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Lane फेर</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/reset.css" />
+    <link rel="stylesheet" href="./src/home.css" />
   </head>
   <body>
-    <div id="app"></div>
-    <canvas id="canvas"></canvas>
-    <script type="module" src="/src/main.ts"></script>
+    <header>
+      <h1>Welcome to <span>Lane फेर.</span></h1>
+    </header>
+
+    <main>
+      <section class="game-description">
+        <h2>Dodge the Cars and Stay Alive!</h2>
+        <p>Change lanes to avoid collisions with other cars on the road.</p>
+        <p class="description--highlight">How long can you survive?</p>
+      </section>
+
+      <section class="instructions">
+        <h2>Instructions</h2>
+        <ul>
+          <li>Use the A and D keys to change lanes.</li>
+          <li>Avoid hitting other cars or going off the road.</li>
+          <li>Your score increases when you dodge cars.</li>
+        </ul>
+      </section>
+
+      <section class="start-game">
+        <a href="game.html" class="start-button">Start Game</a>
+      </section>
+    </main>
   </body>
 </html>
