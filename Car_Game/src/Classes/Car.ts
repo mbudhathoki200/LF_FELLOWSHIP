@@ -1,5 +1,3 @@
-import { CAR_DIMENSIONS } from "../constants";
-
 interface ICar {
   x: number;
   y: number;

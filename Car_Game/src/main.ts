@@ -1,15 +1,15 @@
 import "./reset.css";
 import "./style.css";
 
-import { DIMENSIONS, CAR_DIMENSIONS, LANE_DIMENSIONS } from "./constants";
+import { CAR_DIMENSIONS, DIMENSIONS, LANE_DIMENSIONS } from "./constants";
 
 import Car from "./Classes/Car.ts";
 import Lane from "./Classes/Lane.ts";
 
 import { getRandomInt } from "./utils/Random.ts";
 
-import playerImg from "./assets/playerCar.png";
 import carImg1 from "./assets/otherCar.png";
+import playerImg from "./assets/playerCar.png";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -136,11 +136,22 @@ function draw() {
 window.addEventListener("keypress", (event) => {
   switch (event.key) {
     case "a": {
-      playerCar.x -= 200;
+      if (
+        playerCar.x >
+        DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 - 200
+      ) {
+        playerCar.x -= 200;
+      }
       break;
     }
     case "d": {
-      playerCar.x += 200;
+      if (
+        playerCar.x <
+        DIMENSIONS.CANVAS_WIDTH / 2 - CAR_DIMENSIONS.width / 2 + 200
+      ) {
+        playerCar.x += 200;
+      }
+
       break;
     }
   }
