@@ -1,4 +1,7 @@
 import { DIMENSIONS } from "../constants";
+import Platform from "./Platform";
+import collisionDetection from "../utils/collisionDetection";
+
 interface IPlayer {
   x: number;
   y: number;
@@ -10,6 +13,7 @@ interface IPlayer {
   isJumping: boolean;
   GRAVITY: number;
 }
+
 export default class Player implements IPlayer {
   x: number;
   y: number;
@@ -43,49 +47,58 @@ export default class Player implements IPlayer {
     this.GRAVITY = GRAVITY;
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
+  draw(ctx: CanvasRenderingContext2D, platformArr: Platform[]) {
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
-
-    this.update();
-    this.jump();
+    this.update(platformArr);
   }
 
-  update() {
+  update(platformArr: Platform[]) {
     // Apply gravity
+    this.velocityY += this.GRAVITY;
     this.y += this.velocityY;
-    if (this.isJumping) {
-      this.velocityY += this.GRAVITY;
 
-      // Prevent the player from falling below the ground
-      if (this.y + this.h >= DIMENSIONS.CANVAS_HEIGHT) {
-        this.y = DIMENSIONS.CANVAS_HEIGHT - this.h;
-        this.velocityY = 0;
-        this.isJumping = false;
-        this.jump(); // Automatically jump again
+    // Check for collisions with platforms
+    platformArr.forEach((platform) => {
+      if (collisionDetection(this, platform) && this.velocityY > 0) {
+        console.log("Collision detected");
+        this.velocityY = -10; // Bounce up
+        this.isJumping = true;
       }
-    }
+    });
 
     this.x += this.velocityX;
 
-    //boundary conditions
+    // Boundary conditions
     if (this.x < -this.w) this.x = DIMENSIONS.CANVAS_WIDTH;
-
     if (this.x > DIMENSIONS.CANVAS_WIDTH) this.x = this.w;
+
+    // Prevent the player from falling below the ground
+    if (this.y + this.h >= DIMENSIONS.CANVAS_HEIGHT) {
+      this.y = DIMENSIONS.CANVAS_HEIGHT - this.h;
+      this.velocityY = 0;
+      this.isJumping = false;
+      console.log("Player hit the ground, jumping again");
+      this.jump(); // Automatically jump again
+    }
   }
 
   jump() {
     if (!this.isJumping) {
+      console.log("Jumping");
       this.isJumping = true;
-      this.velocityY = -10; // initial jump velocity
+      this.velocityY = -10; // Initial jump velocity
     }
   }
+
   moveLeft() {
     this.velocityX = -5;
   }
+
   moveRight() {
-    this.velocityX = 5; // speed for moving right
+    this.velocityX = 5;
   }
+
   stopHorizontalMovement() {
-    this.velocityX = 0; // stop horizontal movement
+    this.velocityX = 0;
   }
 }
