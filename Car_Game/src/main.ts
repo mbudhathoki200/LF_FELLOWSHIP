@@ -18,6 +18,7 @@ const ctx = canvas.getContext("2d")!;
 const gameScore = document.querySelector(".details__score") as HTMLElement;
 const restartBlock = document.querySelector(".details__restart") as HTMLElement;
 const restartBtn = document.querySelector(".restart-Btn") as HTMLButtonElement;
+const showHighScore = document.querySelector(".high__score") as HTMLElement;
 
 canvas.width = DIMENSIONS.CANVAS_WIDTH;
 canvas.height = DIMENSIONS.CANVAS_HEIGHT;
@@ -29,6 +30,10 @@ let laneArr: Lane[];
 let playerCar: Car;
 let moveX: number;
 const spaceBetweenCars: number = CAR_DIMENSIONS.height * 2;
+let highScore: number;
+
+const highScoreString = localStorage.getItem("highscore");
+highScore = highScoreString !== null ? parseInt(highScoreString, 10) : 0;
 
 function intializeGame(): void {
   CAR_DIMENSIONS.SPEED = 3;
@@ -157,6 +162,10 @@ function draw() {
       } while (!hasSpace(carArr, spaceBetweenCars));
 
       score++;
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("highscore", JSON.stringify(highScore));
+      }
       gameScore.innerHTML = `Score: ${score}`;
     }
   });
@@ -174,6 +183,7 @@ function draw() {
     restartBlock.style.display = "flex";
     return;
   }
+  showHighScore.innerHTML = `High Score: ${highScore}`;
 
   myReq = requestAnimationFrame(draw);
 }
@@ -206,7 +216,7 @@ restartBtn.addEventListener("click", () => {
   gameScore.innerHTML = `Score: ${score}`;
   restartBlock.style.display = "none";
   intializeGame();
-  draw();
+  requestAnimationFrame(draw);
 });
 
 intializeGame();
