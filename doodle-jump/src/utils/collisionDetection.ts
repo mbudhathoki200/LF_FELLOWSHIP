@@ -5,23 +5,15 @@ export default function collisionDetection(
   player: Player,
   platform: Platform
 ): boolean {
-  const playerBottom = player.y + player.h;
-  const platformTop = platform.y;
-  const playerTop = player.y;
-  const platformBottom = platform.y + platform.h;
-  const playerRight = player.x + player.w;
-  const platformLeft = platform.x;
-  const playerLeft = player.x;
-  const platformRight = platform.x + platform.w;
-
   if (
-    playerBottom > platformTop &&
-    playerTop < platformBottom &&
-    playerRight > platformLeft &&
-    playerLeft < platformRight
+    player.y + player.h >= platform.y &&
+    player.y + player.h <= platform.y + platform.h &&
+    player.x + player.w >= platform.x &&
+    player.x <= platform.x + platform.w &&
+    player.velocityY > 0
   ) {
     return true;
+  } else {
+    return false;
   }
-
-  return false;
 }

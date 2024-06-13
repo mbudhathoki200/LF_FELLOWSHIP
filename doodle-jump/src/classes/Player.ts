@@ -1,4 +1,4 @@
-import { DIMENSIONS } from "../constants";
+import { DIMENSIONS, PLATFORM, PLAYER } from "../constants";
 import Platform from "./Platform";
 import collisionDetection from "../utils/collisionDetection";
 
@@ -24,6 +24,7 @@ export default class Player implements IPlayer {
   image: HTMLImageElement;
   isJumping: boolean;
   GRAVITY: number;
+  SCORE: number;
 
   constructor(
     x: number,
@@ -45,11 +46,24 @@ export default class Player implements IPlayer {
     this.image.src = imgSrc;
     this.isJumping = false;
     this.GRAVITY = GRAVITY;
+    this.SCORE = 0;
   }
 
   draw(ctx: CanvasRenderingContext2D, platformArr: Platform[]) {
     ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
     this.update(platformArr);
+    this.displayScore(ctx);
+  }
+
+  //display score
+  displayScore(ctx: CanvasRenderingContext2D): void {
+    ctx.font = "20px Verdana";
+    ctx.fillStyle = "blue";
+    ctx.fillText("Score: " + this.SCORE, 10, 30);
+  }
+
+  checkGameOver(): boolean {
+    return this.y + this.h >= DIMENSIONS.CANVAS_HEIGHT;
   }
 
   update(platformArr: Platform[]) {
@@ -60,9 +74,12 @@ export default class Player implements IPlayer {
     // Check for collisions with platforms
     platformArr.forEach((platform) => {
       if (collisionDetection(this, platform) && this.velocityY > 0) {
+        this.y = platform.y - this.h;
         console.log("Collision detected");
         this.velocityY = -10; // Bounce up
-        this.isJumping = true;
+        // this.isJumping = true;
+        this.SCORE++;
+        console.log(this.SCORE);
       }
     });
 
@@ -77,8 +94,7 @@ export default class Player implements IPlayer {
       this.y = DIMENSIONS.CANVAS_HEIGHT - this.h;
       this.velocityY = 0;
       this.isJumping = false;
-      console.log("Player hit the ground, jumping again");
-      this.jump(); // Automatically jump again
+      // this.jump(); // Automatically jump again
     }
   }
 
@@ -91,11 +107,11 @@ export default class Player implements IPlayer {
   }
 
   moveLeft() {
-    this.velocityX = -5;
+    this.velocityX = -4;
   }
 
   moveRight() {
-    this.velocityX = 5;
+    this.velocityX = 4;
   }
 
   stopHorizontalMovement() {

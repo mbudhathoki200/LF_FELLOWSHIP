@@ -2,3 +2,34 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.start__screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+  width: 500px;
+  background-image: url("./assets/Default.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+button {
+  background: transparent;
+  border: none;
+}
+.start-btn:hover {
+  scale: 1.1;
+  transition: all 3ms ease-in-out;
+}
+.over__screen {
+  display: flex;
+  justify-content: center;
+  height: 700px;
+  width: 500px;
+  background-image: url("./assets/background.png");
+}
+.restart-btn:hover {
+  scale: 1.1;
+  transition: all 3ms ease-in-out;
+}
