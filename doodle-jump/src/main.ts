@@ -1,7 +1,9 @@
 import "./reset.css";
 import "./style.css";
 
-import { DIMENSIONS, PLATFORM, PLAYER } from "./constants.ts";
+import { DIMENSIONS, PLAYER } from "./constants.ts";
+import { PLATFORM } from "./constants.ts";
+import { Tplatform } from "./constants.ts";
 
 // classes
 import Platform from "./classes/Platform.ts";
@@ -64,7 +66,7 @@ function isColliding(platform1: Platform, platform2: Platform): boolean {
 }
 function generatePlatform(
   existingPlatforms: Platform[],
-  platformWidth: number
+  PLATFORM: Tplatform
 ): Platform {
   let x: number, y: number, newPlatform: Platform | undefined;
   let isValidPosition = false;
@@ -94,7 +96,7 @@ function generatePlatform(
   return newPlatform!;
 }
 for (let i = 0; i < platformCount - 1; i++) {
-  platforms.push(generatePlatform(platforms, PLATFORM.WIDTH));
+  platforms.push(generatePlatform(platforms, PLATFORM));
 }
 
 function draw() {

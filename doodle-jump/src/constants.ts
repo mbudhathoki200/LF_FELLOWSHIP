@@ -16,12 +16,12 @@ export const PLAYER: player = {
   HEIGHT: 90,
 };
 
-type platform = {
+export type Tplatform = {
   WIDTH: number;
   HEIGHT: number;
 };
 
-export const PLATFORM: platform = {
+export const PLATFORM: Tplatform = {
   WIDTH: 90,
   HEIGHT: 25,
 };

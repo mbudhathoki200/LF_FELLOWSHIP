@@ -1,4 +1,4 @@
-import { DIMENSIONS, PLATFORM, PLAYER } from "../constants";
+import { DIMENSIONS } from "../constants";
 import Platform from "./Platform";
 import collisionDetection from "../utils/collisionDetection";
 
