@@ -23,6 +23,7 @@ background.src = bgImage;
 canvas.width = DIMENSIONS.CANVAS_WIDTH;
 canvas.height = DIMENSIONS.CANVAS_HEIGHT;
 
+function init() {}
 // player
 let player = new Player(
   DIMENSIONS.CANVAS_WIDTH / 2 - PLAYER.WIDTH / 2,

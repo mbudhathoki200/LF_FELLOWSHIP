@@ -23,7 +23,7 @@ button {
   transition: all 3ms ease-in-out;
 }
 .over__screen {
-  display: flex;
+  display: none;
   justify-content: center;
   height: 700px;
   width: 500px;
