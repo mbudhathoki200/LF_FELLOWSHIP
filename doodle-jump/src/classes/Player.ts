@@ -101,16 +101,16 @@ export default class Player implements IPlayer {
     if (!this.isJumping) {
       console.log("Jumping");
       this.isJumping = true;
-      this.velocityY = -10; // Initial jump velocity
+      this.velocityY = -12; // Initial jump velocity
     }
   }
 
   moveLeft() {
-    this.velocityX = -4;
+    this.velocityX = -6;
   }
 
   moveRight() {
-    this.velocityX = 4;
+    this.velocityX = 6;
   }
 
   stopHorizontalMovement() {
