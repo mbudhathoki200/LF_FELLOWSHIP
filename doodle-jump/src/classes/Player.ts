@@ -76,7 +76,6 @@ export default class Player implements IPlayer {
       if (collisionDetection(this, platform) && this.velocityY > 0) {
         this.y = platform.y - this.h;
         this.velocityY = -10; // Bounce up
-        // this.isJumping = true;
         this.SCORE++;
         console.log(this.SCORE);
       }
@@ -93,7 +92,6 @@ export default class Player implements IPlayer {
       this.y = DIMENSIONS.CANVAS_HEIGHT - this.h;
       this.velocityY = 0;
       this.isJumping = false;
-      // this.jump(); // Automatically jump again
     }
   }
 
@@ -106,11 +104,11 @@ export default class Player implements IPlayer {
   }
 
   moveLeft() {
-    this.velocityX = -6;
+    this.velocityX = -7;
   }
 
   moveRight() {
-    this.velocityX = 6;
+    this.velocityX = 7;
   }
 
   stopHorizontalMovement() {

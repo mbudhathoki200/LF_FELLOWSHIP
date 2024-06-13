@@ -42,9 +42,7 @@ let player = new Player(
 
 // Initial platforms
 let platforms: Platform[] = [];
-const platformCount = 7; // Number of platforms
-
-// Add a platform directly beneath the player initially
+const platformCount = 7;
 
 platforms.push(
   new Platform(
@@ -68,7 +66,7 @@ function draw() {
   // Prevent player from moving above the fixed y-axis position
   if (player.y < DIMENSIONS.CANVAS_HEIGHT / 2 - PLAYER.HEIGHT / 2) {
     player.y = DIMENSIONS.CANVAS_HEIGHT / 2 - PLAYER.HEIGHT / 2;
-    player.velocityY = 0; // Reset vertical velocity to avoid the player from moving upwards
+    player.velocityY = 0;
   }
 
   // Draw player

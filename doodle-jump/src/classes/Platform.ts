@@ -87,9 +87,9 @@ export function movePlatform(
     if (platform.y > DIMENSIONS.CANVAS_HEIGHT) {
       platform.y = -PLATFORM.HEIGHT;
       platform.x = Math.random() * (DIMENSIONS.CANVAS_WIDTH - PLATFORM.WIDTH);
-      platform.w = PLATFORM.WIDTH; // Update platform width
+      platform.w = PLATFORM.WIDTH;
 
-      // Ensure the new position doesn't collide with other platforms
+      // Ensuring the new position doesn't collide with other platforms
       let isValidPosition = false;
       while (!isValidPosition) {
         isValidPosition = true;
