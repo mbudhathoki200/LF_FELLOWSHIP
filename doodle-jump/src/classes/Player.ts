@@ -57,8 +57,8 @@ export default class Player implements IPlayer {
 
   //display score
   displayScore(ctx: CanvasRenderingContext2D): void {
-    ctx.font = "20px Verdana";
-    ctx.fillStyle = "blue";
+    ctx.font = "bold 25px Patrick Hand";
+    ctx.fillStyle = "grey";
     ctx.fillText("Score: " + this.SCORE, 10, 30);
   }
 
@@ -75,7 +75,6 @@ export default class Player implements IPlayer {
     platformArr.forEach((platform) => {
       if (collisionDetection(this, platform) && this.velocityY > 0) {
         this.y = platform.y - this.h;
-        console.log("Collision detected");
         this.velocityY = -10; // Bounce up
         // this.isJumping = true;
         this.SCORE++;

@@ -7,12 +7,15 @@ import { DIMENSIONS, PLATFORM, PLAYER } from "./constants.ts";
 import Platform from "./classes/Platform.ts";
 import Player from "./classes/Player.ts";
 
-// functions
+// Images
 import bgImage from "./assets/background.png";
 import playerImgLeft from "./assets/blueL.png";
 import platformImg from "./assets/platform.png";
 
+//functions
 import displayGameOver from "./utils/displaygameOver.ts";
+
+const audioOver = document.querySelector("#dead_audio") as HTMLAudioElement;
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -23,7 +26,6 @@ background.src = bgImage;
 canvas.width = DIMENSIONS.CANVAS_WIDTH;
 canvas.height = DIMENSIONS.CANVAS_HEIGHT;
 
-function init() {}
 // player
 let player = new Player(
   DIMENSIONS.CANVAS_WIDTH / 2 - PLAYER.WIDTH / 2,
@@ -138,9 +140,11 @@ function draw() {
   player.draw(ctx, platforms);
 
   const animationFrame = requestAnimationFrame(draw);
+
   if (player.checkGameOver()) {
     cancelAnimationFrame(animationFrame);
-    displayGameOver();
+    displayGameOver(player.SCORE);
+    audioOver.play();
   }
 }
 

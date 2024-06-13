@@ -4,16 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>Doodle Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Schoolbell&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <canvas id="canvas"></canvas>
-    <!-- <section class="start__screen">
-      <button class="start-btn">
-        <img src="./src/assets/play.png" alt="" />
-      </button>
-    </section> -->
+    <audio
+      src="./src/assets/sounds/dead.wav"
+      id="dead_audio"
+      preload="auto"
+    ></audio>
     <section class="over__screen">
+      <div class="over_text">game over!</div>
+      <div class="scores">
+        <p class="score">your score: 0</p>
+        <p class="high__score">your high score: 0</p>
+      </div>
       <button class="restart-btn">
         <img src="./src/assets/playAgain.png" alt="play again" />
       </button>

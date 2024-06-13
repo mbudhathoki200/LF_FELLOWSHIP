@@ -24,10 +24,27 @@ button {
 }
 .over__screen {
   display: none;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
   height: 700px;
   width: 500px;
+  gap: 2rem;
   background-image: url("./assets/background.png");
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.over_text {
+  font-weight: bold;
+  font-size: 4rem;
+  color: red;
+}
+.scores {
+  display: flex;
+  font-size: 2rem;
+  flex-direction: column;
+  gap: 3rem;
 }
 .restart-btn:hover {
   scale: 1.1;
