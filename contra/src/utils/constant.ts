@@ -13,7 +13,7 @@ type map = {
 };
 
 export const MAP: map = {
-  WIDTH: 6500,
+  WIDTH: 7000,
 };
 
 type player = {

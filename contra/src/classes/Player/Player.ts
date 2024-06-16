@@ -1,11 +1,13 @@
-import { PLAYER } from "../../utils/constant";
+import { PLAYER, CANVAS } from "../../utils/constant";
 
 import playerR from "../../assets/images/LanceStandingR.png";
 import playerL from "../../assets/images/LanceStandingL.png";
+
 interface IPlayer {
   posX: number;
   posY: number;
 }
+
 export default class Player implements IPlayer {
   posX: number;
   posY: number;
@@ -27,6 +29,7 @@ export default class Player implements IPlayer {
     this.velY = 0;
     this.SPEED = PLAYER.SPEED;
   }
+
   draw(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(
       this.playerImage,
@@ -36,14 +39,20 @@ export default class Player implements IPlayer {
       this.height
     );
   }
-  moveLeft() {
-    this.playerImage.src = playerL;
-    this.velX = this.SPEED;
-    this.posX -= this.velX;
+
+  moveLeft(): void {
+    if (this.posX > 0) {
+      this.playerImage.src = playerL;
+      this.velX = this.SPEED;
+      this.posX -= this.velX;
+    }
   }
-  moveRigth() {
-    this.playerImage.src = playerR;
-    this.velX = this.SPEED;
-    this.posX += this.velX;
+
+  moveRight(): void {
+    if (this.posX + this.width < CANVAS.WIDTH) {
+      this.playerImage.src = playerR;
+      this.velX = this.SPEED;
+      this.posX += this.velX;
+    }
   }
 }

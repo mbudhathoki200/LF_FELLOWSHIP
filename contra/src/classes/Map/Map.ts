@@ -12,7 +12,7 @@ interface IMap {
 let background = new Image();
 background.src = bgImage;
 
-export default class implements IMap {
+export default class Map implements IMap {
   WIDTH: number;
   HEIGHT: number;
   posX: number;
@@ -25,11 +25,15 @@ export default class implements IMap {
     this.posY = posY;
   }
 
-  draw(ctx: CanvasRenderingContext2D, req: number) {
-    // this.posX -= 15;
-    // if (this.posX <= -5500) {
-    //   cancelAnimationFrame(req);
-    // }
-    ctx.drawImage(background, this.posX, 0, this.WIDTH, this.HEIGHT);
+  draw(ctx: CanvasRenderingContext2D): void {
+    ctx.drawImage(background, this.posX, this.posY, this.WIDTH, this.HEIGHT);
+  }
+
+  moveLeft(speed: number): void {
+    this.posX += speed;
+  }
+
+  moveRight(speed: number): void {
+    this.posX -= speed;
   }
 }
