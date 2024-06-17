@@ -20,7 +20,7 @@ export default class Map implements IMap {
 
   constructor(posX: number, posY: number) {
     this.WIDTH = MAP.WIDTH;
-    this.HEIGHT = CANVAS.HEIGHT;
+    this.HEIGHT = MAP.HEIGHT;
     this.posX = posX;
     this.posY = posY;
   }
@@ -30,7 +30,9 @@ export default class Map implements IMap {
   }
 
   moveLeft(speed: number): void {
-    this.posX += speed;
+    if (this.posX > 0) {
+      this.posX += speed;
+    }
   }
 
   moveRight(speed: number): void {
