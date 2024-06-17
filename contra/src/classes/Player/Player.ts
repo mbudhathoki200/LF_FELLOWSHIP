@@ -19,7 +19,10 @@ export default class Player implements IPlayer {
   velX: number;
   velY: number;
   SPEED: number;
-  isGrounded = false;
+  life: number;
+  // isGrounded = false;
+  Ground: number;
+  isJumping: boolean;
 
   constructor(posX: number, posY: number) {
     this.posX = posX;
@@ -30,7 +33,10 @@ export default class Player implements IPlayer {
     this.playerImage.src = playerR;
     this.velX = 0;
     this.velY = 0;
+    this.Ground = this.posY;
     this.SPEED = PLAYER.SPEED;
+    this.life = PLAYER.LIFE;
+    this.isJumping = false;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -69,22 +75,45 @@ export default class Player implements IPlayer {
     }
   }
 
-  update(platformArr: Platform[]) {
-    this.velY = 5;
-    platformArr.forEach((platform) => {
-      if (collisionDetection(this, platform) && this.velY > 0) {
-        this.posY = platform.y - this.height;
-        this.isGrounded = true;
-      }
-    });
-
-    if (this.isGrounded) {
-      this.velY = 0;
+  jump() {
+    if (!this.isJumping) {
+      this.isJumping = true;
+      this.velY = PLAYER.JUMP_POWER;
     }
+  }
 
-    this.posX += this.velX * 0.01;
-    this.posY += this.velY * 0.1;
-    // console.log("hi");
-    //
+  applyGravity() {
+    if (this.isJumping) {
+      this.velY -= PLAYER.GRAVITY;
+      this.posY -= this.velY;
+      if (this.posY > this.Ground) {
+        this.posY = this.Ground;
+        this.isJumping = false;
+        this.velY = 0;
+      }
+    }
+  }
+
+  // update(platformArr: Platform[]) {
+  //   this.velY = 5;
+  //   platformArr.forEach((platform) => {
+  //     if (collisionDetection(this, platform) && this.velY > 0) {
+  //       this.posY = platform.y - this.height;
+  //       this.isGrounded = true;
+  //     }
+  //   });
+
+  //   if (this.isGrounded) {
+  //     this.velY = 0;
+  //   }
+
+  //   this.posX += this.velX * 0.01;
+  //   this.posY += this.velY * 0.1;
+  //   // console.log("hi");
+  //   //
+  // }
+
+  update() {
+    this.applyGravity();
   }
 }

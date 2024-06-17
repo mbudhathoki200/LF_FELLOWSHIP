@@ -20,16 +20,24 @@ export const MAP: map = {
   HEIGHT: 221 * 2,
 };
 
+// Player Constants
+
 type player = {
   WIDTH: number;
   HEIGHT: number;
   SPEED: number;
+  LIFE: number;
+  JUMP_POWER: number;
+  GRAVITY: number;
 };
 
 export const PLAYER: player = {
   WIDTH: 50,
   HEIGHT: 75,
   SPEED: 15,
+  LIFE: 3,
+  JUMP_POWER: 10,
+  GRAVITY: 0.5,
 };
 
 export default function collisionDetection(

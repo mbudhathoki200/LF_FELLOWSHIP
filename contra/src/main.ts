@@ -30,14 +30,15 @@ function draw() {
   ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT);
 
   //map Render
-  const req = requestAnimationFrame(draw);
   gameMap.draw(ctx);
   // player.update(platformArr);
   player.draw(ctx);
+  player.update();
   // platformArr.forEach((plat) => {
   //   plat.draw(ctx);
   // });
   // drawGrid(ctx);
+  requestAnimationFrame(draw);
 }
 
 draw();
@@ -71,5 +72,7 @@ window.addEventListener("keydown", (e) => {
     case "ArrowRight":
       player.moveRight(gameMap);
       break;
+    case "ArrowUp":
+      player.jump();
   }
 });
