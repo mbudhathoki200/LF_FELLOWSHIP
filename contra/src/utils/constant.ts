@@ -31,9 +31,20 @@ type player = {
   GRAVITY: number;
 };
 
+type playerSprite = {
+  WIDTH: number;
+  HEIGHT: number;
+  COLUMNS: number;
+};
+
+export const PLAYER_SPRITE: playerSprite = {
+  WIDTH: 116,
+  HEIGHT: 38,
+  COLUMNS: 5,
+};
 export const PLAYER: player = {
-  WIDTH: 50,
-  HEIGHT: 75,
+  WIDTH: PLAYER_SPRITE.WIDTH / PLAYER_SPRITE.COLUMNS,
+  HEIGHT: 38,
   SPEED: 15,
   LIFE: 3,
   JUMP_POWER: 10,
