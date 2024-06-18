@@ -3,7 +3,7 @@ import collisionDetection from "../../utils/constant";
 import playerR from "../../assets/images/player_right.gif";
 import playerL from "../../assets/images/player_left.gif";
 import Map from "../Map/Map";
-import Platform from "../Map/Playform";
+import Platform from "../Map/hawaPlatform";
 
 interface IPlayer {
   posX: number;
@@ -28,6 +28,7 @@ export default class Player implements IPlayer {
   frameY: number;
   maxFrame: number;
   runReq: number;
+  staggerFrame = 0;
 
   constructor(posX: number, posY: number) {
     this.posX = posX;
@@ -63,7 +64,9 @@ export default class Player implements IPlayer {
     );
   }
   animateRunning = () => {
-    this.frameX = (this.frameX + 1) % (this.maxFrame + 1);
+    this.frameX = Math.floor(this.staggerFrame / 5) % this.maxFrame;
+    this.staggerFrame++;
+    // this.frameX = Math.floor(this.frameX + 1) % (this.maxFrame + 1);
     // return requestAnimationFrame(this.animateRunning);
     // this.animateRunning();
   };
@@ -75,6 +78,7 @@ export default class Player implements IPlayer {
       this.posX -= this.velX;
       if (this.posX > CANVAS.WIDTH / 2) {
         gameMap.moveLeft(this.SPEED);
+        Map.offsetX -= this.SPEED;
       }
     }
   }
@@ -87,6 +91,7 @@ export default class Player implements IPlayer {
     }
     if (this.posX + this.width > CANVAS.WIDTH / 2) {
       gameMap.moveRight(this.SPEED);
+      Map.offsetX += this.SPEED;
     }
     if (this.posX > 3475) {
       this.posX = 3475;

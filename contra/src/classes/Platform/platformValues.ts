@@ -1,8 +1,8 @@
-const platforms = [
+export const platformValues = [
   {
-    x: 36,
+    x: 60,
     y: 206,
-    w: 2718,
+    w: 2825,
     h: 34,
     id: "grass",
   },

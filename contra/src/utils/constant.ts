@@ -1,4 +1,4 @@
-import Platform from "../classes/Map/Playform";
+import Platform from "../classes/Map/hawaPlatform";
 import Player from "../classes/Player/Player";
 type canvas = {
   WIDTH: number;

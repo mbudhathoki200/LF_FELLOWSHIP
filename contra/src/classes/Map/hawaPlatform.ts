@@ -6,7 +6,7 @@ interface IPlatform {
   image: HTMLImageElement;
 }
 
-export default class Platform implements IPlatform {
+export default class Platforms implements IPlatform {
   x: number;
   y: number;
   w: number;
@@ -27,8 +27,7 @@ export default class Platform implements IPlatform {
   }
 }
 
-
-function isColliding(platform1: Platform, platform2: Platform): boolean {
+function isColliding(platform1: Platforms, platform2: Platforms): boolean {
   return !(
     platform1.x + platform1.w < platform2.x ||
     platform1.x > platform2.x + platform2.w ||

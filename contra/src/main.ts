@@ -1,14 +1,17 @@
+import { platformValues } from "./classes/Platform/platformValues";
 import "./reset.css";
 import "./style.css";
 
 // classes
 import Map from "./classes/Map/Map.ts";
+// import Platform from "./classes/Map/Playform.ts";
 
 //import Constants
-import { CANVAS } from "./utils/constant.ts";
+import { CANVAS, PLAYER } from "./utils/constant.ts";
 import Player from "./classes/Player/Player.ts";
-import drawGrid from "./classes/Map/drawrid.ts";
-import Platform from "./classes/Map/Playform.ts";
+import { Platfrom } from "./classes/Platform/Platform.ts";
+
+// import drawGrid from "./classes/Map/drawrid.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -38,6 +41,17 @@ function draw() {
 
   player.update();
 
+  platformValues.forEach((platform) => {
+    const newPlatform = new Platfrom(
+      platform.x,
+      platform.y,
+      platform.w,
+      platform.h,
+      platform.id
+    );
+    newPlatform.draw(ctx);
+  });
+
   // platformArr.forEach((plat) => {
   //   plat.draw(ctx);
   // });
@@ -47,26 +61,6 @@ function draw() {
 }
 
 draw();
-
-// window.addEventListener("keydown", (e) => {
-//   switch (e.key) {
-//     case "a":
-//       if (player.posX > CANVAS.WIDTH / 2) {
-//         player.moveLeft();
-//         player.avoidOutOfFrame();
-//       } else {
-//         gameMap.moveLeft(player.SPEED);
-//       }
-//       break;
-//     case "d":
-//       if (player.posX + player.width < CANVAS.WIDTH / 2) {
-//         player.moveRight();
-//       } else {
-//         gameMap.moveRight(player.SPEED);
-//       }
-//       break;
-//   }
-// });
 
 window.addEventListener("keydown", (e) => {
   console.log(e.key);

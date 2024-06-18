@@ -2,6 +2,7 @@ import { CANVAS, MAP } from "../../utils/constant";
 
 // images
 import bgImage from "../../assets/images/NES - Contra - Level 1.png";
+import { Platfrom } from "../Platform/Platform";
 
 interface IMap {
   WIDTH: number;
@@ -17,6 +18,8 @@ export default class Map implements IMap {
   HEIGHT: number;
   posX: number;
   posY: number;
+  static offsetX = 0;
+  static offsetY = 0;
 
   constructor(posX: number, posY: number) {
     this.WIDTH = MAP.WIDTH;
