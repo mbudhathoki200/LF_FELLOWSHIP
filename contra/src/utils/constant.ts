@@ -30,7 +30,7 @@ type playerSprite = {
 
 export const PLAYER_SPRITE: playerSprite = {
   WIDTH: 116,
-  HEIGHT: 45,
+  HEIGHT: 50,
   COLUMNS: 5,
 };
 type player = {

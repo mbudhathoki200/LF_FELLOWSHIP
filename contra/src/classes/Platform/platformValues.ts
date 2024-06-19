@@ -62,4 +62,25 @@ export const platformValues = [
     h: 30,
     id: "grass",
   },
+  {
+    x: 1212,
+    y: 403,
+    w: 131,
+    h: 37,
+    id: "grass",
+  },
+  {
+    x: 2816,
+    y: 401,
+    w: 196,
+    h: 35,
+    id: "grass",
+  },
+  {
+    x: 3008,
+    y: 305,
+    w: 127,
+    h: 32,
+    id: "grass",
+  },
 ];

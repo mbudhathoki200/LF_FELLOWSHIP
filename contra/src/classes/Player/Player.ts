@@ -169,7 +169,6 @@ export default class Player implements IPlayer {
         console.log("collided");
         if (this.velY > 0) {
           this.velY = 0;
-
           if (this.posY + this.height >= platform.y) {
             this.posY = platform.y - 50;
             console.log("Mathi");
