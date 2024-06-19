@@ -137,27 +137,8 @@ export default class Player implements IPlayer {
     }
   }
 
-  // update(platformArr: Platform[]) {
-  //   this.velY = 5;
-  //   platformArr.forEach((platform) => {
-  //     if (collisionDetection(this, platform) && this.velY > 0) {
-  //       this.posY = platform.y - this.height;
-  //       this.isGrounded = true;
-  //     }
-  //   });
-
-  //   if (this.isGrounded) {
-  //     this.velY = 0;
-  //   }
-
-  //   this.posX += this.velX * 0.01;
-  //   this.posY += this.velY * 0.1;
-
-  // }
-
   update(): void {
     // this.applyGravity();
-    // this.checkForHorizontalCollision();
     if (!this.isGrounded) {
       this.gravity();
     }
@@ -177,19 +158,6 @@ export default class Player implements IPlayer {
 
           //     // this.isGrounded = true;
           //     // this.isJumping = false;
-        }
-      }
-    });
-  }
-  checkForHorizontalCollision() {
-    platformValues.forEach((platform: any) => {
-      if (collisionDetections(this, platform)) {
-        console.log("Horixontal collided");
-        if (this.velX > 0) {
-          this.velX = 0;
-          this.posX = platform.x + this.width - 0.01;
-          // this.isGrounded = true;
-          // this.isJumping = false;
         }
       }
     });

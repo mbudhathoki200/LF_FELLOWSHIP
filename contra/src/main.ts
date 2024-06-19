@@ -3,13 +3,12 @@ import "./style.css";
 
 // classes
 import Map from "./classes/Map/Map.ts";
-// import Platform from "./classes/Map/Playform.ts";
-
-//import Constants
-import { CANVAS, PLAYER } from "./utils/constant.ts";
 import Player from "./classes/Player/Player.ts";
 import { Platfrom } from "./classes/Platform/Platform.ts";
 import { platformValues } from "./classes/Platform/platformValues";
+
+//import Constants
+import { CANVAS, PLAYER } from "./utils/constant.ts";
 
 // import drawGrid from "./classes/Map/drawrid.ts";
 
@@ -25,7 +24,6 @@ canvas.width = CANVAS.WIDTH;
 let gameMap = new Map(0, 0);
 
 let player = new Player(40, 100);
-// let player = new Player(40, platformValues[0].y - 80);
 let runReq = 0;
 
 function draw() {
