@@ -1,9 +1,10 @@
 import { PLAYER, CANVAS, PLAYER_SPRITE } from "../../utils/constant";
-import collisionDetection from "../../utils/constant";
+import { collisionDetections } from "../../utils/collisionDetection.ts";
 import playerR from "../../assets/images/player_right.gif";
 import playerL from "../../assets/images/player_left.gif";
 import Map from "../Map/Map";
 import Platform from "../Map/hawaPlatform";
+import { platformValues } from "../Platform/platformValues";
 
 interface IPlayer {
   posX: number;
@@ -20,7 +21,7 @@ export default class Player implements IPlayer {
   velY: number;
   SPEED: number;
   life: number;
-  // isGrounded = false;
+  isGrounded: boolean;
   Ground: number;
   isJumping: boolean;
   isRunning: boolean;
@@ -42,6 +43,7 @@ export default class Player implements IPlayer {
     this.life = PLAYER.LIFE;
     this.isJumping = false;
     this.isRunning = false;
+    this.isGrounded = false;
     this.maxFrame = 5;
     this.frameY = 0;
     this.frameX = 0;
@@ -60,8 +62,10 @@ export default class Player implements IPlayer {
       this.posX,
       this.posY,
       50,
-      80
+      50
     );
+    ctx.fillStyle = "rgba(0,255,200,0.5)";
+    ctx.fillRect(this.posX, this.posY, 50, 50);
   }
   animateRunning = () => {
     this.frameX = Math.floor(this.staggerFrame / 5) % this.maxFrame;
@@ -102,19 +106,33 @@ export default class Player implements IPlayer {
   jump(): void {
     if (!this.isJumping) {
       this.isJumping = true;
-      this.velY = PLAYER.JUMP_POWER;
+      this.velY = PLAYER.JUMP_POWER; //Jump Velocity
     }
   }
 
   applyGravity(): void {
     if (this.isJumping) {
-      this.velY -= PLAYER.GRAVITY;
+      this.velY -= PLAYER.GRAVITY; //Gravity Effect
       this.posY -= this.velY;
       if (this.posY > this.Ground) {
         this.posY = this.Ground;
         this.isJumping = false;
         this.velY = 0;
       }
+    }
+  }
+  jumping() {
+    this.isJumping = true;
+    this.isGrounded = false;
+    this.velY = -PLAYER.JUMP_POWER;
+  }
+
+  gravity() {
+    if (this.posY + 50 + this.velY < CANVAS.HEIGHT) {
+      this.posY += this.velY;
+      this.velY += PLAYER.GRAVITY;
+    } else {
+      this.velY = 0;
     }
   }
 
@@ -133,11 +151,47 @@ export default class Player implements IPlayer {
 
   //   this.posX += this.velX * 0.01;
   //   this.posY += this.velY * 0.1;
-  //   // console.log("hi");
-  //   //
+
   // }
 
   update(): void {
-    this.applyGravity();
+    // this.applyGravity();
+    // this.checkForHorizontalCollision();
+    if (!this.isGrounded) {
+      this.gravity();
+    }
+    this.checkForVerticalCollision();
+  }
+
+  checkForVerticalCollision() {
+    platformValues.forEach((platform: any) => {
+      if (collisionDetections(this, platform)) {
+        console.log("collided");
+        if (this.velY > 0) {
+          this.velY = 0;
+
+          if (this.posY + this.height >= platform.y) {
+            this.posY = platform.y - 50;
+            console.log("Mathi");
+          }
+
+          //     // this.isGrounded = true;
+          //     // this.isJumping = false;
+        }
+      }
+    });
+  }
+  checkForHorizontalCollision() {
+    platformValues.forEach((platform: any) => {
+      if (collisionDetections(this, platform)) {
+        console.log("Horixontal collided");
+        if (this.velX > 0) {
+          this.velX = 0;
+          this.posX = platform.x + this.width - 0.01;
+          // this.isGrounded = true;
+          // this.isJumping = false;
+        }
+      }
+    });
   }
 }

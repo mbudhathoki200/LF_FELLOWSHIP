@@ -22,7 +22,6 @@ export class Platfrom implements IPlatfrom {
   }
   draw(ctx: CanvasRenderingContext2D) {
     ctx.strokeStyle = "red";
-    console.log(Map.offsetX);
-    ctx.strokeRect(this.x - Map.offsetX, this.y - Map.offsetY, this.w, this.h);
+    ctx.strokeRect(this.x - Map.offsetX, this.y, this.w, this.h);
   }
 }

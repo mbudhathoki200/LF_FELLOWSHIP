@@ -1,3 +1,10 @@
+type platformValues = {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  id: string;
+};
 export const platformValues = [
   {
     x: 60,
@@ -46,6 +53,13 @@ export const platformValues = [
     y: 306,
     w: 194,
     h: 31,
+    id: "grass",
+  },
+  {
+    x: 2750,
+    y: 144,
+    w: 1024,
+    h: 30,
     id: "grass",
   },
 ];
