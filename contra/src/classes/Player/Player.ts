@@ -61,11 +61,11 @@ export default class Player implements IPlayer {
       PLAYER.HEIGHT,
       this.posX,
       this.posY,
-      50,
-      50
+      PLAYER.WIDTH,
+      PLAYER.HEIGHT
     );
-    ctx.fillStyle = "rgba(0,255,200,0.5)";
-    ctx.fillRect(this.posX, this.posY, 50, 50);
+    ctx.strokeStyle = "red";
+    ctx.strokeRect(this.posX, this.posY, PLAYER.WIDTH, PLAYER.HEIGHT);
   }
   animateRunning = () => {
     this.frameX = Math.floor(this.staggerFrame / 5) % this.maxFrame;
@@ -128,7 +128,7 @@ export default class Player implements IPlayer {
   }
 
   gravity() {
-    if (this.posY + 50 + this.velY < CANVAS.HEIGHT) {
+    if (this.posY + PLAYER.HEIGHT + this.velY < CANVAS.HEIGHT) {
       this.posY += this.velY;
       this.velY += PLAYER.GRAVITY;
     } else {
