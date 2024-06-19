@@ -56,13 +56,14 @@ export default class Player implements IPlayer {
     ctx.drawImage(
       this.playerImage,
       this.frameX * PLAYER.WIDTH,
-      this.frameY * PLAYER.HEIGHT,
+      0,
       PLAYER.WIDTH,
       PLAYER.HEIGHT,
       this.posX,
       this.posY,
       PLAYER.WIDTH,
-      PLAYER.HEIGHT
+      // PLAYER.HEIGHT
+      80
     );
     ctx.strokeStyle = "red";
     ctx.strokeRect(this.posX, this.posY, PLAYER.WIDTH, PLAYER.HEIGHT);
