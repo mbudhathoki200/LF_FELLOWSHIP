@@ -49,20 +49,3 @@ export const PLAYER: player = {
   JUMP_POWER: 10,
   GRAVITY: 0.5,
 };
-
-// export default function collisionDetection(
-//   player: Player,
-//   platform: Platform
-// ): boolean {
-//   if (
-//     player.posY + player.height >= platform.y &&
-//     player.posY + player.height <= platform.y + platform.h &&
-//     player.posX + player.width >= platform.x &&
-//     player.posX <= platform.x + platform.w &&
-//     player.velY > 0
-//   ) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }

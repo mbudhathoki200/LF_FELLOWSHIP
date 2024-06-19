@@ -68,7 +68,7 @@ window.addEventListener("keydown", (e) => {
 
       break;
     case "x":
-      player.jumping();
+      player.jump();
       break;
   }
 });

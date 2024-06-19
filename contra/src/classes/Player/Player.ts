@@ -104,25 +104,7 @@ export default class Player implements IPlayer {
     }
   }
 
-  jump(): void {
-    if (!this.isJumping) {
-      this.isJumping = true;
-      this.velY = PLAYER.JUMP_POWER; //Jump Velocity
-    }
-  }
-
-  applyGravity(): void {
-    if (this.isJumping) {
-      this.velY -= PLAYER.GRAVITY; //Gravity Effect
-      this.posY -= this.velY;
-      if (this.posY > this.Ground) {
-        this.posY = this.Ground;
-        this.isJumping = false;
-        this.velY = 0;
-      }
-    }
-  }
-  jumping() {
+  jump() {
     this.isJumping = true;
     this.isGrounded = false;
     this.velY = -PLAYER.JUMP_POWER;
@@ -138,7 +120,6 @@ export default class Player implements IPlayer {
   }
 
   update(): void {
-    // this.applyGravity();
     if (!this.isGrounded) {
       this.gravity();
     }
