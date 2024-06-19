@@ -1,9 +1,9 @@
-import { PLAYER, CANVAS, PLAYER_SPRITE } from "../../utils/constant";
-import { collisionDetections } from "../../utils/collisionDetection.ts";
-import playerR from "../../assets/images/player_right.gif";
 import playerL from "../../assets/images/player_left.gif";
+import playerR from "../../assets/images/player_right.gif";
+import { collisionDetections } from "../../utils/collisionDetection.ts";
+import { CANVAS, PLAYER } from "../../utils/constant";
+import { input } from "../../utils/input.ts";
 import Map from "../Map/Map";
-import Platform from "../Map/hawaPlatform";
 import { platformValues } from "../Platform/platformValues";
 
 interface IPlayer {
@@ -30,6 +30,7 @@ export default class Player implements IPlayer {
   maxFrame: number;
   runReq: number;
   staggerFrame = 0;
+  animationTimer: number;
 
   constructor(posX: number, posY: number) {
     this.posX = posX;
@@ -50,6 +51,7 @@ export default class Player implements IPlayer {
     this.playerImage = new Image();
     this.playerImage.src = playerR;
     this.runReq = 0;
+    this.animationTimer = 0;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -68,6 +70,15 @@ export default class Player implements IPlayer {
     ctx.strokeStyle = "red";
     ctx.strokeRect(this.posX, this.posY, PLAYER.WIDTH, PLAYER.HEIGHT);
   }
+
+  update(): void {
+    if (!this.isGrounded) {
+      this.gravity(); //For Gravity Effect
+    }
+
+    this.checkVerticalCollision();
+  }
+
   animateRunning = () => {
     this.frameX = Math.floor(this.staggerFrame / 5) % this.maxFrame;
     this.staggerFrame++;
@@ -119,14 +130,7 @@ export default class Player implements IPlayer {
     }
   }
 
-  update(): void {
-    if (!this.isGrounded) {
-      this.gravity();
-    }
-    this.checkForVerticalCollision();
-  }
-
-  checkForVerticalCollision() {
+  checkVerticalCollision() {
     platformValues.forEach((platform: any) => {
       if (collisionDetections(this, platform)) {
         console.log("collided");
