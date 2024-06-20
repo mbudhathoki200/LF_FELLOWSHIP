@@ -109,7 +109,7 @@ export const jumpingSprite: sprite[] = [
     width: 19,
   },
 ];
-const playerPronePosition = {
+export const playerPronePosition = {
   right: {
     x: 144,
     y: 174,

@@ -84,16 +84,16 @@ window.onkeydown = (event) => {
     case "ArrowLeft":
       input.left = true;
       player.moveLeft(gameMap);
-      player.animateRunning();
       break;
     case "ArrowRight":
       input.right = true;
       player.moveRight(gameMap);
-      player.animateRunning();
+      break;
+    case "ArrowDown":
+      input.down = true;
       break;
     case "x":
       input.jump = true;
-      player.jump();
       break;
   }
 };
@@ -105,6 +105,9 @@ window.onkeyup = (event) => {
       break;
     case "ArrowRight":
       input.right = false;
+      break;
+    case "ArrowDown":
+      input.down = false;
       break;
     case "x":
       input.jump = false;

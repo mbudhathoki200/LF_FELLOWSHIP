@@ -1,10 +1,18 @@
 import playerL from "../../assets/images/player_left.gif";
-import playerR from "../../assets/images/player_right.gif";
+import playerSheet from "../../assets/images/player.gif";
+// import playerR from "../../assets/images/player_right.gif";
 import { collisionDetections } from "../../utils/collisionDetection.ts";
 import { CANVAS, PLAYER } from "../../utils/constant";
 import { input } from "../../utils/input.ts";
 import Map from "../Map/Map";
 import { platformValues } from "../Platform/platformValues";
+import {
+  jumpingSprite,
+  playerPronePosition,
+  runningLeft,
+  runningRight,
+  sprite,
+} from "./PlayerImage.ts";
 
 interface IPlayer {
   posX: number;
@@ -31,6 +39,10 @@ export default class Player implements IPlayer {
   runReq: number;
   staggerFrame = 0;
   animationTimer: number;
+  animationCounter: number;
+  playerDirection: string;
+  playerAction: sprite;
+  prone: boolean;
 
   constructor(posX: number, posY: number) {
     this.posX = posX;
@@ -45,28 +57,45 @@ export default class Player implements IPlayer {
     this.isJumping = false;
     this.isRunning = false;
     this.isGrounded = false;
+    this.prone = false;
     this.maxFrame = 5;
     this.frameY = 0;
     this.frameX = 0;
     this.playerImage = new Image();
-    this.playerImage.src = playerR;
+    this.playerImage.src = playerSheet;
     this.runReq = 0;
+
     this.animationTimer = 0;
+    this.animationCounter = 0;
+    this.playerDirection = "DIRECTION_RIGHT";
+    this.playerAction = runningRight[0];
   }
 
   draw(ctx: CanvasRenderingContext2D) {
+    // ctx.drawImage(
+    //   this.playerImage,
+    //   this.frameX * PLAYER.WIDTH,
+    //   0,
+    //   PLAYER.WIDTH,
+    //   PLAYER.HEIGHT,
+    //   this.posX,
+    //   this.posY,
+    //   PLAYER.WIDTH,
+    //   // PLAYER.HEIGHT
+    //   80
+    // );
     ctx.drawImage(
       this.playerImage,
-      this.frameX * PLAYER.WIDTH,
-      0,
-      PLAYER.WIDTH,
-      PLAYER.HEIGHT,
+      this.playerAction.x,
+      this.playerAction.y,
+      this.playerAction.width,
+      this.playerAction.height,
       this.posX,
       this.posY,
-      PLAYER.WIDTH,
-      // PLAYER.HEIGHT
-      80
+      this.width,
+      this.height
     );
+
     ctx.strokeStyle = "red";
     ctx.strokeRect(this.posX, this.posY, PLAYER.WIDTH, PLAYER.HEIGHT);
   }
@@ -77,21 +106,39 @@ export default class Player implements IPlayer {
     }
 
     this.checkVerticalCollision();
-  }
 
-  animateRunning = () => {
-    this.frameX = Math.floor(this.staggerFrame / 5) % this.maxFrame;
-    this.staggerFrame++;
-    // this.frameX = Math.floor(this.frameX + 1) % (this.maxFrame + 1);
-    // return requestAnimationFrame(this.animateRunning);
-    // this.animateRunning();
-  };
+    if (input.down) {
+      this.stopMoving();
+      this.playerProne();
+    }
+
+    if (input.jump) {
+      this.jump();
+    }
+
+    //Reset if No input Stroke is pressed
+    if (Object.values(input).every((value) => value === false)) {
+      this.animationTimer = 0;
+      this.animationCounter = 0;
+      this.stopMoving();
+      this.resetActions();
+      this.resetPlayerSize();
+    }
+  }
 
   moveLeft(gameMap: Map): void {
     if (this.posX > 0) {
-      this.playerImage.src = playerL;
+      this.animateMovement();
+
+      this.playerDirection = "DIRECTION_LEFT";
+
+      if (!input.jump) {
+        this.playerRunning(this.playerDirection);
+      }
       this.velX = this.SPEED;
       this.posX -= this.velX;
+
+      //move camera
       if (this.posX > CANVAS.WIDTH / 2) {
         gameMap.moveLeft(this.SPEED);
         Map.offsetX -= this.SPEED;
@@ -100,11 +147,17 @@ export default class Player implements IPlayer {
   }
 
   moveRight(gameMap: Map): void {
-    this.playerImage.src = playerR;
+    this.animateMovement();
+    this.playerDirection = "DIRECTION_RIGHT";
+    if (!input.jump) {
+      this.playerRunning(this.playerDirection);
+    }
     if (this.posX + this.width < CANVAS.WIDTH / 2) {
       this.velX = this.SPEED;
       this.posX += this.velX;
     }
+
+    //For Camera Offset
     if (this.posX + this.width > CANVAS.WIDTH / 2) {
       gameMap.moveRight(this.SPEED);
       Map.offsetX += this.SPEED;
@@ -112,6 +165,22 @@ export default class Player implements IPlayer {
     if (this.posX > 3475) {
       this.posX = 3475;
       this.velX = 0;
+    }
+  }
+
+  resetPlayerSize() {
+    this.height = PLAYER.HEIGHT;
+    this.width = PLAYER.WIDTH;
+  }
+
+  playerProne() {
+    let { left, right } = playerPronePosition;
+    this.width = left.width;
+    this.height = left.width;
+    if (this.playerDirection == "DIRECTION_LEFT") {
+      this.playerAction = left;
+    } else {
+      this.playerAction = right;
     }
   }
 
@@ -126,25 +195,53 @@ export default class Player implements IPlayer {
       this.posY += this.velY;
       this.velY += PLAYER.GRAVITY;
     } else {
-      this.velY = 0;
+      this.velY = 0; // Reset velocity to zero when on the ground
     }
   }
 
   checkVerticalCollision() {
     platformValues.forEach((platform: any) => {
       if (collisionDetections(this, platform)) {
-        console.log("collided");
         if (this.velY > 0) {
           this.velY = 0;
           if (this.posY + this.height >= platform.y) {
             this.posY = platform.y - 50;
-            console.log("Mathi");
           }
-
-          //     // this.isGrounded = true;
+          // this.isGrounded = true;
           //     // this.isJumping = false;
         }
       }
     });
+  }
+
+  playerRunning(direction: string) {
+    const runningDirection =
+      direction === "DIRECTION_RIGHT" ? runningRight : runningLeft;
+    console.log(runningDirection);
+
+    const lastIndex = runningDirection.length - 1;
+
+    if (this.animationTimer >= lastIndex) {
+      this.animationTimer = 1;
+    }
+    this.playerAction = runningDirection[this.animationTimer];
+  }
+
+  animateMovement() {
+    this.animationCounter++;
+    if (this.animationCounter % 7 == 0 && this.animationCounter != 0) {
+      this.animationTimer += 1;
+    }
+  }
+  stopMoving() {
+    this.velX = 0;
+  }
+
+  resetActions() {
+    if (this.playerDirection == "DIRECTION_LEFT") {
+      this.playerAction = runningLeft[0];
+    } else {
+      this.playerAction = runningRight[0];
+    }
   }
 }

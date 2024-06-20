@@ -20,17 +20,6 @@ export const MAP: map = {
 
 // Player Constants
 
-type playerSprite = {
-  WIDTH: number;
-  HEIGHT: number;
-  COLUMNS: number;
-};
-
-export const PLAYER_SPRITE: playerSprite = {
-  WIDTH: 116,
-  HEIGHT: 50,
-  COLUMNS: 5,
-};
 type player = {
   WIDTH: number;
   HEIGHT: number;
@@ -39,11 +28,12 @@ type player = {
   JUMP_POWER: number;
   GRAVITY: number;
 };
+
 export const PLAYER: player = {
-  WIDTH: PLAYER_SPRITE.WIDTH / PLAYER_SPRITE.COLUMNS + 1,
-  HEIGHT: 50,
+  WIDTH: 30,
+  HEIGHT: 72,
   SPEED: 15,
   LIFE: 3,
-  JUMP_POWER: 10,
+  JUMP_POWER: 6,
   GRAVITY: 0.5,
 };
