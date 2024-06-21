@@ -18,36 +18,41 @@ export class Bullet implements IBullet {
     this.x = x;
     this.y = y;
     this.bulletImg = new Image();
-    this.bulletImg.src = bulletImgR;
     this.width = BULLET_SPRITE.WIDTH;
     this.height = BULLET_SPRITE.HEIGHT;
     this.velocityX =
       direction === "DIRECTION_RIGHT" ? BULLET.SPEED : -BULLET.SPEED;
+    this.bulletImg.src =
+      direction === "DIRECTION_RIGHT" ? bulletImgR : bulletImgL;
   }
   draw(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.bulletImg, this.x, this.y, this.width, this.height);
   }
   update() {
-    this.moveBullet();
-  }
-  moveBullet() {
-    if (this.x > 0 || this.x < CANVAS.WIDTH) {
-      console.log(this.x);
-      this.x += this.velocityX;
-    }
+    // this.moveBullet();
   }
 
-  // moveBullet(bullets: Bullet[]) {
-  //   if (playerDirection == "DIRECTION_RIGHT") {
-  //     this.x += this.velocityX;
-  //     if (this.x > CANVAS.WIDTH) {
-  //       bullets.pop();
-  //     }
-  //   } else {
-  //     this.x -= this.velocityX;
-  //     if (this.x < 0) {
-  //       bullets.pop();
-  //     }
-  //   }
-  // }
+  moveBullet(bullets: Bullet[]) {
+    this.x += this.velocityX;
+    if (this.x < 0 || this.x > CANVAS.WIDTH) {
+      const index = bullets.indexOf(this);
+      if (index > -1) {
+        bullets.splice(index, 1); // Remove the bullet from the array
+      }
+    }
+  }
 }
+
+// moveBullet(bullets: Bullet[]) {
+//   if (playerDirection == "DIRECTION_RIGHT") {
+//     this.x += this.velocityX;
+//     if (this.x > CANVAS.WIDTH) {
+//       bullets.pop();
+//     }
+//   } else {
+//     this.x -= this.velocityX;
+//     if (this.x < 0) {
+//       bullets.pop();
+//     }
+//   }
+// }

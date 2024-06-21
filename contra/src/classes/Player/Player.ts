@@ -119,7 +119,7 @@ export default class Player implements IPlayer {
 
     bullets.forEach((bullet) => {
       // bullet.moveBullet(bullets);
-      bullet.update();
+      bullet.moveBullet(bullets);
       bullet.draw(ctx);
     });
 
