@@ -26,12 +26,18 @@ export class Bullet implements IBullet {
   draw(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.bulletImg, this.x, this.y, this.width, this.height);
   }
-  update() {
-    this.moveBullet();
-  }
-  moveBullet() {
-    if (this.x < CANVAS.WIDTH) {
+
+  moveBullet(playerDirection: string, bullets: Bullet[]) {
+    if (playerDirection == "DIRECTION_RIGHT") {
       this.x += this.velocityX;
+      if (this.x > CANVAS.WIDTH) {
+        bullets.pop();
+      }
+    } else {
+      this.x -= this.velocityX;
+      if (this.x < 0) {
+        bullets.pop();
+      }
     }
   }
 }

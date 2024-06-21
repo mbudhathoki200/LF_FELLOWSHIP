@@ -117,10 +117,9 @@ export default class Player implements IPlayer {
     }
 
     bullets.forEach((bullet) => {
-      bullet.update();
+      bullet.moveBullet(this.playerDirection, bullets);
       bullet.draw(ctx);
     });
-    // bullets.forEach((bullet) => bullet.draw(ctx));
 
     //Reset if No input Stroke is pressed
     if (Object.values(input).every((value) => value === false)) {
