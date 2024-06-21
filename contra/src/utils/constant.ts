@@ -30,10 +30,30 @@ type player = {
 };
 
 export const PLAYER: player = {
-  WIDTH: 30,
+  WIDTH: 33,
   HEIGHT: 72,
   SPEED: 15,
   LIFE: 3,
   JUMP_POWER: 6,
   GRAVITY: 0.5,
+};
+type playerSprite = {
+  WIDTH: number;
+  HEIGHT: number;
+  COLUMNS: number;
+};
+
+export const PLAYER_SPRITE: playerSprite = {
+  WIDTH: 116,
+  HEIGHT: 50,
+  COLUMNS: 5,
+};
+
+type bullet = {
+  WIDTH: number;
+  HEIGHT: number;
+};
+export const BULLET_SPRITE: bullet = {
+  WIDTH: 20,
+  HEIGHT: 20,
 };

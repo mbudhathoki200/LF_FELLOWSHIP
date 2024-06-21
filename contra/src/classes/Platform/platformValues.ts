@@ -303,9 +303,9 @@ export const platformValues = [
   },
   {
     x: 0,
-    y: 372,
-    w: 310,
-    h: 70,
+    y: 403,
+    w: 308,
+    h: 39,
     id: "water",
   },
   {

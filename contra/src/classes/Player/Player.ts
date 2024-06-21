@@ -1,9 +1,10 @@
-import playerL from "../../assets/images/player_left.gif";
 import playerSheet from "../../assets/images/player.gif";
+
 // import playerR from "../../assets/images/player_right.gif";
 import { collisionDetections } from "../../utils/collisionDetection.ts";
-import { CANVAS, PLAYER } from "../../utils/constant";
+import { BULLET_SPRITE, CANVAS, PLAYER } from "../../utils/constant";
 import { input } from "../../utils/input.ts";
+import { Bullet } from "../Bullet/Bullet.ts";
 import Map from "../Map/Map";
 import { platformValues } from "../Platform/platformValues";
 import {
@@ -19,6 +20,7 @@ interface IPlayer {
   posY: number;
 }
 
+const bullets: Bullet[] = [];
 export default class Player implements IPlayer {
   posX: number;
   posY: number;
@@ -72,18 +74,6 @@ export default class Player implements IPlayer {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
-    // ctx.drawImage(
-    //   this.playerImage,
-    //   this.frameX * PLAYER.WIDTH,
-    //   0,
-    //   PLAYER.WIDTH,
-    //   PLAYER.HEIGHT,
-    //   this.posX,
-    //   this.posY,
-    //   PLAYER.WIDTH,
-    //   // PLAYER.HEIGHT
-    //   80
-    // );
     ctx.drawImage(
       this.playerImage,
       this.playerAction.x,
@@ -100,7 +90,7 @@ export default class Player implements IPlayer {
     ctx.strokeRect(this.posX, this.posY, PLAYER.WIDTH, PLAYER.HEIGHT);
   }
 
-  update(): void {
+  update(ctx: CanvasRenderingContext2D): void {
     if (!this.isGrounded) {
       this.gravity(); //For Gravity Effect
     }
@@ -115,6 +105,22 @@ export default class Player implements IPlayer {
     if (input.jump) {
       this.jump();
     }
+
+    if (input.bullet && !input.isShooting) {
+      input.isShooting = true;
+      //bullet instantiate
+      const bullet = new Bullet(
+        this.posX + PLAYER.WIDTH,
+        this.posY + PLAYER.HEIGHT / 4
+      );
+      bullets.push(bullet);
+    }
+
+    bullets.forEach((bullet) => {
+      bullet.update();
+      bullet.draw(ctx);
+    });
+    // bullets.forEach((bullet) => bullet.draw(ctx));
 
     //Reset if No input Stroke is pressed
     if (Object.values(input).every((value) => value === false)) {
@@ -168,12 +174,12 @@ export default class Player implements IPlayer {
     }
   }
 
-  resetPlayerSize() {
+  resetPlayerSize(): void {
     this.height = PLAYER.HEIGHT;
     this.width = PLAYER.WIDTH;
   }
 
-  playerProne() {
+  playerProne(): void {
     let { left, right } = playerPronePosition;
     this.width = left.width;
     this.height = left.width;
@@ -184,13 +190,13 @@ export default class Player implements IPlayer {
     }
   }
 
-  jump() {
+  jump(): void {
     this.isJumping = true;
     this.isGrounded = false;
     this.velY = -PLAYER.JUMP_POWER;
   }
 
-  gravity() {
+  gravity(): void {
     if (this.posY + PLAYER.HEIGHT + this.velY < CANVAS.HEIGHT) {
       this.posY += this.velY;
       this.velY += PLAYER.GRAVITY;
@@ -199,7 +205,7 @@ export default class Player implements IPlayer {
     }
   }
 
-  checkVerticalCollision() {
+  checkVerticalCollision(): void {
     platformValues.forEach((platform: any) => {
       if (collisionDetections(this, platform)) {
         if (this.velY > 0) {
@@ -217,7 +223,6 @@ export default class Player implements IPlayer {
   playerRunning(direction: string) {
     const runningDirection =
       direction === "DIRECTION_RIGHT" ? runningRight : runningLeft;
-    console.log(runningDirection);
 
     const lastIndex = runningDirection.length - 1;
 

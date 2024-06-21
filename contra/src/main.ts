@@ -10,8 +10,7 @@ import { platformValues } from "./classes/Platform/platformValues";
 //import Constants
 import { CANVAS, PLAYER } from "./utils/constant.ts";
 import { input } from "./utils/input.ts";
-
-// import drawGrid from "./classes/Map/drawrid.ts";
+import { Bullet } from "./classes/Bullet/Bullet.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -23,9 +22,8 @@ canvas.width = CANVAS.WIDTH;
 
 //global variable
 
-let gameMap: Map;
 //instantiate
-gameMap = new Map(0, 0);
+let gameMap = new Map(0, 0);
 
 let player = new Player(40, 100);
 
@@ -37,7 +35,9 @@ function draw() {
 
   //update player with platform Collision Detection
   player.draw(ctx);
-  player.update();
+  player.update(ctx);
+
+  //bullet
 
   //Draw platforms
   platformValues.forEach((platform) => {
@@ -50,8 +50,6 @@ function draw() {
     );
     newPlatform.draw(ctx);
   });
-
-  // drawGrid(ctx);
 
   requestAnimationFrame(draw);
 }
@@ -95,6 +93,9 @@ window.onkeydown = (event) => {
     case "x":
       input.jump = true;
       break;
+    case "z":
+      input.bullet = true;
+      break;
   }
 };
 
@@ -111,6 +112,10 @@ window.onkeyup = (event) => {
       break;
     case "x":
       input.jump = false;
+      break;
+    case "z":
+      input.bullet = false;
+      input.isShooting = false;
       break;
   }
 };
