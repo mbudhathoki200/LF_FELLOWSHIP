@@ -111,13 +111,15 @@ export default class Player implements IPlayer {
       //bullet instantiate
       const bullet = new Bullet(
         this.posX + PLAYER.WIDTH,
-        this.posY + PLAYER.HEIGHT / 4
+        this.posY + PLAYER.HEIGHT / 4,
+        this.playerDirection
       );
       bullets.push(bullet);
     }
 
     bullets.forEach((bullet) => {
-      bullet.moveBullet(this.playerDirection, bullets);
+      // bullet.moveBullet(bullets);
+      bullet.update();
       bullet.draw(ctx);
     });
 

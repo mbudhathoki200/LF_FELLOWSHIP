@@ -49,11 +49,19 @@ export const PLAYER_SPRITE: playerSprite = {
   COLUMNS: 5,
 };
 
-type bullet = {
+type bulletSprite = {
   WIDTH: number;
   HEIGHT: number;
 };
-export const BULLET_SPRITE: bullet = {
+export const BULLET_SPRITE: bulletSprite = {
   WIDTH: 20,
   HEIGHT: 20,
+};
+
+type bullet = {
+  SPEED: number;
+};
+
+export const BULLET: bullet = {
+  SPEED: 8,
 };
