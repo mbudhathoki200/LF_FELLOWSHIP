@@ -158,34 +158,19 @@ const swimming = [
 ];
 
 export const playerTargetUp = {
-  left: [
-    {
-      x: 58,
-      y: 6,
-      height: 47,
-      width: 21,
-    },
-    {
-      x: 117,
-      y: 53,
-      height: 40,
-      width: 21,
-    },
-  ],
-  right: [
-    {
-      x: 202,
-      y: 4,
-      height: 50,
-      width: 18,
-    },
-    {
-      x: 142,
-      y: 53,
-      height: 40,
-      width: 21,
-    },
-  ],
+  left: {
+    x: 58,
+    y: 6,
+    height: 47,
+    width: 21,
+  },
+
+  right: {
+    x: 202,
+    y: 4,
+    height: 50,
+    width: 18,
+  },
 };
 export const TargetUpLR = {
   left: {

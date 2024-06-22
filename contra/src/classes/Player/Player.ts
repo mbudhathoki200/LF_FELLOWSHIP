@@ -178,6 +178,7 @@ export default class Player extends Character implements IPlayer {
       this.positionY + PLAYER.HEIGHT / 3,
       bulletDirection
     );
+    bullets.push(bullet);
   }
 
   moveLeft(gameMap: Map): void {
@@ -247,11 +248,11 @@ export default class Player extends Character implements IPlayer {
   }
 
   targetUp(direction: string) {
-    // console.log(direction);
     if (direction === "DIRECTION_LEFT") {
-      this.playerAction = playerTargetUp.left[0];
+      this.playerAction = playerTargetUp.left;
+    } else {
+      this.playerAction = playerTargetUp.right;
     }
-    this.playerAction = playerTargetUp.right[0];
   }
   targetUpLR(direction: string) {
     let { left, right } = TargetUpLR;
