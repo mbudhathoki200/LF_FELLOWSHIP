@@ -1,6 +1,8 @@
 import bulletImgL from "../../assets/images/leftBullet.png";
 import bulletImgR from "../../assets/images/rightBullet.png";
+import { collisionBetweenCharacters } from "../../utils/collisionDetection";
 import { BULLET_SPRITE, CANVAS } from "../../utils/constant";
+import { Enemy } from "../Enemy/Enemy";
 import { BULLET } from "./../../utils/constant";
 // import { Bullet } from "./Bullet";
 
@@ -48,5 +50,21 @@ export class Bullet implements IBullet {
     if (index > -1) {
       bullets.splice(index, 1);
     }
+  }
+  checkCollisionsWithEnemies(enemies: Enemy[], bullets: Bullet[]): void {
+    enemies.forEach((enemy, enemyIndex) => {
+      if (collisionBetweenCharacters(this, enemy)) {
+        this.handleCollisionWithEnemy(enemies, bullets, enemyIndex);
+      }
+    });
+  }
+  handleCollisionWithEnemy(
+    enemies: Enemy[],
+    bullets: Bullet[],
+    enemyIndex: number
+  ): void {
+    enemies.splice(enemyIndex, 1);
+    // Remove bullet from array
+    this.removeBullet(bullets);
   }
 }

@@ -106,6 +106,7 @@ export default class Player extends Character implements IPlayer {
     bullets.forEach((bullet) => {
       bullet.moveBullet(bullets);
       bullet.draw(ctx);
+      bullet.checkCollisionsWithEnemies(enemies, bullets);
     });
 
     //Reset if No input Stroke is pressed
@@ -235,17 +236,16 @@ export default class Player extends Character implements IPlayer {
   checkCollisionsWithEnemies(enemies: Enemy[]): void {
     enemies.forEach((enemy, index) => {
       if (collisionBetweenCharacters(this, enemy)) {
-        console.log("collided");
+        // console.log("collided");
         this.handleCollisionWithEnemy(enemies, index);
       }
     });
   }
   handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
-    // Define what happens on collision, for example:
     this.life -= 1; // Decrease player life
-    console.log(`${this.life} Remaining`);
+    // console.log(`${this.life} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
-    console.log(enemies);
+    // console.log(enemies);
   }
 }
