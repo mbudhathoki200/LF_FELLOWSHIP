@@ -57,8 +57,8 @@ type bulletSprite = {
   HEIGHT: number;
 };
 export const BULLET_SPRITE: bulletSprite = {
-  WIDTH: 20,
-  HEIGHT: 20,
+  WIDTH: 15,
+  HEIGHT: 15,
 };
 
 type bullet = {

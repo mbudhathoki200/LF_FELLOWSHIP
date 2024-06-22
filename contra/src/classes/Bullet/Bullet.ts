@@ -17,6 +17,7 @@ export class Bullet implements IBullet {
   width: number;
   bulletImg: HTMLImageElement;
   velocityX: number;
+  direction: string;
 
   constructor(positionX: number, positionY: number, direction: string) {
     this.positionX = positionX;
@@ -24,6 +25,7 @@ export class Bullet implements IBullet {
     this.bulletImg = new Image();
     this.width = BULLET_SPRITE.WIDTH;
     this.height = BULLET_SPRITE.HEIGHT;
+    this.direction = direction;
     this.velocityX =
       direction === "DIRECTION_RIGHT" ? BULLET.SPEED : -BULLET.SPEED;
     this.bulletImg.src =
@@ -39,9 +41,30 @@ export class Bullet implements IBullet {
     );
   }
 
+  // moveBullet(bullets: Bullet[]) {
+  //   this.positionX += this.velocityX;
+  //   if (this.positionX < 0 || this.positionX > CANVAS.WIDTH) {
+  //     this.removeBullet(bullets);
+  //   }
+  // }
   moveBullet(bullets: Bullet[]) {
-    this.positionX += this.velocityX;
-    if (this.positionX < 0 || this.positionX > CANVAS.WIDTH) {
+    switch (this.direction) {
+      case "DIRECTION_RIGHT":
+        this.positionX += this.velocityX;
+        break;
+      case "DIRECTION_LEFT":
+        this.positionX += this.velocityX;
+        break;
+      case "DIRECTION_UP":
+        this.positionY -= BULLET.SPEED; // Upward movement
+        break;
+    }
+    if (
+      this.positionX < 0 ||
+      this.positionX > CANVAS.WIDTH ||
+      this.positionY < 0 ||
+      this.positionY > CANVAS.HEIGHT
+    ) {
       this.removeBullet(bullets);
     }
   }

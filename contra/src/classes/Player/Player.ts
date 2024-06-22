@@ -9,6 +9,7 @@ import Map from "../Map/Map";
 
 import {
   playerPronePosition,
+  playerTargetUp,
   runningLeft,
   runningRight,
   sprite,
@@ -20,6 +21,8 @@ interface IPlayer {
 }
 //Bullet Array
 const bullets: Bullet[] = [];
+
+let bullet;
 
 export default class Player extends Character implements IPlayer {
   playerImage: HTMLImageElement;
@@ -94,13 +97,28 @@ export default class Player extends Character implements IPlayer {
 
     if (input.bullet && !input.isShooting) {
       input.isShooting = true;
-      //bullet instantiate
-      const bullet = new Bullet(
-        this.positionX + PLAYER.WIDTH,
-        this.positionY + PLAYER.HEIGHT / 4,
-        this.playerDirection
-      );
+      // bullet instantiate
+      let bulletDirection = this.playerDirection;
+      if (input.up) {
+        bulletDirection = "DIRECTION_UP";
+        bullet = new Bullet(
+          this.positionX + PLAYER.WIDTH / 2,
+          this.positionY + PLAYER.HEIGHT / 3,
+          bulletDirection
+        );
+      } else {
+        bullet = new Bullet(
+          this.positionX + PLAYER.WIDTH,
+          this.positionY + PLAYER.HEIGHT / 3,
+          bulletDirection
+        );
+      }
       bullets.push(bullet);
+    }
+
+    if (input.up) {
+      this.stopMoving();
+      this.targetUp();
     }
 
     bullets.forEach((bullet) => {
@@ -187,6 +205,14 @@ export default class Player extends Character implements IPlayer {
     this.velocityY = -PLAYER.JUMP_POWER;
   }
 
+  targetUp() {
+    if ((this.playerDirection = "DIRECTION_RIGHT")) {
+      this.playerAction = playerTargetUp.right[0];
+    } else {
+      this.playerAction = playerTargetUp.left[0];
+    }
+  }
+
   // checkVerticalCollision(): void {
   //   platformValues.forEach((platform: any) => {
   //     if (collisionDetections(this, platform)) {
@@ -243,7 +269,7 @@ export default class Player extends Character implements IPlayer {
   }
   handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
     this.life -= 1; // Decrease player life
-    // console.log(`${this.life} Remaining`);
+    console.log(`${this.life} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
     // console.log(enemies);

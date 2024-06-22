@@ -157,7 +157,7 @@ const swimming = [
   },
 ];
 
-const playerTargetUp = {
+export const playerTargetUp = {
   left: [
     {
       x: 58,
@@ -187,7 +187,7 @@ const playerTargetUp = {
     },
   ],
 };
-const playerTargetDown = {
+export const playerTargetDown = {
   left: {
     x: 113,
     y: 93,

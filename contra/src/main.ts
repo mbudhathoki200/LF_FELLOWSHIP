@@ -43,8 +43,6 @@ function draw() {
   player.update(ctx, enemies);
 
   //Enemy
-  // enemy.draw(ctx);
-  // enemy.update();
   enemies.forEach((enemy) => {
     enemy.draw(ctx);
     enemy.update();
@@ -102,6 +100,9 @@ window.onkeydown = (event) => {
     case "ArrowDown":
       input.down = true;
       break;
+    case "ArrowUp":
+      input.up = true;
+      break;
     case "x":
       input.jump = true;
       break;
@@ -121,6 +122,9 @@ window.onkeyup = (event) => {
       break;
     case "ArrowDown":
       input.down = false;
+      break;
+    case "ArrowUp":
+      input.up = false;
       break;
     case "x":
       input.jump = false;
