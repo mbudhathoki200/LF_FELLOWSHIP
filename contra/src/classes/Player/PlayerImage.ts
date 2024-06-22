@@ -187,6 +187,20 @@ export const playerTargetUp = {
     },
   ],
 };
+export const TargetUpLR = {
+  left: {
+    x: 117,
+    y: 53,
+    height: 40,
+    width: 21,
+  },
+  right: {
+    x: 142,
+    y: 53,
+    height: 40,
+    width: 21,
+  },
+};
 export const playerTargetDown = {
   left: {
     x: 113,

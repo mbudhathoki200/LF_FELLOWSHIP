@@ -8,7 +8,9 @@ import { Enemy } from "../Enemy/Enemy.ts";
 import Map from "../Map/Map";
 
 import {
+  TargetUpLR,
   playerPronePosition,
+  playerTargetDown,
   playerTargetUp,
   runningLeft,
   runningRight,
@@ -31,6 +33,7 @@ export default class Player extends Character implements IPlayer {
   SPEED: number;
   life: number;
   isGrounded: boolean;
+  inWater: boolean;
 
   isJumping: boolean;
   isRunning: boolean;
@@ -52,6 +55,7 @@ export default class Player extends Character implements IPlayer {
     this.isJumping = false;
     this.isRunning = false;
     this.isGrounded = false;
+    this.inWater = false;
     this.prone = false;
     this.playerImage = new Image();
     this.playerImage.src = playerSheet;
@@ -99,6 +103,7 @@ export default class Player extends Character implements IPlayer {
       input.isShooting = true;
       // bullet instantiate
       let bulletDirection = this.playerDirection;
+
       if (input.up) {
         bulletDirection = "DIRECTION_UP";
         bullet = new Bullet(
@@ -106,19 +111,48 @@ export default class Player extends Character implements IPlayer {
           this.positionY + PLAYER.HEIGHT / 3,
           bulletDirection
         );
-      } else {
-        bullet = new Bullet(
-          this.positionX + PLAYER.WIDTH,
-          this.positionY + PLAYER.HEIGHT / 3,
-          bulletDirection
-        );
       }
+      if (input.down && input.right) {
+        bulletDirection = "DIRECTION_DOWN_RIGHT";
+      } else if (input.down && input.left) {
+        bulletDirection = "DIRECTION_DOWN_LEFT";
+      } else if (input.down && input.right) {
+        bulletDirection = "DIRECTION_UP_RIGHT";
+      } else if (input.up && input.right) {
+        bulletDirection = "DIRECTION_UP_RIGHT";
+      } else if (input.up && input.left) {
+        bulletDirection = "DIRECTION_UP_LEFT";
+      }
+
+      bullet = new Bullet(
+        this.positionX + PLAYER.WIDTH,
+        this.positionY + PLAYER.HEIGHT / 3,
+        bulletDirection
+      );
       bullets.push(bullet);
     }
 
-    if (input.up) {
-      this.stopMoving();
-      this.targetUp();
+    if (!this.inWater) {
+      if (input.up) {
+        this.stopMoving();
+        this.targetUp(this.playerDirection);
+      }
+      if (input.down && input.right) {
+        this.stopMoving();
+        this.targetDown("DIRECTION_DOWN_RIGHT");
+      }
+      if (input.down && input.left) {
+        this.stopMoving();
+        this.targetDown("DIRECTION_DOWN_LEFT");
+      }
+      if (input.up && input.right) {
+        this.stopMoving();
+        this.targetUpLR("DIRECTION_DOWN_RIGHT");
+      }
+      if (input.up && input.left) {
+        this.stopMoving();
+        this.targetUpLR("DIRECTION_DOWN_LEFT");
+      }
     }
 
     bullets.forEach((bullet) => {
@@ -137,6 +171,13 @@ export default class Player extends Character implements IPlayer {
     }
     // Check for collisions with enemies
     this.checkCollisionsWithEnemies(enemies);
+  }
+  makeDefaultBullet(bulletDirection: string) {
+    bullet = new Bullet(
+      this.positionX + PLAYER.WIDTH,
+      this.positionY + PLAYER.HEIGHT / 3,
+      bulletDirection
+    );
   }
 
   moveLeft(gameMap: Map): void {
@@ -205,12 +246,33 @@ export default class Player extends Character implements IPlayer {
     this.velocityY = -PLAYER.JUMP_POWER;
   }
 
-  targetUp() {
-    if ((this.playerDirection = "DIRECTION_RIGHT")) {
-      this.playerAction = playerTargetUp.right[0];
-    } else {
+  targetUp(direction: string) {
+    // console.log(direction);
+    if (direction === "DIRECTION_LEFT") {
       this.playerAction = playerTargetUp.left[0];
     }
+    this.playerAction = playerTargetUp.right[0];
+  }
+  targetUpLR(direction: string) {
+    let { left, right } = TargetUpLR;
+    if (direction == "DIRECTION_DOWN_RIGHT") {
+      this.playerAction = right;
+    } else {
+      this.playerAction = left;
+    }
+    this.height = PLAYER.HEIGHT;
+    this.width = PLAYER.WIDTH;
+  }
+
+  targetDown(direction: string) {
+    let { left, right } = playerTargetDown;
+    if (direction == "DIRECTION_DOWN_RIGHT") {
+      this.playerAction = right;
+    } else {
+      this.playerAction = left;
+    }
+    this.height = PLAYER.HEIGHT;
+    this.width = PLAYER.WIDTH;
   }
 
   // checkVerticalCollision(): void {
