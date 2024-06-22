@@ -8,6 +8,7 @@ export const CANVAS: canvas = {
   HEIGHT: 221 * 2,
 };
 
+//------------------MAP CONSTANTS--------------------------
 type map = {
   WIDTH: number;
   HEIGHT: number;
@@ -18,7 +19,7 @@ export const MAP: map = {
   HEIGHT: 221 * 2,
 };
 
-// Player Constants
+// --------------Player Constants----------------------
 
 type player = {
   WIDTH: number;
@@ -37,6 +38,8 @@ export const PLAYER: player = {
   JUMP_POWER: 6,
   GRAVITY: 0.5,
 };
+
+//----------------------------PLAYER SPRITE CONSTANTS
 type playerSprite = {
   WIDTH: number;
   HEIGHT: number;
@@ -63,5 +66,19 @@ type bullet = {
 };
 
 export const BULLET: bullet = {
+  SPEED: 8,
+};
+
+//---------------------ENEMY CONSTANTS
+
+type enemy = {
+  WIDTH: number;
+  HEIGHT: number;
+  SPEED: number;
+};
+
+export const ENEMY: enemy = {
+  WIDTH: 33,
+  HEIGHT: 72,
   SPEED: 8,
 };

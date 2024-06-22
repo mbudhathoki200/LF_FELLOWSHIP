@@ -3,14 +3,14 @@ import "./style.css";
 
 // classes
 import Map from "./classes/Map/Map.ts";
-import Player from "./classes/Player/Player.ts";
 import { Platfrom } from "./classes/Platform/Platform.ts";
 import { platformValues } from "./classes/Platform/platformValues";
+import Player from "./classes/Player/Player.ts";
 
 //import Constants
-import { CANVAS, PLAYER } from "./utils/constant.ts";
+import { Enemy } from "./classes/Enemy/Enemy.ts";
+import { CANVAS } from "./utils/constant.ts";
 import { input } from "./utils/input.ts";
-import { Bullet } from "./classes/Bullet/Bullet.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -27,6 +27,8 @@ let gameMap = new Map(0, 0);
 
 let player = new Player(40, 100);
 
+let enemy = new Enemy(500, 100);
+
 function draw() {
   ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT);
 
@@ -37,7 +39,9 @@ function draw() {
   player.draw(ctx);
   player.update(ctx);
 
-  //bullet
+  //Enemy
+  enemy.draw(ctx);
+  enemy.update();
 
   //Draw platforms
   platformValues.forEach((platform) => {

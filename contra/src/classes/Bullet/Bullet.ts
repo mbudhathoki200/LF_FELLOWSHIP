@@ -1,6 +1,6 @@
 import bulletImgL from "../../assets/images/leftBullet.png";
 import bulletImgR from "../../assets/images/rightBullet.png";
-import { BULLET, BULLET_SPRITE, CANVAS, PLAYER } from "../../utils/constant";
+import { BULLET, BULLET_SPRITE, CANVAS } from "../../utils/constant";
 
 interface IBullet {
   x: number;
@@ -28,9 +28,6 @@ export class Bullet implements IBullet {
   draw(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.bulletImg, this.x, this.y, this.width, this.height);
   }
-  update() {
-    // this.moveBullet();
-  }
 
   moveBullet(bullets: Bullet[]) {
     this.x += this.velocityX;
@@ -42,17 +39,3 @@ export class Bullet implements IBullet {
     }
   }
 }
-
-// moveBullet(bullets: Bullet[]) {
-//   if (playerDirection == "DIRECTION_RIGHT") {
-//     this.x += this.velocityX;
-//     if (this.x > CANVAS.WIDTH) {
-//       bullets.pop();
-//     }
-//   } else {
-//     this.x -= this.velocityX;
-//     if (this.x < 0) {
-//       bullets.pop();
-//     }
-//   }
-// }

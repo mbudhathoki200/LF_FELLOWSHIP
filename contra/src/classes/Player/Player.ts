@@ -1,14 +1,11 @@
 import playerSheet from "../../assets/images/player.gif";
-
-// import playerR from "../../assets/images/player_right.gif";
-import { collisionDetections } from "../../utils/collisionDetection.ts";
-import { BULLET_SPRITE, CANVAS, PLAYER } from "../../utils/constant";
+import { CANVAS, PLAYER } from "../../utils/constant";
 import { input } from "../../utils/input.ts";
 import { Bullet } from "../Bullet/Bullet.ts";
+import { Character } from "../Character/Character.ts";
 import Map from "../Map/Map";
-import { platformValues } from "../Platform/platformValues";
+
 import {
-  jumpingSprite,
   playerPronePosition,
   runningLeft,
   runningRight,
@@ -19,25 +16,19 @@ interface IPlayer {
   posX: number;
   posY: number;
 }
-
+//Bullet Array
 const bullets: Bullet[] = [];
-export default class Player implements IPlayer {
-  posX: number;
-  posY: number;
-  width: number;
-  height: number;
+export default class Player extends Character implements IPlayer {
   playerImage: HTMLImageElement;
   velX: number;
   velY: number;
   SPEED: number;
   life: number;
   isGrounded: boolean;
-  Ground: number;
+
   isJumping: boolean;
   isRunning: boolean;
-  frameX: number;
-  frameY: number;
-  maxFrame: number;
+
   runReq: number;
   staggerFrame = 0;
   animationTimer: number;
@@ -47,26 +38,18 @@ export default class Player implements IPlayer {
   prone: boolean;
 
   constructor(posX: number, posY: number) {
-    this.posX = posX;
-    this.posY = posY;
-    this.width = PLAYER.WIDTH;
-    this.height = PLAYER.HEIGHT;
+    super(posX, posY, PLAYER.WIDTH, PLAYER.HEIGHT);
     this.velX = 0;
     this.velY = 0;
-    this.Ground = this.posY;
     this.SPEED = PLAYER.SPEED;
     this.life = PLAYER.LIFE;
     this.isJumping = false;
     this.isRunning = false;
     this.isGrounded = false;
     this.prone = false;
-    this.maxFrame = 5;
-    this.frameY = 0;
-    this.frameX = 0;
     this.playerImage = new Image();
     this.playerImage.src = playerSheet;
     this.runReq = 0;
-
     this.animationTimer = 0;
     this.animationCounter = 0;
     this.playerDirection = "DIRECTION_RIGHT";
@@ -87,7 +70,7 @@ export default class Player implements IPlayer {
     );
 
     ctx.strokeStyle = "red";
-    ctx.strokeRect(this.posX, this.posY, PLAYER.WIDTH, PLAYER.HEIGHT);
+    ctx.strokeRect(this.posX, this.posY, this.width, this.height);
   }
 
   update(ctx: CanvasRenderingContext2D): void {
@@ -118,7 +101,6 @@ export default class Player implements IPlayer {
     }
 
     bullets.forEach((bullet) => {
-      // bullet.moveBullet(bullets);
       bullet.moveBullet(bullets);
       bullet.draw(ctx);
     });
@@ -181,14 +163,16 @@ export default class Player implements IPlayer {
   }
 
   playerProne(): void {
-    let { left, right } = playerPronePosition;
-    this.width = left.width;
-    this.height = left.width;
+    const { left, right } = playerPronePosition;
+
+    this.width = PLAYER.WIDTH + 20;
+    this.height = PLAYER.HEIGHT - 20;
     if (this.playerDirection == "DIRECTION_LEFT") {
       this.playerAction = left;
     } else {
       this.playerAction = right;
     }
+    this.prone = true;
   }
 
   jump(): void {
@@ -197,29 +181,21 @@ export default class Player implements IPlayer {
     this.velY = -PLAYER.JUMP_POWER;
   }
 
-  gravity(): void {
-    if (this.posY + PLAYER.HEIGHT + this.velY < CANVAS.HEIGHT) {
-      this.posY += this.velY;
-      this.velY += PLAYER.GRAVITY;
-    } else {
-      this.velY = 0; // Reset velocity to zero when on the ground
-    }
-  }
-
-  checkVerticalCollision(): void {
-    platformValues.forEach((platform: any) => {
-      if (collisionDetections(this, platform)) {
-        if (this.velY > 0) {
-          this.velY = 0;
-          if (this.posY + this.height >= platform.y) {
-            this.posY = platform.y - 50;
-          }
-          // this.isGrounded = true;
-          //     // this.isJumping = false;
-        }
-      }
-    });
-  }
+  // checkVerticalCollision(): void {
+  //   platformValues.forEach((platform: any) => {
+  //     if (collisionDetections(this, platform)) {
+  //       if (this.velY > 0) {
+  //         this.velY = 0;
+  //         if (this.posY + this.height >= platform.y) {
+  //           this.posY = platform.y - 50;
+  //           this.isGrounded = true;
+  //         }
+  //       }
+  //     } else {
+  //       this.isGrounded = false;
+  //     }
+  //   });
+  // }
 
   playerRunning(direction: string) {
     const runningDirection =
