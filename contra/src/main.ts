@@ -6,29 +6,32 @@ import Map from "./classes/Map/Map.ts";
 import { Platfrom } from "./classes/Platform/Platform.ts";
 import { platformValues } from "./classes/Platform/platformValues";
 import Player from "./classes/Player/Player.ts";
-
-//import Constants
 import { Enemy } from "./classes/Enemy/Enemy.ts";
+
+// Constants and Utilities
 import { CANVAS } from "./utils/constant.ts";
 import { input } from "./utils/input.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 
-//images
-
 canvas.height = CANVAS.HEIGHT;
 canvas.width = CANVAS.WIDTH;
 
-//global variable
-
-//instantiate
+// Instantiate game elements
 let gameMap = new Map(0, 0);
 
 let player = new Player(40, 100);
 
-let enemy = new Enemy(500, 100);
+// let enemy = new Enemy(CANVAS.WIDTH, 100);
+const enemies: Enemy[] = [
+  new Enemy(CANVAS.WIDTH, 100),
+  new Enemy(CANVAS.WIDTH - 200, 100),
+  new Enemy(CANVAS.WIDTH * 2, 100),
+  new Enemy(CANVAS.WIDTH * 3, 100),
+];
 
+// Function to draw game elements
 function draw() {
   ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT);
 
@@ -37,11 +40,15 @@ function draw() {
 
   //update player with platform Collision Detection
   player.draw(ctx);
-  player.update(ctx);
+  player.update(ctx, enemies);
 
   //Enemy
-  enemy.draw(ctx);
-  enemy.update();
+  // enemy.draw(ctx);
+  // enemy.update();
+  enemies.forEach((enemy) => {
+    enemy.draw(ctx);
+    enemy.update();
+  });
 
   //Draw platforms
   platformValues.forEach((platform) => {
@@ -81,6 +88,7 @@ draw();
 //   cancelAnimationFrame(runReq);
 // });
 
+// Event listeners for keyboard input
 window.onkeydown = (event) => {
   switch (event.key) {
     case "ArrowLeft":

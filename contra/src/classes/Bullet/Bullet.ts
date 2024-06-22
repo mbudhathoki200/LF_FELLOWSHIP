@@ -1,22 +1,24 @@
 import bulletImgL from "../../assets/images/leftBullet.png";
 import bulletImgR from "../../assets/images/rightBullet.png";
-import { BULLET, BULLET_SPRITE, CANVAS } from "../../utils/constant";
+import { BULLET_SPRITE, CANVAS } from "../../utils/constant";
+import { BULLET } from "./../../utils/constant";
+// import { Bullet } from "./Bullet";
 
 interface IBullet {
-  x: number;
-  y: number;
+  positionX: number;
+  positionY: number;
 }
 export class Bullet implements IBullet {
-  x: number;
-  y: number;
+  positionX: number;
+  positionY: number;
   height: number;
   width: number;
   bulletImg: HTMLImageElement;
   velocityX: number;
 
-  constructor(x: number, y: number, direction: string) {
-    this.x = x;
-    this.y = y;
+  constructor(positionX: number, positionY: number, direction: string) {
+    this.positionX = positionX;
+    this.positionY = positionY;
     this.bulletImg = new Image();
     this.width = BULLET_SPRITE.WIDTH;
     this.height = BULLET_SPRITE.HEIGHT;
@@ -26,16 +28,25 @@ export class Bullet implements IBullet {
       direction === "DIRECTION_RIGHT" ? bulletImgR : bulletImgL;
   }
   draw(ctx: CanvasRenderingContext2D) {
-    ctx.drawImage(this.bulletImg, this.x, this.y, this.width, this.height);
+    ctx.drawImage(
+      this.bulletImg,
+      this.positionX,
+      this.positionY,
+      this.width,
+      this.height
+    );
   }
 
   moveBullet(bullets: Bullet[]) {
-    this.x += this.velocityX;
-    if (this.x < 0 || this.x > CANVAS.WIDTH) {
-      const index = bullets.indexOf(this);
-      if (index > -1) {
-        bullets.splice(index, 1); // Remove the bullet from the array
-      }
+    this.positionX += this.velocityX;
+    if (this.positionX < 0 || this.positionX > CANVAS.WIDTH) {
+      this.removeBullet(bullets);
+    }
+  }
+  removeBullet(bullets: Bullet[]) {
+    const index = bullets.indexOf(this);
+    if (index > -1) {
+      bullets.splice(index, 1);
     }
   }
 }

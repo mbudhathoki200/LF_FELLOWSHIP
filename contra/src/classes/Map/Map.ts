@@ -1,8 +1,7 @@
-import { CANVAS, MAP } from "../../utils/constant";
+import { MAP } from "../../utils/constant";
 
 // images
 import bgImage from "../../assets/images/NES - Contra - Level 1.png";
-import { Platfrom } from "../Platform/Platform";
 
 interface IMap {
   WIDTH: number;

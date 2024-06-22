@@ -1,8 +1,10 @@
 import playerSheet from "../../assets/images/player.gif";
+import { collisionBetweenCharacters } from "../../utils/collisionDetection.ts";
 import { CANVAS, PLAYER } from "../../utils/constant";
 import { input } from "../../utils/input.ts";
 import { Bullet } from "../Bullet/Bullet.ts";
 import { Character } from "../Character/Character.ts";
+import { Enemy } from "../Enemy/Enemy.ts";
 import Map from "../Map/Map";
 
 import {
@@ -13,15 +15,16 @@ import {
 } from "./PlayerImage.ts";
 
 interface IPlayer {
-  posX: number;
-  posY: number;
+  positionX: number;
+  positionY: number;
 }
 //Bullet Array
 const bullets: Bullet[] = [];
+
 export default class Player extends Character implements IPlayer {
   playerImage: HTMLImageElement;
-  velX: number;
-  velY: number;
+  velocityX: number;
+  velocityY: number;
   SPEED: number;
   life: number;
   isGrounded: boolean;
@@ -37,10 +40,10 @@ export default class Player extends Character implements IPlayer {
   playerAction: sprite;
   prone: boolean;
 
-  constructor(posX: number, posY: number) {
-    super(posX, posY, PLAYER.WIDTH, PLAYER.HEIGHT);
-    this.velX = 0;
-    this.velY = 0;
+  constructor(positionX: number, positionY: number) {
+    super(positionX, positionY, PLAYER.WIDTH, PLAYER.HEIGHT);
+    this.velocityX = 0;
+    this.velocityY = 0;
     this.SPEED = PLAYER.SPEED;
     this.life = PLAYER.LIFE;
     this.isJumping = false;
@@ -63,17 +66,17 @@ export default class Player extends Character implements IPlayer {
       this.playerAction.y,
       this.playerAction.width,
       this.playerAction.height,
-      this.posX,
-      this.posY,
+      this.positionX,
+      this.positionY,
       this.width,
       this.height
     );
 
     ctx.strokeStyle = "red";
-    ctx.strokeRect(this.posX, this.posY, this.width, this.height);
+    ctx.strokeRect(this.positionX, this.positionY, this.width, this.height);
   }
 
-  update(ctx: CanvasRenderingContext2D): void {
+  update(ctx: CanvasRenderingContext2D, enemies: Enemy[]): void {
     if (!this.isGrounded) {
       this.gravity(); //For Gravity Effect
     }
@@ -93,8 +96,8 @@ export default class Player extends Character implements IPlayer {
       input.isShooting = true;
       //bullet instantiate
       const bullet = new Bullet(
-        this.posX + PLAYER.WIDTH,
-        this.posY + PLAYER.HEIGHT / 4,
+        this.positionX + PLAYER.WIDTH,
+        this.positionY + PLAYER.HEIGHT / 4,
         this.playerDirection
       );
       bullets.push(bullet);
@@ -113,10 +116,12 @@ export default class Player extends Character implements IPlayer {
       this.resetActions();
       this.resetPlayerSize();
     }
+    // Check for collisions with enemies
+    this.checkCollisionsWithEnemies(enemies);
   }
 
   moveLeft(gameMap: Map): void {
-    if (this.posX > 0) {
+    if (this.positionX > 0) {
       this.animateMovement();
 
       this.playerDirection = "DIRECTION_LEFT";
@@ -124,11 +129,11 @@ export default class Player extends Character implements IPlayer {
       if (!input.jump) {
         this.playerRunning(this.playerDirection);
       }
-      this.velX = this.SPEED;
-      this.posX -= this.velX;
+      this.velocityX = this.SPEED;
+      this.positionX -= this.velocityX;
 
       //move camera
-      if (this.posX > CANVAS.WIDTH / 2) {
+      if (this.positionX > CANVAS.WIDTH / 2) {
         gameMap.moveLeft(this.SPEED);
         Map.offsetX -= this.SPEED;
       }
@@ -141,19 +146,19 @@ export default class Player extends Character implements IPlayer {
     if (!input.jump) {
       this.playerRunning(this.playerDirection);
     }
-    if (this.posX + this.width < CANVAS.WIDTH / 2) {
-      this.velX = this.SPEED;
-      this.posX += this.velX;
+    if (this.positionX + this.width < CANVAS.WIDTH / 2) {
+      this.velocityX = this.SPEED;
+      this.positionX += this.velocityX;
     }
 
     //For Camera Offset
-    if (this.posX + this.width > CANVAS.WIDTH / 2) {
+    if (this.positionX + this.width > CANVAS.WIDTH / 2) {
       gameMap.moveRight(this.SPEED);
       Map.offsetX += this.SPEED;
     }
-    if (this.posX > 3475) {
-      this.posX = 3475;
-      this.velX = 0;
+    if (this.positionX > 3475) {
+      this.positionX = 3475;
+      this.velocityX = 0;
     }
   }
 
@@ -178,16 +183,16 @@ export default class Player extends Character implements IPlayer {
   jump(): void {
     this.isJumping = true;
     this.isGrounded = false;
-    this.velY = -PLAYER.JUMP_POWER;
+    this.velocityY = -PLAYER.JUMP_POWER;
   }
 
   // checkVerticalCollision(): void {
   //   platformValues.forEach((platform: any) => {
   //     if (collisionDetections(this, platform)) {
-  //       if (this.velY > 0) {
-  //         this.velY = 0;
-  //         if (this.posY + this.height >= platform.y) {
-  //           this.posY = platform.y - 50;
+  //       if (this.velocityY > 0) {
+  //         this.velocityY = 0;
+  //         if (this.positionY + this.height >= platform.y) {
+  //           this.positionY = platform.y - 50;
   //           this.isGrounded = true;
   //         }
   //       }
@@ -216,7 +221,7 @@ export default class Player extends Character implements IPlayer {
     }
   }
   stopMoving() {
-    this.velX = 0;
+    this.velocityX = 0;
   }
 
   resetActions() {
@@ -225,5 +230,22 @@ export default class Player extends Character implements IPlayer {
     } else {
       this.playerAction = runningRight[0];
     }
+  }
+
+  checkCollisionsWithEnemies(enemies: Enemy[]): void {
+    enemies.forEach((enemy, index) => {
+      if (collisionBetweenCharacters(this, enemy)) {
+        console.log("collided");
+        this.handleCollisionWithEnemy(enemies, index);
+      }
+    });
+  }
+  handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
+    // Define what happens on collision, for example:
+    this.life -= 1; // Decrease player life
+    console.log(`${this.life} Remaining`);
+    // Remove the enemy from the array
+    enemies.splice(enemyIndex, 1);
+    console.log(enemies);
   }
 }
