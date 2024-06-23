@@ -1,11 +1,12 @@
-import { PLAYER } from "./../../utils/constant";
 import enemySprite from "../../assets/images/Enemies.gif";
+import { collisionBetweenCharacters } from "../../utils/collisionDetection";
 import { ENEMY } from "../../utils/constant";
 import { Character } from "../Character/Character";
 import Map from "../Map/Map";
-import { gunEnemy, sprite } from "./EnemySpriteCords";
 import Player from "../Player/Player";
-import { Bullet } from "../Bullet/Bullet";
+import { PLAYER } from "./../../utils/constant";
+import { Bullet } from "./../Bullet/Bullet";
+import { gunEnemy, sprite } from "./EnemySpriteCords";
 interface IEnemy {
   positionX: number;
   positionY: number;
@@ -65,10 +66,20 @@ export class GuardEnemy extends Character implements IEnemy {
     this.getPlayerDirection(player);
 
     // Update bullets
-    this.bullets.forEach((bullet) => bullet.moveBullet(this.bullets));
+    this.bullets.forEach((bullet, index) => {
+      bullet.moveBullet(this.bullets);
+      if (collisionBetweenCharacters(bullet, player)) {
+        this.handleBulletCollision(this.bullets, index);
+      }
+    });
 
     // Attempt to shoot at player
     this.shootAtPlayer(player);
+  }
+  handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
+    PLAYER.LIFE -= 1;
+    console.log(`${PLAYER.LIFE} Remaining`);
+    bullets.splice(bulletIndex, 1);
   }
 
   getPlayerDirection(player: Player) {

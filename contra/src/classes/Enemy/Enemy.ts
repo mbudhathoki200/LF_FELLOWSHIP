@@ -1,7 +1,7 @@
+import enemySprite from "../../assets/images/Enemies.gif";
 import { ENEMY } from "../../utils/constant";
 import { Character } from "./../Character/Character";
-import enemySprite from "../../assets/images/Enemies.gif";
-import { RunningEnemy, runningEnemy, sprite } from "./EnemySpriteCords";
+import { runningEnemy, sprite } from "./EnemySpriteCords";
 
 interface IEnemy {
   positionX: number;

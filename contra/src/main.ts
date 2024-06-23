@@ -77,27 +77,6 @@ function draw() {
 
 draw();
 
-// window.addEventListener("keydown", (e) => {
-//   switch (e.key) {
-//     case "ArrowLeft":
-//       player.moveLeft(gameMap);
-//       player.animateRunning();
-
-//       break;
-//     case "ArrowRight":
-//       player.moveRight(gameMap);
-//       player.animateRunning();
-
-//       break;
-//     case "x":
-//       player.jump();
-//       break;
-//   }
-// });
-// window.addEventListener("keyup", (e) => {
-//   cancelAnimationFrame(runReq);
-// });
-
 // Event listeners for keyboard input
 window.onkeydown = (event) => {
   switch (event.key) {

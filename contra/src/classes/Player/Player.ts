@@ -331,10 +331,9 @@ export default class Player extends Character implements IPlayer {
     });
   }
   handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
-    this.life -= 1; // Decrease player life
-    console.log(`${this.life} Remaining`);
+    PLAYER.LIFE -= 1; // Decrease player life
+    console.log(`${PLAYER.LIFE} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
-    // console.log(enemies);
   }
 }
