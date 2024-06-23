@@ -5,6 +5,7 @@ import { Character } from "../Character/Character";
 import Map from "../Map/Map";
 import { gunEnemy, sprite } from "./EnemySpriteCords";
 import Player from "../Player/Player";
+import { Bullet } from "../Bullet/Bullet";
 interface IEnemy {
   positionX: number;
   positionY: number;
@@ -19,6 +20,9 @@ export class GuardEnemy extends Character implements IEnemy {
   isPlayerRight: boolean;
   isPlayerAbove: boolean;
   isPlayerBelow: boolean;
+  bullets: Bullet[] = [];
+  lastShotTime: number;
+  shotCooldown: number;
 
   constructor(positionX: number, positionY: number) {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
@@ -32,6 +36,8 @@ export class GuardEnemy extends Character implements IEnemy {
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
+    this.lastShotTime = 0; // Initialize lastShotTime
+    this.shotCooldown = 1000; // Set cooldown period in milliseconds
   }
   draw(ctx: CanvasRenderingContext2D) {
     const { x, y, width, height } = this.enemyAction;
@@ -46,6 +52,8 @@ export class GuardEnemy extends Character implements IEnemy {
       this.width,
       this.height
     );
+    // Draw bullets
+    this.bullets.forEach((bullet) => bullet.draw(ctx));
   }
   update(player: Player) {
     if (!this.isGrounded) {
@@ -53,28 +61,30 @@ export class GuardEnemy extends Character implements IEnemy {
     }
     this.checkVerticalCollision();
     this.getPlayerDirection(player);
+
+    // Update bullets
+    this.bullets.forEach((bullet) => bullet.moveBullet(this.bullets));
+
+    // Attempt to shoot at player
+    this.shootAtPlayer(player);
   }
+
   getPlayerDirection(player: Player) {
     const { positionX, positionY } = player;
     const { positionX: enemyPositionX, positionY: enemyPostionY } = this;
-    console.log(`Player: ${positionX}`);
-    console.log(`Enemy: ${enemyPositionX}`);
 
     this.isPlayerLeft = positionX + PLAYER.WIDTH + Map.offsetX < enemyPositionX;
-    console.log(`Left ${this.isPlayerLeft}`);
 
     this.isPlayerRight =
       positionX + Map.offsetX > enemyPositionX + PLAYER.WIDTH;
-    console.log(`Right ${this.isPlayerRight}`);
 
     this.isPlayerBelow = positionY > enemyPostionY + PLAYER.HEIGHT;
-    // console.log(`Bellow ${this.isPlayerBelow}`);
 
     this.isPlayerAbove = positionY < enemyPostionY - PLAYER.HEIGHT;
 
-    // console.log(`Above ${this.isPlayerAbove}`);
-    this.changeEnemySprite();
+    return this.changeEnemySprite();
   }
+
   changeEnemySprite() {
     if (this.isPlayerLeft && this.isPlayerAbove) {
       this.enemyAction = gunEnemy.upLeft;
@@ -89,14 +99,35 @@ export class GuardEnemy extends Character implements IEnemy {
       this.enemyAction = gunEnemy.downLeft;
       return "DIRECTION_DOWN_LEFT";
     } else if (this.isPlayerLeft) {
-      console.log(true);
       this.enemyAction = gunEnemy.left;
+      return "DIRECTION_LEFT";
     } else if (this.isPlayerRight) {
       this.enemyAction = gunEnemy.right;
+      return "DIRECTION_RIGHT";
     } else if (this.isPlayerBelow) {
       this.enemyAction = gunEnemy.down;
+      return "DIRECTION_DOWN";
     } else if (this.isPlayerAbove) {
       this.enemyAction = gunEnemy.up;
+      return "DIRECTION_UP";
     }
+  }
+
+  shootAtPlayer(player: Player) {
+    const currentTime = Date.now();
+    if (currentTime - this.lastShotTime < this.shotCooldown) {
+      return; // If the cooldown period has not passed, do not shoot
+    }
+
+    const { positionX: enemyX, positionY: enemyY } = this;
+
+    let direction = this.getPlayerDirection(player);
+
+    // Create and add bullet
+    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction);
+    this.bullets.push(bullet);
+
+    // Update the last shot time
+    this.lastShotTime = currentTime;
   }
 }

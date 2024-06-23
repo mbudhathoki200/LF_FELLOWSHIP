@@ -17,9 +17,13 @@ export class Bullet implements IBullet {
   width: number;
   bulletImg: HTMLImageElement;
 
-  direction: string;
+  direction: string | undefined;
 
-  constructor(positionX: number, positionY: number, direction: string) {
+  constructor(
+    positionX: number,
+    positionY: number,
+    direction: string | undefined
+  ) {
     this.positionX = positionX;
     this.positionY = positionY;
     this.bulletImg = new Image();
