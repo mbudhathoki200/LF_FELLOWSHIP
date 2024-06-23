@@ -7,6 +7,7 @@ import {
 import { BULLET_SPRITE, CANVAS } from "../../utils/constant";
 import { Enemy } from "../Enemy/Enemy";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
+import { Tank } from "../Enemy/Tank.ts";
 import { BULLET } from "./../../utils/constant";
 // import { Bullet } from "./Bullet";
 
@@ -98,7 +99,7 @@ export class Bullet implements IBullet {
     });
   }
   checkCollisionsWithGuardEnemies(
-    enemies: GuardEnemy[],
+    enemies: GuardEnemy[] | Tank[],
     bullets: Bullet[]
   ): void {
     enemies.forEach((enemy, enemyIndex) => {
@@ -109,7 +110,7 @@ export class Bullet implements IBullet {
   }
 
   handleCollisionWithEnemy(
-    enemies: Enemy[] | GuardEnemy[],
+    enemies: Enemy[] | GuardEnemy[] | Tank[],
     bullets: Bullet[],
     enemyIndex: number
   ): void {

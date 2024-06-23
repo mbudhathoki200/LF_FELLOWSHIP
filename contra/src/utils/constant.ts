@@ -84,3 +84,16 @@ export const ENEMY: enemy = {
 };
 
 /*-----------Static Enemy-------------*/
+type Tank = {
+  WIDTH: number;
+  HEIGHT: number;
+  CANNON_SPEED: number;
+  HEALTH: number;
+};
+
+export const TANK: Tank = {
+  WIDTH: 40,
+  HEALTH: 30,
+  HEIGHT: 40,
+  CANNON_SPEED: 6,
+};

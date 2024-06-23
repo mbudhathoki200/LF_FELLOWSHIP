@@ -175,7 +175,19 @@ export const gunEnemy: GunEnemy = {
 };
 
 /* -------------------------- Turret Sprite Coords -------------------------- */
-const turretSprites = {
+export type turretSprites = {
+  closed: sprite;
+  opening: sprite;
+  left: sprite;
+  right: sprite;
+  up: sprite;
+  down: sprite;
+  upLeft: sprite;
+  upRight: sprite;
+  downLeft: sprite;
+  downRight: sprite;
+};
+export const turretSprites: turretSprites = {
   closed: {
     x: 37,
     y: 106,
