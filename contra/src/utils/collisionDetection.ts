@@ -31,7 +31,7 @@ export const collisionDetections = (
 };
 
 export const collisionBetweenCharacters = (
-  object1: Character,
+  object1: Character | Bullet,
   object2: Character
 ) => {
   return (
