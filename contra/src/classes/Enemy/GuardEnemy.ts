@@ -76,16 +76,7 @@ export class GuardEnemy extends Character implements IEnemy {
     this.changeEnemySprite();
   }
   changeEnemySprite() {
-    if (this.isPlayerLeft) {
-      console.log(true);
-      this.enemyAction = gunEnemy.left;
-    } else if (this.isPlayerRight) {
-      this.enemyAction = gunEnemy.right;
-    } else if (this.isPlayerBelow) {
-      this.enemyAction = gunEnemy.down;
-    } else if (this.isPlayerAbove) {
-      this.enemyAction = gunEnemy.up;
-    } else if (this.isPlayerLeft && this.isPlayerAbove) {
+    if (this.isPlayerLeft && this.isPlayerAbove) {
       this.enemyAction = gunEnemy.upLeft;
       return "DIRECTION_UP_LEFT";
     } else if (this.isPlayerRight && this.isPlayerAbove) {
@@ -97,30 +88,15 @@ export class GuardEnemy extends Character implements IEnemy {
     } else if (this.isPlayerLeft && this.isPlayerBelow) {
       this.enemyAction = gunEnemy.downLeft;
       return "DIRECTION_DOWN_LEFT";
+    } else if (this.isPlayerLeft) {
+      console.log(true);
+      this.enemyAction = gunEnemy.left;
+    } else if (this.isPlayerRight) {
+      this.enemyAction = gunEnemy.right;
+    } else if (this.isPlayerBelow) {
+      this.enemyAction = gunEnemy.down;
+    } else if (this.isPlayerAbove) {
+      this.enemyAction = gunEnemy.up;
     }
   }
-  // changeEnemySprite() {
-  //   if (this.isPlayerLeft) {
-  //     console.log(true);
-  //     this.enemyAction = gunEnemy.left;
-  //   } else if (this.isPlayerRight) {
-  //     this.enemyAction = gunEnemy.right;
-  //   } else if (this.isPlayerBelow) {
-  //     this.enemyAction = gunEnemy.down;
-  //   } else if (this.isPlayerAbove) {
-  //     this.enemyAction = gunEnemy.up;
-  //   } else if (this.isPlayerLeft && this.isPlayerAbove) {
-  //     this.enemyAction = gunEnemy.upLeft;
-  //     return "DIRECTION_UP_LEFT";
-  //   } else if (this.isPlayerRight && this.isPlayerAbove) {
-  //     this.enemyAction = gunEnemy.upRight;
-  //     return "DIRECTION_UP_RIGHT";
-  //   } else if (this.isPlayerRight && this.isPlayerBelow) {
-  //     this.enemyAction = gunEnemy.downRight;
-  //     return "DIRECTION_DOWN_RIGHT";
-  //   } else if (this.isPlayerLeft && this.isPlayerBelow) {
-  //     this.enemyAction = gunEnemy.downLeft;
-  //     return "DIRECTION_DOWN_LEFT";
-  //   }
-  // }
 }
