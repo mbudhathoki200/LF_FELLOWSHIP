@@ -46,7 +46,7 @@ function draw() {
 
   //update player with platform Collision Detection
   player.draw(ctx);
-  player.update(ctx, enemies);
+  player.update(ctx, enemies, guardEnemies);
 
   //Enemy
   enemies.forEach((enemy) => {

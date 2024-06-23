@@ -5,6 +5,7 @@ import { input } from "../../utils/input.ts";
 import { Bullet } from "../Bullet/Bullet.ts";
 import { Character } from "../Character/Character.ts";
 import { Enemy } from "../Enemy/Enemy.ts";
+import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import Map from "../Map/Map";
 
 import {
@@ -83,7 +84,11 @@ export default class Player extends Character implements IPlayer {
     ctx.strokeRect(this.positionX, this.positionY, this.width, this.height);
   }
 
-  update(ctx: CanvasRenderingContext2D, enemies: Enemy[]): void {
+  update(
+    ctx: CanvasRenderingContext2D,
+    enemies: Enemy[],
+    guardEnemies: GuardEnemy[]
+  ): void {
     if (!this.isGrounded) {
       this.gravity(); //For Gravity Effect
     }
@@ -158,7 +163,10 @@ export default class Player extends Character implements IPlayer {
     bullets.forEach((bullet) => {
       bullet.moveBullet(bullets);
       bullet.draw(ctx);
+      //For Running Enemy
       bullet.checkCollisionsWithEnemies(enemies, bullets);
+      //For Guard Enemy
+      bullet.checkCollisionsWithEnemies(guardEnemies, bullets);
     });
 
     //Reset if No input Stroke is pressed
@@ -321,14 +329,17 @@ export default class Player extends Character implements IPlayer {
       this.playerAction = runningRight[0];
     }
   }
-
+  //check collision with Running enemies
   checkCollisionsWithEnemies(enemies: Enemy[]): void {
     enemies.forEach((enemy, index) => {
       if (collisionBetweenCharacters(this, enemy)) {
-        // console.log("collided");
         this.handleCollisionWithEnemy(enemies, index);
       }
     });
+  }
+
+  checkCollisionWithGuardEnemies(guardEnemies: GuardEnemy[]): void {
+    console.log(guardEnemies);
   }
   handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
     PLAYER.LIFE -= 1; // Decrease player life
