@@ -23,6 +23,7 @@ export class GuardEnemy extends Character implements IEnemy {
   bullets: Bullet[] = [];
   lastShotTime: number;
   shotCooldown: number;
+  shootingRange: number;
 
   constructor(positionX: number, positionY: number) {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
@@ -36,8 +37,9 @@ export class GuardEnemy extends Character implements IEnemy {
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
-    this.lastShotTime = 0; // Initialize lastShotTime
+    this.lastShotTime = 0;
     this.shotCooldown = 1000; // Set cooldown period in milliseconds
+    this.shootingRange = 400; // Set the shooting range in pixels
   }
   draw(ctx: CanvasRenderingContext2D) {
     const { x, y, width, height } = this.enemyAction;
@@ -70,17 +72,16 @@ export class GuardEnemy extends Character implements IEnemy {
   }
 
   getPlayerDirection(player: Player) {
-    const { positionX, positionY } = player;
-    const { positionX: enemyPositionX, positionY: enemyPostionY } = this;
+    const { positionX: playerX, positionY: playerY } = player;
+    const { positionX: enemyX, positionY: enemyY } = this;
 
-    this.isPlayerLeft = positionX + PLAYER.WIDTH + Map.offsetX < enemyPositionX;
+    this.isPlayerLeft = playerX + PLAYER.WIDTH + Map.offsetX < enemyX;
 
-    this.isPlayerRight =
-      positionX + Map.offsetX > enemyPositionX + PLAYER.WIDTH;
+    this.isPlayerRight = playerX + Map.offsetX > enemyX + PLAYER.WIDTH;
 
-    this.isPlayerBelow = positionY > enemyPostionY + PLAYER.HEIGHT;
+    this.isPlayerBelow = playerY > enemyY + PLAYER.HEIGHT;
 
-    this.isPlayerAbove = positionY < enemyPostionY - PLAYER.HEIGHT;
+    this.isPlayerAbove = playerY < enemyY - PLAYER.HEIGHT;
 
     return this.changeEnemySprite();
   }
@@ -113,10 +114,27 @@ export class GuardEnemy extends Character implements IEnemy {
     }
   }
 
+  isPlayerInRange(player: Player): boolean {
+    const { positionX: playerX, positionY: playerY } = player;
+    const { positionX: enemyX, positionY: enemyY } = this;
+
+    // Calculate distance to player
+    const distanceX = playerX - enemyX;
+    const distanceY = playerY - enemyY;
+    const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+    // Check if the player is within the shooting range
+    return distance <= this.shootingRange;
+  }
+
   shootAtPlayer(player: Player) {
     const currentTime = Date.now();
     if (currentTime - this.lastShotTime < this.shotCooldown) {
       return; // If the cooldown period has not passed, do not shoot
+    }
+
+    if (!this.isPlayerInRange(player)) {
+      return; // If the player is not within range, do not shoot
     }
 
     const { positionX: enemyX, positionY: enemyY } = this;
