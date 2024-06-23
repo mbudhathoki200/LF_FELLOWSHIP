@@ -1,6 +1,9 @@
 import bulletImgL from "../../assets/images/leftBullet.png";
 import bulletImgR from "../../assets/images/rightBullet.png";
-import { collisionBetweenCharacters } from "../../utils/collisionDetection";
+import {
+  collisionBetweenCharacters,
+  collisionBetweenWithGuardBullet,
+} from "../../utils/collisionDetection";
 import { BULLET_SPRITE, CANVAS } from "../../utils/constant";
 import { Enemy } from "../Enemy/Enemy";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
@@ -87,12 +90,19 @@ export class Bullet implements IBullet {
       bullets.splice(index, 1);
     }
   }
-  checkCollisionsWithEnemies(
-    enemies: Enemy[] | GuardEnemy[],
+  checkCollisionsWithEnemies(enemies: Enemy[], bullets: Bullet[]): void {
+    enemies.forEach((enemy, enemyIndex) => {
+      if (collisionBetweenCharacters(this, enemy)) {
+        this.handleCollisionWithEnemy(enemies, bullets, enemyIndex);
+      }
+    });
+  }
+  checkCollisionsWithGuardEnemies(
+    enemies: GuardEnemy[],
     bullets: Bullet[]
   ): void {
     enemies.forEach((enemy, enemyIndex) => {
-      if (collisionBetweenCharacters(this, enemy)) {
+      if (collisionBetweenWithGuardBullet(this, enemy)) {
         this.handleCollisionWithEnemy(enemies, bullets, enemyIndex);
       }
     });

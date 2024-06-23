@@ -31,12 +31,23 @@ export const collisionDetections = (
 };
 
 export const collisionBetweenCharacters = (
-  object1: Character | Bullet,
+  object1: Character,
   object2: Character
 ) => {
   return (
     object1.positionX < object2.positionX + object2.width &&
     object1.positionX + object1.width > object2.positionX &&
+    object1.positionY < object2.positionY + object2.height &&
+    object1.positionY + object1.height > object2.positionY
+  );
+};
+export const collisionBetweenWithGuardBullet = (
+  object1: Bullet,
+  object2: Character
+) => {
+  return (
+    object1.positionX < object2.positionX - Map.offsetX + object2.width &&
+    object1.positionX + object1.width > object2.positionX - Map.offsetX &&
     object1.positionY < object2.positionY + object2.height &&
     object1.positionY + object1.height > object2.positionY
   );

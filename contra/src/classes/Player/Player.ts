@@ -166,7 +166,7 @@ export default class Player extends Character implements IPlayer {
       //For Running Enemy
       bullet.checkCollisionsWithEnemies(enemies, bullets);
       //For Guard Enemy
-      bullet.checkCollisionsWithEnemies(guardEnemies, bullets);
+      bullet.checkCollisionsWithGuardEnemies(guardEnemies, bullets);
     });
 
     //Reset if No input Stroke is pressed
