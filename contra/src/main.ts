@@ -11,6 +11,7 @@ import { Enemy } from "./classes/Enemy/Enemy.ts";
 // Constants and Utilities
 import { CANVAS } from "./utils/constant.ts";
 import { input } from "./utils/input.ts";
+import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -22,6 +23,11 @@ canvas.width = CANVAS.WIDTH;
 let gameMap = new Map(0, 0);
 
 let player = new Player(40, 100);
+
+let guardEnemies: GuardEnemy[] = [
+  new GuardEnemy(614, 100),
+  new GuardEnemy(614, 318),
+];
 
 // let enemy = new Enemy(CANVAS.WIDTH, 100);
 const enemies: Enemy[] = [
@@ -46,6 +52,12 @@ function draw() {
   enemies.forEach((enemy) => {
     enemy.draw(ctx);
     enemy.update();
+  });
+
+  //guard Enemy
+  guardEnemies.forEach((enemy) => {
+    enemy.draw(ctx);
+    enemy.update(player);
   });
 
   //Draw platforms

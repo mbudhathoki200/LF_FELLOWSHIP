@@ -80,5 +80,7 @@ type enemy = {
 export const ENEMY: enemy = {
   WIDTH: 33,
   HEIGHT: 72,
-  SPEED: 8,
+  SPEED: 4,
 };
+
+/*-----------Static Enemy-------------*/
