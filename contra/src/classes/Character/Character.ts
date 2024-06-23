@@ -1,5 +1,6 @@
 import { collisionDetections } from "../../utils/collisionDetection.ts";
 import { CANVAS } from "../../utils/constant";
+import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import { platformValues } from "../Platform/platformValues";
 
 interface ICharacter {

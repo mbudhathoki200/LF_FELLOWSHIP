@@ -62,7 +62,9 @@ export class GuardEnemy extends Character implements IEnemy {
     if (!this.isGrounded) {
       this.gravity(); // For Gravity Effect
     }
+
     this.checkVerticalCollision();
+
     this.getPlayerDirection(player);
 
     // Update bullets
@@ -126,7 +128,7 @@ export class GuardEnemy extends Character implements IEnemy {
   }
 
   isPlayerInRange(player: Player): boolean {
-    const { positionX: playerX, positionY: playerY } = player;
+    let { positionX: playerX, positionY: playerY } = player;
     const { positionX: enemyX, positionY: enemyY } = this;
 
     // Calculate distance to player
@@ -135,7 +137,7 @@ export class GuardEnemy extends Character implements IEnemy {
     const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
     // Check if the player is within the shooting range
-    return distance <= this.shootingRange;
+    return distance - Map.offsetX <= this.shootingRange;
   }
 
   shootAtPlayer(player: Player) {

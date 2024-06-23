@@ -27,6 +27,10 @@ let player = new Player(40, 100);
 let guardEnemies: GuardEnemy[] = [
   new GuardEnemy(614, 100),
   new GuardEnemy(614, 318),
+  new GuardEnemy(1256, 330),
+  new GuardEnemy(2892, 330),
+  new GuardEnemy(4785, 100),
+  new GuardEnemy(5330, 239),
 ];
 
 // let enemy = new Enemy(CANVAS.WIDTH, 100);
