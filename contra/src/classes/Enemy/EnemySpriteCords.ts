@@ -250,7 +250,7 @@ export const turretSprites: turretSprites = {
   },
 };
 /* ------------------------------- Tank Sprite ------------------------------ */
-const tankSprites = {
+export const tankSprites = {
   new: [
     {
       x: 73,

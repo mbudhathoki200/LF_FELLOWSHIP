@@ -2,12 +2,12 @@ import { PLAYER, TANK } from "../../utils/constant";
 import { Character } from "../Character/Character";
 
 import tankImage from "../../assets/images/Contra-Tanks.gif";
-import tankBulletImage from "../../assets/images/Contra-Extras.gif";
+import tankBulletImage from "../../assets/images/fireball.png";
+import { collisionBetweenCharacters } from "../../utils/collisionDetection";
 import { Bullet } from "../Bullet/Bullet";
-import { sprite, turretSprites } from "./EnemySpriteCords";
 import Map from "../Map/Map";
 import Player from "../Player/Player";
-import { collisionBetweenCharacters } from "../../utils/collisionDetection";
+import { sprite, turretSprites } from "./EnemySpriteCords";
 
 interface ITank {
   positionX: number;
@@ -24,9 +24,10 @@ export class Tank extends Character implements ITank {
   isPlayerRight: boolean;
   isPlayerAbove: boolean;
   isPlayerBelow: boolean;
-  isOpen: boolean;
+
   bullets: Bullet[] = [];
   tankAction: sprite;
+
   lastShotTime: number;
   shotCooldown: number;
   shootingRange: number;
@@ -39,12 +40,12 @@ export class Tank extends Character implements ITank {
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
-    this.isOpen = false;
 
     this.tankImage = new Image();
     this.tankImage.src = tankImage;
     this.tankBUlletImage = new Image();
     this.tankBUlletImage.src = tankBulletImage;
+
     this.tankAction = turretSprites.left;
 
     this.lastShotTime = 0;
@@ -65,7 +66,7 @@ export class Tank extends Character implements ITank {
       this.height
     );
     // Draw bullets
-    this.bullets.forEach((bullet) => bullet.draw(ctx));
+    this.bullets.forEach((bullet) => bullet.draw(ctx, this.tankBUlletImage));
   }
   update(player: Player) {
     this.getPlayerDirection(player);

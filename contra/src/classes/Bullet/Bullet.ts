@@ -38,14 +38,14 @@ export class Bullet implements IBullet {
     this.bulletImg.src =
       direction === "DIRECTION_RIGHT" ? bulletImgR : bulletImgL;
   }
-  draw(ctx: CanvasRenderingContext2D) {
-    ctx.drawImage(
-      this.bulletImg,
-      this.positionX,
-      this.positionY,
-      this.width,
-      this.height
-    );
+  draw(
+    ctx: CanvasRenderingContext2D,
+    bulletImg: HTMLImageElement = this.bulletImg,
+    WIDTH: number = this.width,
+    HEIGHT: number = this.height
+  ) {
+    bulletImg = bulletImg;
+    ctx.drawImage(bulletImg, this.positionX, this.positionY, WIDTH, HEIGHT);
   }
 
   moveBullet(bullets: Bullet[]) {
