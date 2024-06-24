@@ -59,9 +59,9 @@ export class GuardEnemy extends Character implements IEnemy {
     this.bullets.forEach((bullet) => bullet.draw(ctx));
   }
   update(player: Player) {
-    if (!this.isGrounded) {
-      this.gravity(); // For Gravity Effect
-    }
+    // if (!this.isGrounded) {
+    //   this.gravity(); // For Gravity Effect
+    // }
 
     this.checkVerticalCollision();
 
