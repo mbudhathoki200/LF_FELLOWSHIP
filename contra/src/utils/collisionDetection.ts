@@ -1,6 +1,7 @@
 import { Bullet } from "../classes/Bullet/Bullet";
 import Map from "../classes/Map/Map";
 import { Platfrom } from "../classes/Platform/Platform";
+import { PowerUpBox } from "../classes/PowerUpBlock/PowerUpBox";
 import { Character } from "./../classes/Character/Character";
 
 // export function collisionDetections(
@@ -43,7 +44,7 @@ export const collisionBetweenCharacters = (
 };
 export const collisionBetweenWithGuardBullet = (
   object1: Bullet,
-  object2: Character
+  object2: Character | PowerUpBox
 ) => {
   return (
     object1.positionX < object2.positionX - Map.offsetX + object2.width &&

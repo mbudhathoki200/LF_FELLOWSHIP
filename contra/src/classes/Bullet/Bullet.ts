@@ -9,6 +9,7 @@ import { Enemy } from "../Enemy/Enemy";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import { MainTank } from "../Enemy/MainTank.ts";
 import { Tank } from "../Enemy/Tank.ts";
+import { PowerUpBox } from "../PowerUpBlock/PowerUpBox.ts";
 import { BULLET } from "./../../utils/constant";
 // import { Bullet } from "./Bullet";
 
@@ -100,7 +101,7 @@ export class Bullet implements IBullet {
     });
   }
   checkCollisionsWithGuardEnemies(
-    enemies: GuardEnemy[] | Tank[] | MainTank[],
+    enemies: GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[],
     bullets: Bullet[]
   ): void {
     enemies.forEach((enemy, enemyIndex) => {
@@ -111,7 +112,7 @@ export class Bullet implements IBullet {
   }
 
   handleCollisionWithEnemy(
-    enemies: Enemy[] | GuardEnemy[] | Tank[] | MainTank[],
+    enemies: Enemy[] | GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[],
     bullets: Bullet[],
     enemyIndex: number
   ): void {

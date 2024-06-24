@@ -1,3 +1,4 @@
+import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox";
 import playerSheet from "../../assets/images/player.gif";
 import { collisionBetweenCharacters } from "../../utils/collisionDetection.ts";
 import { CANVAS, PLAYER } from "../../utils/constant";
@@ -83,7 +84,7 @@ export default class Player extends Character implements IPlayer {
     );
 
     ctx.strokeStyle = "red";
-    ctx.strokeRect(this.positionX, this.positionY, this.width, this.height);
+    // ctx.strokeRect(this.positionX, this.positionY, this.width, this.height);
   }
 
   update(
@@ -91,7 +92,8 @@ export default class Player extends Character implements IPlayer {
     enemies: Enemy[],
     guardEnemies: GuardEnemy[],
     tanks: Tank[],
-    mainTanks: MainTank[]
+    mainTanks: MainTank[],
+    powerUpBlocks: PowerUpBox[]
   ): void {
     if (!this.isGrounded) {
       this.gravity(); //For Gravity Effect
@@ -171,12 +173,12 @@ export default class Player extends Character implements IPlayer {
       bullet.checkCollisionsWithEnemies(enemies, bullets);
       //For Guard Enemy
       bullet.checkCollisionsWithGuardEnemies(guardEnemies, bullets);
-
       //For Tank
-
       bullet.checkCollisionsWithGuardEnemies(tanks, bullets);
       //For Main Tank
       bullet.checkCollisionsWithGuardEnemies(mainTanks, bullets);
+      //For PowerUP Block
+      bullet.checkCollisionsWithGuardEnemies(powerUpBlocks, bullets);
     });
 
     //Reset if No input Stroke is pressed
@@ -250,7 +252,7 @@ export default class Player extends Character implements IPlayer {
     const { left, right } = playerPronePosition;
 
     this.width = PLAYER.WIDTH + 20;
-    this.height = PLAYER.HEIGHT - 20;
+    this.height = PLAYER.HEIGHT - 22;
     if (this.playerDirection == "DIRECTION_LEFT") {
       this.playerAction = left;
     } else {

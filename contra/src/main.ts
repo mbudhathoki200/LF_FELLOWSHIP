@@ -14,6 +14,7 @@ import { input } from "./utils/input.ts";
 import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
 import { Tank } from "./classes/Enemy/Tank.ts";
 import { MainTank } from "./classes/Enemy/MainTank.ts";
+import { PowerUpBox } from "./classes/PowerUpBlock/PowerUpBox.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -44,7 +45,6 @@ const enemies: Enemy[] = [
 ];
 
 const tanks: Tank[] = [
-  new Tank(200, 275),
   new Tank(2508, 285),
   new Tank(3278, 219),
   new Tank(3660, 220),
@@ -59,6 +59,9 @@ const mainTanks: MainTank[] = [
   new MainTank(5951, 304),
   new MainTank(6270, 175),
 ];
+
+const powerUpBlocks: PowerUpBox[] = [new PowerUpBox(650, 283)];
+
 // Function to draw game elements
 function draw() {
   ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT);
@@ -68,7 +71,7 @@ function draw() {
 
   //update player with platform Collision Detection
   player.draw(ctx);
-  player.update(ctx, enemies, guardEnemies, tanks, mainTanks);
+  player.update(ctx, enemies, guardEnemies, tanks, mainTanks, powerUpBlocks);
 
   //Enemy
   enemies.forEach((enemy) => {
@@ -85,7 +88,7 @@ function draw() {
       platform.h,
       platform.id
     );
-    newPlatform.draw(ctx);
+    // newPlatform.draw(ctx);
   });
   //guard Enemy
   guardEnemies.forEach((enemy) => {
@@ -102,6 +105,11 @@ function draw() {
   mainTanks.forEach((tank) => {
     tank.draw(ctx);
     tank.update(player);
+  });
+
+  powerUpBlocks.forEach((block) => {
+    block.draw(ctx);
+    block.update(player);
   });
 
   requestAnimationFrame(draw);
