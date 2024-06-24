@@ -1,6 +1,10 @@
+import { powerUP, powerUpArray } from "./../PowerUpBlock/powerUp";
 import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox";
 import playerSheet from "../../assets/images/player.gif";
-import { collisionBetweenCharacters } from "../../utils/collisionDetection.ts";
+import {
+  collisionBetweenCharacters,
+  collisionWithPowerUp,
+} from "../../utils/collisionDetection.ts";
 import { CANVAS, PLAYER } from "../../utils/constant";
 import { input } from "../../utils/input.ts";
 import { Bullet } from "../Bullet/Bullet.ts";
@@ -191,6 +195,10 @@ export default class Player extends Character implements IPlayer {
     }
     // Check for collisions with enemies
     this.checkCollisionsWithEnemies(enemies);
+
+    //chech collision with powerUps
+    this.checkCollisionsWithPowerUp(powerUpArray);
+    // checkCollisionsWithPowerUp(powerUpArray: powerUP[])
   }
   makeDefaultBullet(bulletDirection: string) {
     bullet = new Bullet(
@@ -349,6 +357,13 @@ export default class Player extends Character implements IPlayer {
       }
     });
   }
+  checkCollisionsWithPowerUp(powerUpArray: powerUP[]): void {
+    powerUpArray.forEach((power, index) => {
+      if (collisionWithPowerUp(this, power)) {
+        this.handleCollisionWithPowerUP(powerUpArray, index);
+      }
+    });
+  }
 
   checkCollisionWithGuardEnemies(guardEnemies: GuardEnemy[]): void {
     console.log(guardEnemies);
@@ -358,5 +373,11 @@ export default class Player extends Character implements IPlayer {
     console.log(`${PLAYER.LIFE} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
+  }
+  handleCollisionWithPowerUP(power: powerUP[], powerIndex: number): void {
+    PLAYER.LIFE += 1; // Decrease player life
+    console.log(`${PLAYER.LIFE} Remaining`);
+    // // Remove the enemy from the array
+    power.splice(powerIndex, 1);
   }
 }

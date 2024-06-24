@@ -1,21 +1,22 @@
+import { collisionWithPowerUp } from "./utils/collisionDetection";
 import "./reset.css";
 import "./style.css";
 
 // classes
+import { Enemy } from "./classes/Enemy/Enemy.ts";
 import Map from "./classes/Map/Map.ts";
 import { Platfrom } from "./classes/Platform/Platform.ts";
 import { platformValues } from "./classes/Platform/platformValues";
 import Player from "./classes/Player/Player.ts";
-import { Enemy } from "./classes/Enemy/Enemy.ts";
 
 // Constants and Utilities
-import { CANVAS } from "./utils/constant.ts";
-import { input } from "./utils/input.ts";
 import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
-import { Tank } from "./classes/Enemy/Tank.ts";
 import { MainTank } from "./classes/Enemy/MainTank.ts";
+import { Tank } from "./classes/Enemy/Tank.ts";
 import { PowerUpBox } from "./classes/PowerUpBlock/PowerUpBox.ts";
 import { powerUpArray } from "./classes/PowerUpBlock/powerUp.ts";
+import { CANVAS } from "./utils/constant.ts";
+import { input } from "./utils/input.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -61,7 +62,11 @@ const mainTanks: MainTank[] = [
   new MainTank(6270, 175),
 ];
 
-const powerUpBlocks: PowerUpBox[] = [new PowerUpBox(650, 283)];
+const powerUpBlocks: PowerUpBox[] = [
+  new PowerUpBox(650, 283),
+  new PowerUpBox(3149, 285),
+  new PowerUpBox(4813, 348),
+];
 
 // Function to draw game elements
 function draw() {
@@ -96,8 +101,9 @@ function draw() {
     enemy.draw(ctx);
     enemy.update(player);
   });
-  powerUpArray.forEach((powerup) => powerup.draw(ctx));
-  console.log(powerUpArray);
+  powerUpArray.forEach((powerup) => {
+    powerup.draw(ctx);
+  });
 
   //Tank
   tanks.forEach((tank) => {

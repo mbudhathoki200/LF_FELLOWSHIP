@@ -2,6 +2,7 @@ import { Bullet } from "../classes/Bullet/Bullet";
 import Map from "../classes/Map/Map";
 import { Platfrom } from "../classes/Platform/Platform";
 import { PowerUpBox } from "../classes/PowerUpBlock/PowerUpBox";
+import { powerUP } from "../classes/PowerUpBlock/powerUp";
 import { Character } from "./../classes/Character/Character";
 
 // export function collisionDetections(
@@ -33,11 +34,19 @@ export const collisionDetections = (
 
 export const collisionBetweenCharacters = (
   object1: Character | Bullet,
-  object2: Character
+  object2: Character | powerUP
 ) => {
   return (
     object1.positionX < object2.positionX + object2.width &&
     object1.positionX + object1.width > object2.positionX &&
+    object1.positionY < object2.positionY + object2.height &&
+    object1.positionY + object1.height > object2.positionY
+  );
+};
+export const collisionWithPowerUp = (object1: Character, object2: powerUP) => {
+  return (
+    object1.positionX < object2.positionX - Map.offsetX + object2.width &&
+    object1.positionX + object1.width > object2.positionX - Map.offsetX &&
     object1.positionY < object2.positionY + object2.height &&
     object1.positionY + object1.height > object2.positionY
   );
