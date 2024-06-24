@@ -5,7 +5,6 @@ const gameAudios = {
   gameOver: "./assets/sound/game-over.mp3",
   gameMusic: "./assets/sound/Contra-Jungle.mp3",
   gameOverMusic: "./assets/sound/game-over.mp3",
-  enemyHit: "./assets/sound/enemy-hit.mp3",
 
   playerGun: "../assets/sounds/enemy-gun.mp3",
   metalHit: "./assets/sound/explosion_asteroid-101886.mp3",
@@ -20,7 +19,7 @@ const gameAudios = {
 };
 import playerGun from "../assets/sounds/enemy-gun.mp3";
 import playerHit from "../assets/sounds/dead.mp3";
-
+import enemyHit from "../assets/sounds/enemy-hit.mp3";
 function playAudio(soundPath: string) {
   const audio = new Audio(soundPath);
   audio.play();
@@ -31,7 +30,7 @@ export function playerHitSound() {
 }
 
 export function enemyHitSound() {
-  playAudio(gameAudios.enemyHit);
+  playAudio(enemyHit);
 }
 
 export function explosionSound() {

@@ -15,6 +15,9 @@ import { BULLET } from "./../../utils/constant";
 import powerUpSprite from "../../assets/images/healthPowerSprite.png";
 import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
 import { player } from "../../main.ts";
+import { enemyHitSound } from "../../utils/gameAudio.ts";
+import { Explosion, explosionArray } from "../Explosion/Explosion.ts";
+import Map from "../Map/Map.ts";
 interface IBullet {
   positionX: number;
   positionY: number;
@@ -125,11 +128,19 @@ export class Bullet implements IBullet {
     bullets: Bullet[],
     enemyIndex: number
   ): void {
+    enemyHitSound();
+    //explosion
+
+    explosionArray.push(
+      new Explosion(this.positionX, this.positionY, "PLAYER_EXPLOSION")
+    );
+
     //remove enemy from array
     enemies.splice(enemyIndex, 1);
     // Remove bullet from array
     this.removeBullet(bullets);
   }
+
   handleCollisionWithPowerUp(
     powerUp: PowerUpBox[],
     bullets: Bullet[],

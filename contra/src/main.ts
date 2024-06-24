@@ -20,7 +20,8 @@ import {
   displayPlayerLife,
   displayPlayerScore,
 } from "./utils/displayParameters.ts";
-import { playerGunSound } from "./utils/Audio.ts";
+import { playerGunSound } from "./utils/gameAudio.ts";
+import { explosionArray } from "./classes/Explosion/Explosion.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -129,10 +130,19 @@ function draw() {
     tank.draw(ctx);
     tank.update(player);
   });
-
+  //render PowerUps
   powerUpBlocks.forEach((block) => {
     block.draw(ctx);
     block.update(player);
+  });
+
+  //render Explosions
+  explosionArray.forEach((explosion) => {
+    explosion.draw(ctx);
+    explosion.update();
+    if (explosion.removeExplosion) {
+      explosionArray.splice(explosionArray.indexOf(explosion), 1);
+    }
   });
 
   requestAnimationFrame(draw);
