@@ -178,7 +178,7 @@ export default class Player extends Character implements IPlayer {
       //For Main Tank
       bullet.checkCollisionsWithGuardEnemies(mainTanks, bullets);
       //For PowerUP Block
-      bullet.checkCollisionsWithGuardEnemies(powerUpBlocks, bullets);
+      bullet.checkCollisionsWithpowerUp(powerUpBlocks, bullets);
     });
 
     //Reset if No input Stroke is pressed

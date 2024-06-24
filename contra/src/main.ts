@@ -15,6 +15,7 @@ import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
 import { Tank } from "./classes/Enemy/Tank.ts";
 import { MainTank } from "./classes/Enemy/MainTank.ts";
 import { PowerUpBox } from "./classes/PowerUpBlock/PowerUpBox.ts";
+import { powerUpArray } from "./classes/PowerUpBlock/powerUp.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -25,7 +26,7 @@ canvas.width = CANVAS.WIDTH;
 // Instantiate game elements
 const gameMap = new Map(0, 0);
 
-let player = new Player(40, 100);
+export let player = new Player(40, 100);
 
 let guardEnemies: GuardEnemy[] = [
   new GuardEnemy(614, 150),
@@ -95,6 +96,8 @@ function draw() {
     enemy.draw(ctx);
     enemy.update(player);
   });
+  powerUpArray.forEach((powerup) => powerup.draw(ctx));
+  console.log(powerUpArray);
 
   //Tank
   tanks.forEach((tank) => {

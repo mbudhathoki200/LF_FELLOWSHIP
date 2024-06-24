@@ -12,7 +12,9 @@ import { Tank } from "../Enemy/Tank.ts";
 import { PowerUpBox } from "../PowerUpBlock/PowerUpBox.ts";
 import { BULLET } from "./../../utils/constant";
 // import { Bullet } from "./Bullet";
-
+import powerUpSprite from "../../assets/images/healthPowerSprite.png";
+import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
+import { player } from "../../main.ts";
 interface IBullet {
   positionX: number;
   positionY: number;
@@ -101,12 +103,19 @@ export class Bullet implements IBullet {
     });
   }
   checkCollisionsWithGuardEnemies(
-    enemies: GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[],
+    enemies: GuardEnemy[] | Tank[] | MainTank[],
     bullets: Bullet[]
   ): void {
     enemies.forEach((enemy, enemyIndex) => {
       if (collisionBetweenWithGuardBullet(this, enemy)) {
         this.handleCollisionWithEnemy(enemies, bullets, enemyIndex);
+      }
+    });
+  }
+  checkCollisionsWithpowerUp(powerUps: PowerUpBox[], bullets: Bullet[]): void {
+    powerUps.forEach((powerUp, enemyIndex) => {
+      if (collisionBetweenWithGuardBullet(this, powerUp)) {
+        this.handleCollisionWithPowerUp(powerUps, bullets, enemyIndex);
       }
     });
   }
@@ -119,6 +128,20 @@ export class Bullet implements IBullet {
     //remove enemy from array
     enemies.splice(enemyIndex, 1);
     // Remove bullet from array
+    this.removeBullet(bullets);
+  }
+  handleCollisionWithPowerUp(
+    powerUp: PowerUpBox[],
+    bullets: Bullet[],
+    enemyIndex: number
+  ): void {
+    console.log("HiTT");
+    console.log(player.positionX, player.positionY);
+    powerUpArray.push(new powerUP(player.positionX + 200, player.positionY));
+
+    // //remove enemy from array
+    powerUp.splice(enemyIndex, 1);
+    // // Remove bullet from array
     this.removeBullet(bullets);
   }
 }
