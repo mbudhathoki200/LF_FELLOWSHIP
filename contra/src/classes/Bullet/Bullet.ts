@@ -15,7 +15,7 @@ import { BULLET } from "./../../utils/constant";
 import powerUpSprite from "../../assets/images/healthPowerSprite.png";
 import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
 import { player } from "../../main.ts";
-import { enemyHitSound } from "../../utils/gameAudio.ts";
+import { enemyHitSound, metalHitSound } from "../../utils/gameAudio.ts";
 import { Explosion, explosionArray } from "../Explosion/Explosion.ts";
 import Map from "../Map/Map.ts";
 interface IBullet {
@@ -148,6 +148,7 @@ export class Bullet implements IBullet {
   ): void {
     console.log("HiTT");
     console.log(player.positionX, player.positionY);
+    metalHitSound();
     powerUpArray.push(new powerUP(player.positionX + 200, player.positionY));
 
     // //remove enemy from array
