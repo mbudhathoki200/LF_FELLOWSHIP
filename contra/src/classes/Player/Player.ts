@@ -375,9 +375,8 @@ export default class Player extends Character implements IPlayer {
     enemies.splice(enemyIndex, 1);
   }
   handleCollisionWithPowerUP(power: powerUP[], powerIndex: number): void {
-    PLAYER.LIFE += 1; // Decrease player life
+    PLAYER.LIFE += 1; // Increase player life
     console.log(`${PLAYER.LIFE} Remaining`);
-    // // Remove the enemy from the array
     power.splice(powerIndex, 1);
   }
 }

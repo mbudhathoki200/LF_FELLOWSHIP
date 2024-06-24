@@ -1,4 +1,3 @@
-import { collisionWithPowerUp } from "./utils/collisionDetection";
 import "./reset.css";
 import "./style.css";
 

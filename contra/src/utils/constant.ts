@@ -97,3 +97,13 @@ export const TANK: Tank = {
   HEIGHT: 40,
   CANNON_SPEED: 6,
 };
+
+/*-------Poweer UP------*/
+type powerup = {
+  WIDTH: number;
+  HEIGHT: number;
+};
+export const POWER_UP: powerup = {
+  WIDTH: 50,
+  HEIGHT: 25,
+};

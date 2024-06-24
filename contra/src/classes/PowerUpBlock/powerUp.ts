@@ -1,5 +1,5 @@
 import healthPowerUp from "../../assets/images/healthPowerSprite.png";
-import { PLAYER } from "../../utils/constant";
+import { PLAYER, POWER_UP } from "../../utils/constant";
 import Map from "../Map/Map";
 
 export const powerUpArray: powerUP[] = [];
@@ -11,12 +11,12 @@ export class powerUP {
   width: number;
 
   constructor(positionX: number, positionY: number) {
-    this.positionX = positionX;
+    this.positionX = positionX + Map.offsetX;
     this.positionY = positionY;
     this.Image = new Image();
     this.Image.src = healthPowerUp;
-    this.height = 25;
-    this.width = 50;
+    this.height = POWER_UP.HEIGHT;
+    this.width = POWER_UP.WIDTH;
   }
   draw(ctx: CanvasRenderingContext2D) {
     ctx.drawImage(
