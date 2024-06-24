@@ -2,12 +2,12 @@ const gameAudios = {
   title: "./assets/sound/title.mp3",
   menuSelect: "./assets/sound/menu-selection.mp3",
   menuHover: "./assets/sound/menu-button.mp3",
-  gameOver: "./assets/sound/game-over.mp3.mp3",
+  gameOver: "./assets/sound/game-over.mp3",
   gameMusic: "./assets/sound/Contra-Jungle.mp3",
   gameOverMusic: "./assets/sound/game-over.mp3",
   enemyHit: "./assets/sound/enemy-hit.mp3",
-  playerHit: "./assets/sound/dead.mp3",
-  playerGun: "./assets/sounds/enemy-gun.mp3",
+
+  playerGun: "../assets/sounds/enemy-gun.mp3",
   metalHit: "./assets/sound/explosion_asteroid-101886.mp3",
   collectPowerup: "./assets/sound/8-bit-powerup-6768.mp3",
   explosion: "./assets/sound/explosion-91872.mp3",
@@ -18,3 +18,30 @@ const gameAudios = {
   enemyShooting: "./assets/sound/desert-eagle-gunshot-14622.mp3",
   turretShooting: "./assets/sound/laser-zap-90575.mp3",
 };
+import playerGun from "../assets/sounds/enemy-gun.mp3";
+import playerHit from "../assets/sounds/dead.mp3";
+
+function playAudio(soundPath: string) {
+  const audio = new Audio(soundPath);
+  audio.play();
+}
+
+export function playerHitSound() {
+  playAudio(playerHit);
+}
+
+export function enemyHitSound() {
+  playAudio(gameAudios.enemyHit);
+}
+
+export function explosionSound() {
+  playAudio(gameAudios.explosion);
+}
+
+export function metalHitSound() {
+  playAudio(gameAudios.metalHit);
+}
+
+export function playerGunSound() {
+  playAudio(playerGun);
+}

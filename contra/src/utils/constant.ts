@@ -109,3 +109,13 @@ export const POWER_UP: powerup = {
   WIDTH: 50,
   HEIGHT: 25,
 };
+
+/*-------Explosion------*/
+type explosion = {
+  PLAYER_SIZE: number;
+  TANK_SIZE: number;
+};
+export const EXPLOSION: explosion = {
+  PLAYER_SIZE: 60,
+  TANK_SIZE: 80,
+};

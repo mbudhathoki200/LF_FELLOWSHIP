@@ -20,6 +20,7 @@ import {
   displayPlayerLife,
   displayPlayerScore,
 } from "./utils/displayParameters.ts";
+import { playerGunSound } from "./utils/Audio.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -161,6 +162,7 @@ window.onkeydown = (event) => {
       break;
     case "z":
       input.bullet = true;
+      playerGunSound();
       break;
   }
 };
