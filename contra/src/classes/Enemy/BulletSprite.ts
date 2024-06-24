@@ -27,8 +27,8 @@ export const bulletSprite: bulletsprite = {
   tankCannon: {
     x: 233,
     y: 267,
-    height: 16,
-    width: 16,
+    height: 20,
+    width: 20,
   },
   specialRay: {
     x: 218,

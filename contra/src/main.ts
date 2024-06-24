@@ -13,6 +13,7 @@ import { CANVAS } from "./utils/constant.ts";
 import { input } from "./utils/input.ts";
 import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
 import { Tank } from "./classes/Enemy/Tank.ts";
+import { MainTank } from "./classes/Enemy/MainTank.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -51,6 +52,13 @@ const tanks: Tank[] = [
   new Tank(6221, 349),
   new Tank(6477, 349),
 ];
+
+const mainTanks: MainTank[] = [
+  new MainTank(4095, 110),
+  new MainTank(4557, 173),
+  new MainTank(5951, 304),
+  new MainTank(6270, 175),
+];
 // Function to draw game elements
 function draw() {
   ctx.clearRect(0, 0, CANVAS.WIDTH, CANVAS.HEIGHT);
@@ -60,7 +68,7 @@ function draw() {
 
   //update player with platform Collision Detection
   player.draw(ctx);
-  player.update(ctx, enemies, guardEnemies, tanks);
+  player.update(ctx, enemies, guardEnemies, tanks, mainTanks);
 
   //Enemy
   enemies.forEach((enemy) => {
@@ -87,6 +95,11 @@ function draw() {
 
   //Tank
   tanks.forEach((tank) => {
+    tank.draw(ctx);
+    tank.update(player);
+  });
+
+  mainTanks.forEach((tank) => {
     tank.draw(ctx);
     tank.update(player);
   });

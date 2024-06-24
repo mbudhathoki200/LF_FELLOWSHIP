@@ -6,6 +6,7 @@ import { Bullet } from "../Bullet/Bullet.ts";
 import { Character } from "../Character/Character.ts";
 import { Enemy } from "../Enemy/Enemy.ts";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
+import { MainTank } from "../Enemy/MainTank.ts";
 import { Tank } from "../Enemy/Tank.ts";
 import Map from "../Map/Map";
 
@@ -89,7 +90,8 @@ export default class Player extends Character implements IPlayer {
     ctx: CanvasRenderingContext2D,
     enemies: Enemy[],
     guardEnemies: GuardEnemy[],
-    tanks: Tank[]
+    tanks: Tank[],
+    mainTanks: MainTank[]
   ): void {
     if (!this.isGrounded) {
       this.gravity(); //For Gravity Effect
@@ -171,7 +173,10 @@ export default class Player extends Character implements IPlayer {
       bullet.checkCollisionsWithGuardEnemies(guardEnemies, bullets);
 
       //For Tank
+
       bullet.checkCollisionsWithGuardEnemies(tanks, bullets);
+      //For Main Tank
+      bullet.checkCollisionsWithGuardEnemies(mainTanks, bullets);
     });
 
     //Reset if No input Stroke is pressed
