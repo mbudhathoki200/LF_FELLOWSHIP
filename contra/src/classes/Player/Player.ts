@@ -40,19 +40,18 @@ export default class Player extends Character implements IPlayer {
   velocityY: number;
   SPEED: number;
   life: number;
+
   isGrounded: boolean;
   inWater: boolean;
-
   isJumping: boolean;
   isRunning: boolean;
+  isProne: boolean;
 
   runReq: number;
-  staggerFrame = 0;
   animationTimer: number;
   animationCounter: number;
   playerDirection: string;
   playerAction: sprite;
-  prone: boolean;
 
   constructor(positionX: number, positionY: number) {
     super(positionX, positionY, PLAYER.WIDTH, PLAYER.HEIGHT);
@@ -60,11 +59,13 @@ export default class Player extends Character implements IPlayer {
     this.velocityY = 0;
     this.SPEED = PLAYER.SPEED;
     this.life = PLAYER.LIFE;
+
     this.isJumping = false;
     this.isRunning = false;
     this.isGrounded = false;
     this.inWater = false;
-    this.prone = false;
+    this.isProne = false;
+
     this.playerImage = new Image();
     this.playerImage.src = playerSheet;
     this.runReq = 0;
@@ -266,7 +267,7 @@ export default class Player extends Character implements IPlayer {
     } else {
       this.playerAction = right;
     }
-    this.prone = true;
+    this.isProne = true;
   }
 
   jump(): void {
