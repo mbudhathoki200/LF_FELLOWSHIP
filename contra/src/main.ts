@@ -16,6 +16,10 @@ import { PowerUpBox } from "./classes/PowerUpBlock/PowerUpBox.ts";
 import { powerUpArray } from "./classes/PowerUpBlock/powerUp.ts";
 import { CANVAS } from "./utils/constant.ts";
 import { input } from "./utils/input.ts";
+import {
+  displayPlayerLife,
+  displayPlayerScore,
+} from "./utils/displayParameters.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -74,11 +78,17 @@ function draw() {
   //map Render
   gameMap.draw(ctx);
 
+  //score Display
+  displayPlayerScore(ctx);
+
+  //Display Life
+  displayPlayerLife(ctx);
+
   //update player with platform Collision Detection
   player.draw(ctx);
   player.update(ctx, enemies, guardEnemies, tanks, mainTanks, powerUpBlocks);
 
-  //Enemy
+  //Render Enemy
   enemies.forEach((enemy) => {
     enemy.draw(ctx);
     enemy.update();
@@ -95,21 +105,25 @@ function draw() {
     );
     // newPlatform.draw(ctx);
   });
-  //guard Enemy
+
+  //Render Guard Enemy
   guardEnemies.forEach((enemy) => {
     enemy.draw(ctx);
     enemy.update(player);
   });
+
+  //Render PowerUps
   powerUpArray.forEach((powerup) => {
     powerup.draw(ctx);
   });
 
-  //Tank
+  //Render Tanks
   tanks.forEach((tank) => {
     tank.draw(ctx);
     tank.update(player);
   });
 
+  // Render Main Tans
   mainTanks.forEach((tank) => {
     tank.draw(ctx);
     tank.update(player);

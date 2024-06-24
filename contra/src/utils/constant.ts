@@ -28,6 +28,7 @@ type player = {
   LIFE: number;
   JUMP_POWER: number;
   GRAVITY: number;
+  SCORE: number;
 };
 
 export const PLAYER: player = {
@@ -37,6 +38,7 @@ export const PLAYER: player = {
   LIFE: 3,
   JUMP_POWER: 6,
   GRAVITY: 0.5,
+  SCORE: 0,
 };
 
 //----------------------------PLAYER SPRITE CONSTANTS
