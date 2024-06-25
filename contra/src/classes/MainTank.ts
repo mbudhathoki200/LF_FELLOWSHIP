@@ -89,7 +89,6 @@ export class MainTank extends Character implements IMainTank {
 
   handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
     player.playerHit();
-    console.log(`${PLAYER.LIFE} Remaining`);
     bullets.splice(bulletIndex, 1);
   }
 
