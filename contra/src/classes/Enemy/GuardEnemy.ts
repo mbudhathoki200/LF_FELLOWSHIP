@@ -1,13 +1,16 @@
 import enemySprite from "../../assets/images/Enemies.gif";
+import { ENEMY, PLAYER } from "../../constants/constant";
+import { guardEnemy } from "../../constants/enemyPositions";
 import { player } from "../../main";
 import { collisionBetweenCharacters } from "../../utils/collisionDetection";
-import { ENEMY } from "../../constants/constant";
 import { Character } from "../Character/Character";
 import Map from "../Map/Map";
 import Player from "../Player/Player";
-import { PLAYER } from "../../constants/constant";
 import { Bullet } from "./../Bullet/Bullet";
 import { gunEnemy, sprite } from "./EnemySpriteCords";
+
+export const guardEnemies: GuardEnemy[] = [];
+
 interface IEnemy {
   positionX: number;
   positionY: number;
@@ -83,6 +86,7 @@ export class GuardEnemy extends Character implements IEnemy {
     // Attempt to shoot at player
     this.shootAtPlayer(player);
   }
+
   handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
     player.playerHit();
     console.log(`${PLAYER.LIFE} Remaining`);

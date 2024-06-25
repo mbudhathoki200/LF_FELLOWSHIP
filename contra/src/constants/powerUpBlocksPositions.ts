@@ -1,4 +1,4 @@
-const powerUpBox = [
+export const powerUpBoxs = [
   {
     positionX: 650,
     positionY: 283,

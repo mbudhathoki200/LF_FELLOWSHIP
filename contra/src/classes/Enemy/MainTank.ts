@@ -10,6 +10,7 @@ import Player from "../Player/Player";
 import { sprite, tankSprites } from "./EnemySpriteCords";
 import { player } from "../../main";
 
+export const mainTanks: MainTank[] = [];
 interface IMainTank {
   positionX: number;
   positionY: number;

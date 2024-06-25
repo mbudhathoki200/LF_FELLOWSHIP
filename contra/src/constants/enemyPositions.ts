@@ -1,6 +1,6 @@
 import { CANVAS } from "./constant";
 
-const guardEnemy = [
+export const guardEnemy = [
   {
     positionX: 614,
     positionY: 150,
@@ -38,26 +38,26 @@ const guardEnemy = [
   },
 ];
 
-const runningEnemy = [
+export const runningEnemy = [
   {
-    postionX: CANVAS.WIDTH,
+    positionX: CANVAS.WIDTH,
     positionY: 100,
   },
   {
-    postionX: CANVAS.WIDTH - 200,
+    positionX: CANVAS.WIDTH - 200,
     positionY: 100,
   },
   {
-    postionX: CANVAS.WIDTH * 2,
+    positionX: CANVAS.WIDTH * 2,
     positionY: 100,
   },
   {
-    postionX: CANVAS.WIDTH * 3,
+    positionX: CANVAS.WIDTH * 3,
     positionY: 100,
   },
 ];
 
-const tank = [
+export const tank = [
   {
     positionX: 2508,
     positionY: 285,
@@ -84,7 +84,7 @@ const tank = [
   },
 ];
 
-const mainTank = [
+export const mainTank = [
   {
     positionX: 4095,
     positionY: 110,

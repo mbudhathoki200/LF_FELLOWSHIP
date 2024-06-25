@@ -3,6 +3,7 @@ import { ENEMY } from "../../constants/constant";
 import { Character } from "./../Character/Character";
 import { runningEnemy, sprite } from "./EnemySpriteCords";
 
+export const enemies: Enemy[] = [];
 interface IEnemy {
   positionX: number;
   positionY: number;

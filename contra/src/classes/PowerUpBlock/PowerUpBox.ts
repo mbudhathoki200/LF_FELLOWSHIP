@@ -4,6 +4,7 @@ import Map from "../Map/Map";
 import Player from "../Player/Player";
 import { blockPowerupSprite, sprite } from "./powerUpSprites";
 
+export const powerUpBlocks: PowerUpBox[] = [];
 interface IPowerUpBox {
   positionX: number;
   positionY: number;
