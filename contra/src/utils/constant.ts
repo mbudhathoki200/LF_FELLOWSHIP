@@ -63,16 +63,18 @@ type bulletSprite = {
   HEIGHT: number;
 };
 export const BULLET_SPRITE: bulletSprite = {
-  WIDTH: 15,
-  HEIGHT: 15,
+  WIDTH: 10,
+  HEIGHT: 10,
 };
 
 type bullet = {
   SPEED: number;
+  HIT: number;
 };
 
 export const BULLET: bullet = {
   SPEED: 8,
+  HIT: 1,
 };
 
 //---------------------ENEMY CONSTANTS
@@ -100,7 +102,7 @@ type Tank = {
 export const TANK: Tank = {
   WIDTH: 40,
   HEALTH: 30,
-  HEIGHT: 40,
+  HEIGHT: 3,
   CANNON_SPEED: 6,
 };
 
@@ -122,4 +124,18 @@ type explosion = {
 export const EXPLOSION: explosion = {
   PLAYER_SIZE: 60,
   TANK_SIZE: 80,
+};
+
+/*-----SCORE******/
+type score = {
+  RUNNING_ENEMY: number;
+  TANK: number;
+  MAIN_TANK: number;
+  GUARD_ENEMY: number;
+};
+export const SCORE: score = {
+  RUNNING_ENEMY: 10,
+  TANK: 20,
+  MAIN_TANK: 30,
+  GUARD_ENEMY: 15,
 };
