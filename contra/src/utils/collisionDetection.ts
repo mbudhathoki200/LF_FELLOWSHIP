@@ -1,9 +1,9 @@
 import { Bullet } from "../classes/Bullet";
 import Map from "../classes/Map/Map";
-import { Platfrom } from "../classes/Platform/Platform";
-import { PowerUpBox } from "../classes/PowerUpBlock/PowerUpBox";
-import { powerUP } from "../classes/PowerUpBlock/powerUp";
-import { Character } from "./../classes/Character/Character";
+import { Platfrom } from "../classes/Platform";
+import { PowerUpBox } from "../classes/PowerUpBox";
+import { powerUP } from "../classes/powerUp";
+import { Character } from "../classes/Character";
 
 // export function collisionDetections(
 //   player: Player,

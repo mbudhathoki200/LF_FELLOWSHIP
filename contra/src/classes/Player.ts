@@ -2,19 +2,19 @@ import playerSheet from "../../assets/images/player.gif";
 import {
   collisionBetweenCharacters,
   collisionWithPowerUp,
-} from "../../utils/collisionDetection.ts";
-import { CANVAS, PLAYER } from "../../constants/constant.ts";
-import { input } from "../../utils/input.ts";
-import { Bullet } from "../Bullet/Bullet.ts";
-import { Character } from "../Character/Character.ts";
-import { RunningEnemy } from "../Enemy/RunningEnemy.ts";
-import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
-import { MainTank } from "../Enemy/MainTank.ts";
-import { Tank } from "../Enemy/Tank.ts";
-import Map from "../Map/Map";
-import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox";
-import { powerUP, powerUpArray } from "./../PowerUpBlock/powerUp";
-import { playerHitSound } from "../../utils/gameAudio.ts";
+} from "../utils/collisionDetection.ts";
+import { CANVAS, PLAYER } from "../constants/constant.ts";
+import { input } from "../utils/input.ts";
+import { Bullet } from "./Bullet.ts";
+import { Character } from "./Character.ts";
+import { RunningEnemy } from "./RunningEnemy.ts";
+import { GuardEnemy } from "./GuardEnemy.ts";
+import { MainTank } from "./MainTank.ts";
+import { Tank } from "./Tank.ts";
+import Map from "./Map.ts";
+import { PowerUpBox } from "./PowerUpBox.ts";
+import { powerUP, powerUpArray } from "./powerUp.ts";
+import { playerHitSound } from "../utils/gameAudio.ts";
 import {
   TargetUpLR,
   playerPronePosition,
@@ -23,7 +23,7 @@ import {
   runningLeft,
   runningRight,
   sprite,
-} from "./PlayerImage.ts";
+} from "../spriteCords/PlayerSpriteCords.ts";
 
 interface IPlayer {
   positionX: number;

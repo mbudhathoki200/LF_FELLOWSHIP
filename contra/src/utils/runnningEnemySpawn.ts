@@ -1,4 +1,4 @@
-import { RunningEnemy } from "../classes/Enemy/RunningEnemy";
+import { RunningEnemy } from "../classes/RunningEnemy";
 import Map from "../classes/Map/Map";
 import { enemies, player } from "../main";
 import { CANVAS } from "../constants/constant";

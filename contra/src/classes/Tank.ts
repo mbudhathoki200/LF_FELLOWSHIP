@@ -1,59 +1,65 @@
-import enemySprite from "../../assets/images/Enemies.gif";
-import { ENEMY, PLAYER } from "../../constants/constant";
-import { guardEnemy } from "../../constants/enemyPositions";
-import { player } from "../../main";
-import { collisionBetweenCharacters } from "../../utils/collisionDetection";
-import { Character } from "../Character/Character";
-import Map from "../Map/Map";
-import Player from "../Player/Player";
-import { Bullet } from "../Bullet/Bullet";
-import { gunEnemy, sprite } from "./EnemySpriteCords";
+import { PLAYER, TANK } from "../constants/constant";
+import { Character } from "./Character";
 
-export const guardEnemies: GuardEnemy[] = [];
+import tankImage from "../../assets/images/Contra-Tanks.gif";
+import tankBulletImage from "../../assets/images/fireball.png";
+import { collisionBetweenCharacters } from "../utils/collisionDetection";
+import { Bullet } from "./Bullet";
+import Map from "./Map";
+import Player from "./Player";
+import { sprite, turretSprites } from "../spriteCords/EnemySpriteCords";
+import { player } from "../main";
 
-interface IEnemy {
+export const tanks: Tank[] = [];
+interface ITank {
   positionX: number;
   positionY: number;
 }
-export class GuardEnemy extends Character implements IEnemy {
+
+export class Tank extends Character implements ITank {
   positionX: number;
   positionY: number;
-  isGrounded: boolean;
-  guardImg: HTMLImageElement;
-  enemyAction: sprite;
+  tankImage: HTMLImageElement;
+  tankBUlletImage: HTMLImageElement;
+
   isPlayerLeft: boolean;
   isPlayerRight: boolean;
   isPlayerAbove: boolean;
   isPlayerBelow: boolean;
+
   bullets: Bullet[] = [];
+  tankAction: sprite;
+
   lastShotTime: number;
   shotCooldown: number;
   shootingRange: number;
   health: number;
-  isBulletFast: boolean;
 
-  constructor(positionX: number, positionY: number, isBulletFast: boolean) {
-    super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
+  constructor(positionX: number, positionY: number) {
+    super(positionX, positionY, TANK.WIDTH, TANK.HEIGHT);
     this.positionX = positionX;
     this.positionY = positionY;
-    this.isGrounded = false;
-    this.guardImg = new Image();
-    this.guardImg.src = enemySprite;
-    this.enemyAction = gunEnemy.right;
-    this.health = 2;
     this.isPlayerLeft = false;
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
+    this.health = 3;
+
+    this.tankImage = new Image();
+    this.tankImage.src = tankImage;
+    this.tankBUlletImage = new Image();
+    this.tankBUlletImage.src = tankBulletImage;
+
+    this.tankAction = turretSprites.left;
+
     this.lastShotTime = 0;
     this.shotCooldown = 1000; // Set cooldown period in milliseconds
     this.shootingRange = 400; // Set the shooting range in pixels
-    this.isBulletFast = isBulletFast;
   }
   draw(ctx: CanvasRenderingContext2D) {
-    const { x, y, width, height } = this.enemyAction;
+    const { x, y, width, height } = this.tankAction;
     ctx.drawImage(
-      this.guardImg,
+      this.tankImage,
       x,
       y,
       width,
@@ -64,16 +70,13 @@ export class GuardEnemy extends Character implements IEnemy {
       this.height
     );
     // Draw bullets
-    this.bullets.forEach((bullet) => bullet.draw(ctx));
+    this.bullets.forEach((bullet) => bullet.draw(ctx, this.tankBUlletImage));
   }
   update(player: Player) {
-    // if (!this.isGrounded) {
-    //   this.gravity(); // For Gravity Effect
-    // }
-
-    this.checkVerticalCollision();
-
     this.getPlayerDirection(player);
+
+    // Attempt to shoot at player
+    this.shootAtPlayer(player);
 
     // Update bullets
     this.bullets.forEach((bullet, index) => {
@@ -82,14 +85,9 @@ export class GuardEnemy extends Character implements IEnemy {
         this.handleBulletCollision(this.bullets, index);
       }
     });
-
-    // Attempt to shoot at player
-    this.shootAtPlayer(player);
   }
-
   handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
     player.playerHit();
-    console.log(`${PLAYER.LIFE} Remaining`);
     bullets.splice(bulletIndex, 1);
   }
 
@@ -105,37 +103,35 @@ export class GuardEnemy extends Character implements IEnemy {
 
     this.isPlayerAbove = playerY < enemyY - PLAYER.HEIGHT;
 
-    return this.changeSprite();
+    return this.changeTankSprite();
   }
-
-  changeSprite() {
+  changeTankSprite() {
     if (this.isPlayerLeft && this.isPlayerAbove) {
-      this.enemyAction = gunEnemy.upLeft;
+      this.tankAction = turretSprites.upLeft;
       return "DIRECTION_UP_LEFT";
     } else if (this.isPlayerRight && this.isPlayerAbove) {
-      this.enemyAction = gunEnemy.upRight;
+      this.tankAction = turretSprites.upRight;
       return "DIRECTION_UP_RIGHT";
     } else if (this.isPlayerRight && this.isPlayerBelow) {
-      this.enemyAction = gunEnemy.downRight;
+      this.tankAction = turretSprites.downRight;
       return "DIRECTION_DOWN_RIGHT";
     } else if (this.isPlayerLeft && this.isPlayerBelow) {
-      this.enemyAction = gunEnemy.downLeft;
+      this.tankAction = turretSprites.downLeft;
       return "DIRECTION_DOWN_LEFT";
     } else if (this.isPlayerLeft) {
-      this.enemyAction = gunEnemy.left;
+      this.tankAction = turretSprites.left;
       return "DIRECTION_LEFT";
     } else if (this.isPlayerRight) {
-      this.enemyAction = gunEnemy.right;
+      this.tankAction = turretSprites.right;
       return "DIRECTION_RIGHT";
     } else if (this.isPlayerBelow) {
-      this.enemyAction = gunEnemy.down;
+      this.tankAction = turretSprites.down;
       return "DIRECTION_DOWN";
     } else if (this.isPlayerAbove) {
-      this.enemyAction = gunEnemy.up;
+      this.tankAction = turretSprites.up;
       return "DIRECTION_UP";
     }
   }
-
   isPlayerInRange(player: Player): boolean {
     let { positionX: playerX, positionY: playerY } = player;
     const { positionX: enemyX, positionY: enemyY } = this;
@@ -164,12 +160,7 @@ export class GuardEnemy extends Character implements IEnemy {
     let direction = this.getPlayerDirection(player);
 
     // Create and add bullet
-    const bullet = new Bullet(
-      enemyX - Map.offsetX,
-      enemyY,
-      direction,
-      this.isBulletFast
-    );
+    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction, true);
     this.bullets.push(bullet);
 
     // Update the last shot time

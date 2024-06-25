@@ -3,21 +3,18 @@ import "./reset.css";
 import "./style.css";
 
 // classes
-import Map from "./classes/Map/Map.ts";
-import Player from "./classes/Player/Player.ts";
+import Map from "./classes/Map.ts";
+import Player from "./classes/Player.ts";
 
-import { RunningEnemy, runningEnemies } from "./classes/Enemy/RunningEnemy.ts";
-import { GuardEnemy, guardEnemies } from "./classes/Enemy/GuardEnemy.ts";
-import { MainTank, mainTanks } from "./classes/Enemy/MainTank.ts";
-import { Tank, tanks } from "./classes/Enemy/Tank.ts";
-import { explosionArray } from "./classes/Explosion/Explosion.ts";
-import { Platfrom } from "./classes/Platform/Platform.ts";
-import { platformValues } from "./classes/Platform/platformValues";
-import {
-  PowerUpBox,
-  powerUpBlocks,
-} from "./classes/PowerUpBlock/PowerUpBox.ts";
-import { powerUpArray } from "./classes/PowerUpBlock/powerUp.ts";
+import { RunningEnemy, runningEnemies } from "./classes/RunningEnemy.ts";
+import { GuardEnemy, guardEnemies } from "./classes/GuardEnemy.ts";
+import { MainTank, mainTanks } from "./classes/MainTank.ts";
+import { Tank, tanks } from "./classes/Tank.ts";
+import { explosionArray } from "./classes/Explosion.ts";
+import { Platfrom } from "./classes/Platform.ts";
+import { platformValues } from "./Platform/platformValues.ts";
+import { PowerUpBox, powerUpBlocks } from "./classes/PowerUpBox.ts";
+import { powerUpArray } from "./classes/powerUp.ts";
 
 // Constants and Utilities
 import { CANVAS } from "./constants/constant.ts";

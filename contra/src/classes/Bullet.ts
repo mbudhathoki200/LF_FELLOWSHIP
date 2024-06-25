@@ -3,25 +3,20 @@ import bulletImgR from "../../assets/images/rightBullet.png";
 import {
   collisionBetweenCharacters,
   collisionBetweenWithGuardBullet,
-} from "../../utils/collisionDetection.ts";
+} from "../utils/collisionDetection.ts";
 
-import {
-  BULLET_SPRITE,
-  CANVAS,
-  PLAYER,
-  SCORE,
-} from "../../constants/constant.ts";
-import { enemyHitSound, metalHitSound } from "../../utils/gameAudio.ts";
-import { Explosion, explosionArray } from "../Explosion/Explosion.ts";
-import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
+import { BULLET_SPRITE, CANVAS, PLAYER, SCORE } from "../constants/constant.ts";
+import { enemyHitSound, metalHitSound } from "../utils/gameAudio.ts";
+import { Explosion, explosionArray } from "./Explosion.ts";
+import { powerUP, powerUpArray } from "./powerUp.ts";
 
-import { RunningEnemy } from "./../Enemy/RunningEnemy.ts";
-import { GuardEnemy } from "./../Enemy/GuardEnemy.ts";
-import { MainTank } from "./../Enemy/MainTank.ts";
-import { Tank } from "./../Enemy/Tank.ts";
-import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox.ts";
-import { BULLET } from "../../constants/constant.ts";
-import { player } from "../../main.ts";
+import { RunningEnemy } from "./RunningEnemy.ts";
+import { GuardEnemy } from "./GuardEnemy.ts";
+import { MainTank } from "./MainTank.ts";
+import { Tank } from "./Tank.ts";
+import { PowerUpBox } from "./PowerUpBox.ts";
+import { BULLET } from "../constants/constant.ts";
+import { player } from "../main.ts";
 
 interface IBullet {
   positionX: number;

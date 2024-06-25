@@ -1,14 +1,14 @@
-import { PLAYER, TANK } from "../../constants/constant";
-import { Character } from "../Character/Character";
+import { PLAYER, TANK } from "../constants/constant";
+import { Character } from "./Character";
 
 import tankImage from "../../assets/images/Contra-Tanks.gif";
 import tankBulletImage from "../../assets/images/goldBall.png";
-import { collisionBetweenCharacters } from "../../utils/collisionDetection";
-import { Bullet } from "../Bullet/Bullet";
-import Map from "../Map/Map";
-import Player from "../Player/Player";
-import { sprite, tankSprites } from "./EnemySpriteCords";
-import { player } from "../../main";
+import { collisionBetweenCharacters } from "../utils/collisionDetection";
+import { Bullet } from "./Bullet";
+import Map from "./Map";
+import Player from "./Player";
+import { sprite, tankSprites } from "../spriteCords/EnemySpriteCords";
+import { player } from "../main";
 
 export const mainTanks: MainTank[] = [];
 interface IMainTank {

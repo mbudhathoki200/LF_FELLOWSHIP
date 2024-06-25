@@ -1,7 +1,7 @@
 import enemySprite from "../../assets/images/Enemies.gif";
-import { ENEMY } from "../../constants/constant";
-import { Character } from "../Character/Character";
-import { runningEnemy, sprite } from "./EnemySpriteCords";
+import { ENEMY } from "../constants/constant";
+import { Character } from "./Character";
+import { runningEnemy, sprite } from "../spriteCords/EnemySpriteCords";
 
 export const runningEnemies: RunningEnemy[] = [];
 interface IEnemy {

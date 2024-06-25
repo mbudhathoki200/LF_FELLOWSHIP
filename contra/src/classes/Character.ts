@@ -1,6 +1,6 @@
-import { collisionDetections } from "../../utils/collisionDetection.ts";
-import { CANVAS } from "../../constants/constant.ts";
-import { platformValues } from "../Platform/platformValues";
+import { collisionDetections } from "../utils/collisionDetection.ts";
+import { CANVAS } from "../constants/constant.ts";
+import { platformValues } from "../Platform/platformValues.ts";
 
 interface ICharacter {
   positionX: number;
