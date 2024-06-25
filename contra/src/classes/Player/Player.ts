@@ -3,7 +3,7 @@ import {
   collisionBetweenCharacters,
   collisionWithPowerUp,
 } from "../../utils/collisionDetection.ts";
-import { CANVAS, PLAYER } from "../../utils/constant";
+import { CANVAS, PLAYER } from "../../constants/constant.ts";
 import { input } from "../../utils/input.ts";
 import { Bullet } from "../Bullet/Bullet.ts";
 import { Character } from "../Character/Character.ts";
@@ -202,10 +202,6 @@ export default class Player extends Character implements IPlayer {
 
     //chech collision with powerUps
     this.checkCollisionsWithPowerUp(powerUpArray);
-    // checkCollisionsWithPowerUp(powerUpArray: powerUP[])
-    // if (PLAYER.LIFE = 0) {
-    //   this.reSpawn();
-    // }
   }
   makeDefaultBullet(bulletDirection: string) {
     bullet = new Bullet(

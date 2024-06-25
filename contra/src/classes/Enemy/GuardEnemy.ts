@@ -1,11 +1,11 @@
 import enemySprite from "../../assets/images/Enemies.gif";
 import { player } from "../../main";
 import { collisionBetweenCharacters } from "../../utils/collisionDetection";
-import { ENEMY } from "../../utils/constant";
+import { ENEMY } from "../../constants/constant";
 import { Character } from "../Character/Character";
 import Map from "../Map/Map";
 import Player from "../Player/Player";
-import { PLAYER } from "./../../utils/constant";
+import { PLAYER } from "../../constants/constant";
 import { Bullet } from "./../Bullet/Bullet";
 import { gunEnemy, sprite } from "./EnemySpriteCords";
 interface IEnemy {

@@ -1,5 +1,5 @@
 import explosionImage from "../../assets/images/Contra-Extras.gif";
-import { EXPLOSION } from "../../utils/constant";
+import { EXPLOSION } from "../../constants/constant";
 import {
   cloudExplosionSprite,
   extraSprite,

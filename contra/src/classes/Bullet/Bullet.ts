@@ -5,14 +5,19 @@ import {
   collisionBetweenWithGuardBullet,
 } from "../../utils/collisionDetection";
 
-import { BULLET_SPRITE, CANVAS, PLAYER, SCORE } from "../../utils/constant";
+import {
+  BULLET_SPRITE,
+  CANVAS,
+  PLAYER,
+  SCORE,
+} from "../../constants/constant.ts";
 
 import { Enemy } from "../Enemy/Enemy";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import { MainTank } from "../Enemy/MainTank.ts";
 import { Tank } from "../Enemy/Tank.ts";
 import { PowerUpBox } from "../PowerUpBlock/PowerUpBox.ts";
-import { BULLET } from "./../../utils/constant";
+import { BULLET } from "../../constants/constant.ts";
 import { player } from "../../main.ts";
 import { enemyHitSound, metalHitSound } from "../../utils/gameAudio.ts";
 import { Explosion, explosionArray } from "../Explosion/Explosion.ts";

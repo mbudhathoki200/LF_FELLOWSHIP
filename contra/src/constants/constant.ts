@@ -139,8 +139,3 @@ export const SCORE: score = {
   MAIN_TANK: 30,
   GUARD_ENEMY: 15,
 };
-
-// export const BULLET_TYPE = {
-//   FAST: 1,
-//   SLOW: 0,
-// };

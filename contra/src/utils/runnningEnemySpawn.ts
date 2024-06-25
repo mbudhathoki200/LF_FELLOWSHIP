@@ -1,7 +1,7 @@
 import { Enemy } from "../classes/Enemy/Enemy";
 import Map from "../classes/Map/Map";
 import { enemies, player } from "../main";
-import { CANVAS } from "./constant";
+import { CANVAS } from "../constants/constant";
 
 const spawnLocations: {
   x: number;

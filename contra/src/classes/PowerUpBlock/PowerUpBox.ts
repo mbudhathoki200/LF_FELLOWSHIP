@@ -1,5 +1,5 @@
 import powerUpBlockImage from "../../assets/images/Contra-Tanks.gif";
-import { TANK } from "../../utils/constant";
+import { TANK } from "../../constants/constant";
 import Map from "../Map/Map";
 import Player from "../Player/Player";
 import { blockPowerupSprite, sprite } from "./powerUpSprites";

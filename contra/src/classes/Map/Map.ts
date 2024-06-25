@@ -1,4 +1,4 @@
-import { MAP } from "../../utils/constant";
+import { MAP } from "../../constants/constant";
 
 // images
 import bgImage from "../../assets/images/NES - Contra - Level 1.png";

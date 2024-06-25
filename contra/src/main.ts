@@ -2,20 +2,21 @@ import "./reset.css";
 import "./style.css";
 
 // classes
-import { Enemy } from "./classes/Enemy/Enemy.ts";
 import Map from "./classes/Map/Map.ts";
-import { Platfrom } from "./classes/Platform/Platform.ts";
-import { platformValues } from "./classes/Platform/platformValues";
 import Player from "./classes/Player/Player.ts";
 
-// Constants and Utilities
+import { Enemy } from "./classes/Enemy/Enemy.ts";
+import { Platfrom } from "./classes/Platform/Platform.ts";
+import { platformValues } from "./classes/Platform/platformValues";
 import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
 import { MainTank } from "./classes/Enemy/MainTank.ts";
 import { Tank } from "./classes/Enemy/Tank.ts";
 import { explosionArray } from "./classes/Explosion/Explosion.ts";
 import { PowerUpBox } from "./classes/PowerUpBlock/PowerUpBox.ts";
 import { powerUpArray } from "./classes/PowerUpBlock/powerUp.ts";
-import { CANVAS } from "./utils/constant.ts";
+
+// Constants and Utilities
+import { CANVAS } from "./constants/constant.ts";
 import {
   displayPlayerLife,
   displayPlayerScore,

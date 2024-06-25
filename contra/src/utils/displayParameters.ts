@@ -1,4 +1,4 @@
-import { PLAYER } from "./constant";
+import { PLAYER } from "../constants/constant";
 
 export function displayPlayerScore(ctx: CanvasRenderingContext2D): void {
   ctx.font = "20px VT323";

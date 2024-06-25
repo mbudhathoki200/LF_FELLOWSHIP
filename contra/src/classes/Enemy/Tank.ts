@@ -1,4 +1,4 @@
-import { PLAYER, TANK } from "../../utils/constant";
+import { PLAYER, TANK } from "../../constants/constant";
 import { Character } from "../Character/Character";
 
 import tankImage from "../../assets/images/Contra-Tanks.gif";

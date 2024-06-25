@@ -1,5 +1,5 @@
 import enemySprite from "../../assets/images/Enemies.gif";
-import { ENEMY } from "../../utils/constant";
+import { ENEMY } from "../../constants/constant";
 import { Character } from "./../Character/Character";
 import { runningEnemy, sprite } from "./EnemySpriteCords";
 
