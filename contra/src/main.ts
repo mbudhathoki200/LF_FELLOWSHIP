@@ -209,6 +209,7 @@ function init() {
     }
   };
 }
+
 startBtn.addEventListener("click", () => {
   startScreen.style.display = "none";
   gameScreen.style.display = "flex";

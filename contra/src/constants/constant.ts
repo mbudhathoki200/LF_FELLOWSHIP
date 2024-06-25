@@ -8,7 +8,8 @@ export const CANVAS: canvas = {
   HEIGHT: 221 * 2,
 };
 
-//------------------MAP CONSTANTS--------------------------
+/*------------------------------------MAP CONSTANTS----------------------------------------*/
+
 type map = {
   WIDTH: number;
   HEIGHT: number;
@@ -19,7 +20,7 @@ export const MAP: map = {
   HEIGHT: 221 * 2,
 };
 
-// --------------Player Constants----------------------
+/* ---------------------------------Player Constants----------------------------------------*/
 
 type player = {
   WIDTH: number;
@@ -45,7 +46,7 @@ export const PLAYER: player = {
   RESPAWN_POSITION_Y: 100,
 };
 
-//----------------------------PLAYER SPRITE CONSTANTS
+/* ---------------------------------PLAYER SPRITE CONSTANTS----------------------------------------*/
 type playerSprite = {
   WIDTH: number;
   HEIGHT: number;
@@ -57,6 +58,8 @@ export const PLAYER_SPRITE: playerSprite = {
   HEIGHT: 50,
   COLUMNS: 5,
 };
+
+/* ---------------------------------BULLET SPRITE CONSTANTS----------------------------------------*/
 
 type bulletSprite = {
   WIDTH: number;
@@ -77,7 +80,7 @@ export const BULLET: bullet = {
   SLOW_SPEED: 5,
 };
 
-//---------------------ENEMY CONSTANTS
+/* ---------------------------------ENEMY CONSTANTS----------------------------------------*/
 
 type enemy = {
   WIDTH: number;
@@ -91,7 +94,8 @@ export const ENEMY: enemy = {
   SPEED: 4,
 };
 
-/*-----------Static Enemy-------------*/
+/* ---------------------------------STATIC ENEMY----------------------------------------*/
+
 type Tank = {
   WIDTH: number;
   HEIGHT: number;
@@ -106,7 +110,7 @@ export const TANK: Tank = {
   CANNON_SPEED: 6,
 };
 
-/*-------Poweer UP------*/
+/*-----------------------------------Poweer UP------------------------------------------*/
 type powerup = {
   WIDTH: number;
   HEIGHT: number;
@@ -116,7 +120,7 @@ export const POWER_UP: powerup = {
   HEIGHT: 25,
 };
 
-/*-------Explosion------*/
+/*------------------------------------Explosion-------------------------------------------*/
 type explosion = {
   PLAYER_SIZE: number;
   TANK_SIZE: number;
@@ -126,7 +130,7 @@ export const EXPLOSION: explosion = {
   TANK_SIZE: 80,
 };
 
-/*------SCORE-------*/
+/*------------------------------------SCORE-------------------------------------------*/
 type score = {
   RUNNING_ENEMY: number;
   TANK: number;

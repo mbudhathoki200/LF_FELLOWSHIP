@@ -9,7 +9,7 @@ import {
   runningLeft,
   runningRight,
   sprite,
-} from "../spriteCords/PlayerSpriteCords.ts";
+} from "../spriteCoordinates/PlayerSpriteCords.ts";
 import {
   collisionBetweenCharacters,
   collisionWithPowerUp,
@@ -89,9 +89,6 @@ export default class Player extends Character implements IPlayer {
       this.width,
       this.height
     );
-
-    ctx.strokeStyle = "red";
-    // ctx.strokeRect(this.positionX, this.positionY, this.width, this.height);
   }
 
   update(
@@ -204,16 +201,14 @@ export default class Player extends Character implements IPlayer {
     //chech collision with powerUps
     this.checkCollisionsWithPowerUp(powerUpArray);
   }
-  makeDefaultBullet(bulletDirection: string) {
-    bullet = new Bullet(
-      this.positionX + PLAYER.WIDTH,
-      this.positionY + PLAYER.HEIGHT / 3,
-      bulletDirection,
-      true
-    );
-    bullets.push(bullet);
-  }
 
+  /**
+   * The `moveLeft` function in TypeScript moves the player character to the left on the game map while
+   * also adjusting the camera position if needed.
+   * @param {Map} gameMap - The `gameMap` parameter is an object representing the game map in the code
+   * snippet provided. It is used to interact with and manipulate the game map, such as moving the map
+   * left based on the player's movement in the game.
+   */
   moveLeft(gameMap: Map): void {
     if (this.positionX > 0) {
       this.animateMovement();
@@ -233,6 +228,15 @@ export default class Player extends Character implements IPlayer {
       }
     }
   }
+
+  /**
+   * The `moveRight` function in TypeScript updates the player's position and camera offset to move the
+   * player to the right within the game map boundaries.
+   * @param {Map} gameMap - The `gameMap` parameter in the `moveRight` function represents the map or
+   * level that the player character is currently on. It is an object that likely contains information
+   * about the layout of the game world, such as platforms, obstacles, and other elements that the player
+   * can interact with or move across
+   */
 
   moveRight(gameMap: Map): void {
     this.animateMovement();
@@ -261,6 +265,10 @@ export default class Player extends Character implements IPlayer {
     this.width = PLAYER.WIDTH;
   }
 
+  /**
+   * The playerProne function adjusts the player's position and appearance when they are in a prone
+   * state.
+   */
   playerProne(): void {
     const { left, right } = playerPronePosition;
 
@@ -281,6 +289,7 @@ export default class Player extends Character implements IPlayer {
     this.velocityY = -PLAYER.JUMP_POWER;
   }
 
+  //Sprite change of player
   targetUp(direction: string) {
     if (direction === "DIRECTION_LEFT") {
       this.playerAction = playerTargetUp.left;
@@ -310,22 +319,12 @@ export default class Player extends Character implements IPlayer {
     this.width = PLAYER.WIDTH;
   }
 
-  // checkVerticalCollision(): void {
-  //   platformValues.forEach((platform: any) => {
-  //     if (collisionDetections(this, platform)) {
-  //       if (this.velocityY > 0) {
-  //         this.velocityY = 0;
-  //         if (this.positionY + this.height >= platform.y) {
-  //           this.positionY = platform.y - 50;
-  //           this.isGrounded = true;
-  //         }
-  //       }
-  //     } else {
-  //       this.isGrounded = false;
-  //     }
-  //   });
-  // }
-
+  /**
+   * The function `playerRunning` sets the player's action based on the direction provided.
+   * @param {string} direction - The `direction` parameter in the `playerRunning` function is a string
+   * that specifies the direction in which the player is running. It is used to determine whether the
+   * player should be running to the right or to the left.
+   */
   playerRunning(direction: string) {
     const runningDirection =
       direction === "DIRECTION_RIGHT" ? runningRight : runningLeft;
@@ -338,6 +337,10 @@ export default class Player extends Character implements IPlayer {
     this.playerAction = runningDirection[this.animationTimer];
   }
 
+  /**
+   * The `animateMovement` function increments the `animationCounter` and updates the `animationTimer`
+   * based on certain conditions.
+   */
   animateMovement() {
     this.animationCounter++;
     if (this.animationCounter % 7 == 0 && this.animationCounter != 0) {
@@ -384,6 +387,10 @@ export default class Player extends Character implements IPlayer {
     power.splice(powerIndex, 1);
   }
 
+  /**
+   * The `reSpawn` function checks the player's life and either displays game over or respawns the player
+   * at a specific position.
+   */
   reSpawn(): void {
     if (PLAYER.LIFE <= 1) {
       displayGameOver();

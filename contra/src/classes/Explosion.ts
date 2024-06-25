@@ -3,7 +3,7 @@ import { EXPLOSION } from "../constants/constant";
 import {
   extraSprite,
   normalExplosionSprite,
-} from "../spriteCords/ExtraSpriteCords";
+} from "../spriteCoordinates/ExtraSpriteCords";
 
 export const explosionArray: Explosion[] = [];
 

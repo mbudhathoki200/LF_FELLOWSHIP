@@ -2,7 +2,10 @@ import powerUpBlockImage from "../assets/images/Contra-Tanks.gif";
 import { TANK } from "../constants/constant";
 import Map from "./Map";
 import Player from "./Player";
-import { blockPowerupSprite, sprite } from "../spriteCords/powerUpSprites";
+import {
+  blockPowerupSprite,
+  sprite,
+} from "../spriteCoordinates/powerUpSprites";
 
 export const powerUpBlocks: PowerUpBox[] = [];
 interface IPowerUpBox {

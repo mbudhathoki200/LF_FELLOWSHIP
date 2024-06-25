@@ -5,10 +5,10 @@ export type extraSprite = {
   width: number;
 };
 
-export const enemyDeathSprite: extraSprite = {
-  x: 219,
-  y: 477,
-  height: 20,
+export const healthDisplaySprite = {
+  x: 282,
+  y: 264,
+  height: 24,
   width: 17,
 };
 

@@ -17,6 +17,11 @@ export const guardEnemy = [
     isBulletFast: false,
   },
   {
+    positionX: 1913,
+    positionY: 150,
+    isBulletFast: false,
+  },
+  {
     positionX: 1256,
     positionY: 340,
     isBulletFast: false,
@@ -35,6 +40,11 @@ export const guardEnemy = [
     positionX: 5330,
     positionY: 239,
     isBulletFast: false,
+  },
+  {
+    positionX: 3281,
+    positionY: 60,
+    isBulletFast: true,
   },
 ];
 

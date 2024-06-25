@@ -1,7 +1,7 @@
 import enemySprite from "../assets/images/Enemies.gif";
 import { ENEMY, PLAYER } from "../constants/constant";
 import { player } from "../main";
-import { gunEnemy, sprite } from "../spriteCords/EnemySpriteCords";
+import { gunEnemy, sprite } from "../spriteCoordinates/EnemySpriteCords";
 import { collisionBetweenCharacters } from "../utils/collisionDetection";
 import { Bullet } from "./Bullet";
 import { Character } from "./Character";

@@ -7,7 +7,7 @@ import { collisionBetweenCharacters } from "../utils/collisionDetection";
 import { Bullet } from "./Bullet";
 import Map from "./Map";
 import Player from "./Player";
-import { sprite, turretSprites } from "../spriteCords/EnemySpriteCords";
+import { sprite, turretSprites } from "../spriteCoordinates/EnemySpriteCords";
 import { player } from "../main";
 
 export const tanks: Tank[] = [];
