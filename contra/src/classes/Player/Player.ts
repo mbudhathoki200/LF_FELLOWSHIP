@@ -7,14 +7,13 @@ import { CANVAS, PLAYER } from "../../constants/constant.ts";
 import { input } from "../../utils/input.ts";
 import { Bullet } from "../Bullet/Bullet.ts";
 import { Character } from "../Character/Character.ts";
-import { Enemy } from "../Enemy/Enemy.ts";
+import { RunningEnemy } from "../Enemy/RunningEnemy.ts";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import { MainTank } from "../Enemy/MainTank.ts";
 import { Tank } from "../Enemy/Tank.ts";
 import Map from "../Map/Map";
 import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox";
 import { powerUP, powerUpArray } from "./../PowerUpBlock/powerUp";
-
 import { playerHitSound } from "../../utils/gameAudio.ts";
 import {
   TargetUpLR,
@@ -95,7 +94,7 @@ export default class Player extends Character implements IPlayer {
 
   update(
     ctx: CanvasRenderingContext2D,
-    enemies: Enemy[],
+    enemies: RunningEnemy[],
     guardEnemies: GuardEnemy[],
     tanks: Tank[],
     mainTanks: MainTank[],
@@ -180,11 +179,11 @@ export default class Player extends Character implements IPlayer {
       //For Running Enemy
       bullet.checkCollisionsWithEnemies(enemies, bullets);
       //For Guard Enemy
-      bullet.checkCollisionsWithGuardEnemies(guardEnemies, bullets);
+      bullet.checkCollisionsWithStaticEnemies(guardEnemies, bullets);
       //For Tank
-      bullet.checkCollisionsWithGuardEnemies(tanks, bullets);
+      bullet.checkCollisionsWithStaticEnemies(tanks, bullets);
       //For Main Tank
-      bullet.checkCollisionsWithGuardEnemies(mainTanks, bullets);
+      bullet.checkCollisionsWithStaticEnemies(mainTanks, bullets);
       //For PowerUP Block
       bullet.checkCollisionsWithpowerUp(powerUpBlocks, bullets);
     });
@@ -356,7 +355,7 @@ export default class Player extends Character implements IPlayer {
   }
 
   //check collision with Running enemies
-  checkCollisionsWithEnemies(enemies: Enemy[]): void {
+  checkCollisionsWithEnemies(enemies: RunningEnemy[]): void {
     enemies.forEach((enemy, index) => {
       if (collisionBetweenCharacters(this, enemy)) {
         this.handleCollisionWithEnemy(enemies, index);
@@ -372,7 +371,7 @@ export default class Player extends Character implements IPlayer {
     });
   }
 
-  handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
+  handleCollisionWithEnemy(enemies: RunningEnemy[], enemyIndex: number): void {
     this.playerHit();
     console.log(`${PLAYER.LIFE} Remaining`);
     // Remove the enemy from the array

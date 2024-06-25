@@ -6,7 +6,7 @@ import { collisionBetweenCharacters } from "../../utils/collisionDetection";
 import { Character } from "../Character/Character";
 import Map from "../Map/Map";
 import Player from "../Player/Player";
-import { Bullet } from "./../Bullet/Bullet";
+import { Bullet } from "../Bullet/Bullet";
 import { gunEnemy, sprite } from "./EnemySpriteCords";
 
 export const guardEnemies: GuardEnemy[] = [];

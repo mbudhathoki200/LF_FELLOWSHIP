@@ -3,7 +3,7 @@ import bulletImgR from "../../assets/images/rightBullet.png";
 import {
   collisionBetweenCharacters,
   collisionBetweenWithGuardBullet,
-} from "../../utils/collisionDetection";
+} from "../../utils/collisionDetection.ts";
 
 import {
   BULLET_SPRITE,
@@ -11,17 +11,18 @@ import {
   PLAYER,
   SCORE,
 } from "../../constants/constant.ts";
-
-import { Enemy } from "../Enemy/Enemy";
-import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
-import { MainTank } from "../Enemy/MainTank.ts";
-import { Tank } from "../Enemy/Tank.ts";
-import { PowerUpBox } from "../PowerUpBlock/PowerUpBox.ts";
-import { BULLET } from "../../constants/constant.ts";
-import { player } from "../../main.ts";
 import { enemyHitSound, metalHitSound } from "../../utils/gameAudio.ts";
 import { Explosion, explosionArray } from "../Explosion/Explosion.ts";
 import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
+
+import { RunningEnemy } from "./../Enemy/RunningEnemy.ts";
+import { GuardEnemy } from "./../Enemy/GuardEnemy.ts";
+import { MainTank } from "./../Enemy/MainTank.ts";
+import { Tank } from "./../Enemy/Tank.ts";
+import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox.ts";
+import { BULLET } from "../../constants/constant.ts";
+import { player } from "../../main.ts";
+
 interface IBullet {
   positionX: number;
   positionY: number;
@@ -140,7 +141,7 @@ export class Bullet implements IBullet {
     }
   }
 
-  checkCollisionsWithEnemies(enemies: Enemy[], bullets: Bullet[]): void {
+  checkCollisionsWithEnemies(enemies: RunningEnemy[], bullets: Bullet[]): void {
     enemies.forEach((enemy, enemyIndex) => {
       if (collisionBetweenCharacters(this, enemy)) {
         this.handleCollisionWithEnemy(enemies, bullets, enemyIndex);
@@ -148,7 +149,7 @@ export class Bullet implements IBullet {
     });
   }
 
-  checkCollisionsWithGuardEnemies(
+  checkCollisionsWithStaticEnemies(
     enemies: GuardEnemy[] | Tank[] | MainTank[],
     bullets: Bullet[]
   ): void {
@@ -167,7 +168,7 @@ export class Bullet implements IBullet {
   }
 
   handleCollisionWithEnemy(
-    enemies: Enemy[] | GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[],
+    enemies: RunningEnemy[] | GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[],
     bullets: Bullet[],
     enemyIndex: number
   ): void {

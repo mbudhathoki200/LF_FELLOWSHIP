@@ -1,8 +1,9 @@
 import enemySprite from "../../assets/images/Enemies.gif";
-import { CANVAS, ENEMY } from "../../constants/constant";
+import { ENEMY } from "../../constants/constant";
 import { Character } from "../Character/Character";
 import { runningEnemy, sprite } from "./EnemySpriteCords";
 
+export const runningEnemies: RunningEnemy[] = [];
 interface IEnemy {
   positionX: number;
   positionY: number;
@@ -10,7 +11,7 @@ interface IEnemy {
   height: number;
 }
 
-export class Enemy extends Character implements IEnemy {
+export class RunningEnemy extends Character implements IEnemy {
   positionX: number;
   positionY: number;
   isGrounded: boolean;
@@ -18,9 +19,9 @@ export class Enemy extends Character implements IEnemy {
   animationTimer: number;
   lastUpdateTime: number;
   enemyImage: HTMLImageElement;
-  enemyDirection: "left" | "right";
+  enemyDirection: string;
   enemyAction: sprite;
-  speed: number;
+  health: number;
 
   constructor(positionX: number, positionY: number) {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
@@ -32,9 +33,9 @@ export class Enemy extends Character implements IEnemy {
     this.lastUpdateTime = Date.now();
     this.enemyImage = new Image();
     this.enemyImage.src = enemySprite;
-    this.enemyDirection = "left";
+    this.enemyDirection = "DIRECTION_LEFT";
     this.enemyAction = runningEnemy.runningLeft[0];
-    this.speed = ENEMY.SPEED;
+    this.health = 1;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -60,27 +61,10 @@ export class Enemy extends Character implements IEnemy {
       this.gravity(); // For Gravity Effect
     }
     this.checkVerticalCollision();
-    this.move();
-    this.checkHorizontalBoundaries();
+    this.positionX -= ENEMY.SPEED;
 
     // Update animation
     this.updateAnimation(deltaTime);
-  }
-
-  move(): void {
-    if (this.enemyDirection === "left") {
-      this.positionX -= this.speed;
-    } else {
-      this.positionX += this.speed;
-    }
-  }
-
-  checkHorizontalBoundaries(): void {
-    if (this.positionX <= 0) {
-      this.enemyDirection = "right";
-    } else if (this.positionX + this.width >= CANVAS.WIDTH) {
-      this.enemyDirection = "left";
-    }
   }
 
   updateAnimation(deltaTime: number): void {
@@ -91,10 +75,7 @@ export class Enemy extends Character implements IEnemy {
       this.animationTimer -= FRAME_DURATION;
       this.animationCounter =
         (this.animationCounter + 1) % runningEnemy.runningLeft.length;
-      this.enemyAction =
-        this.enemyDirection === "left"
-          ? runningEnemy.runningLeft[this.animationCounter]
-          : runningEnemy.runningRight[this.animationCounter];
+      this.enemyAction = runningEnemy.runningLeft[this.animationCounter];
     }
   }
 }

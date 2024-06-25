@@ -1,4 +1,4 @@
-import { Enemy } from "../classes/Enemy/Enemy";
+import { RunningEnemy } from "../classes/Enemy/RunningEnemy";
 import Map from "../classes/Map/Map";
 import { enemies, player } from "../main";
 import { CANVAS } from "../constants/constant";
@@ -26,7 +26,7 @@ function spawnEnemyGroups(
       location.spawned = true; // Mark as spawned
     } else {
       const offsetX = spawnedCount * 50; // Adjust the spacing between enemies as needed
-      const newEnemy = new Enemy(
+      const newEnemy = new RunningEnemy(
         location.x + offsetX - Map.offsetX,
         location.y
       );

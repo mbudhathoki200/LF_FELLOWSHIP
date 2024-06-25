@@ -1,4 +1,4 @@
-import { Bullet } from "../classes/Bullet/Bullet";
+import { Bullet } from "../classes/Bullet";
 import Map from "../classes/Map/Map";
 import { Platfrom } from "../classes/Platform/Platform";
 import { PowerUpBox } from "../classes/PowerUpBlock/PowerUpBox";

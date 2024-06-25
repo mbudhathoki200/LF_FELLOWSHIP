@@ -6,7 +6,7 @@ import "./style.css";
 import Map from "./classes/Map/Map.ts";
 import Player from "./classes/Player/Player.ts";
 
-import { Enemy, enemies } from "./classes/Enemy/Enemy.ts";
+import { RunningEnemy, runningEnemies } from "./classes/Enemy/RunningEnemy.ts";
 import { GuardEnemy, guardEnemies } from "./classes/Enemy/GuardEnemy.ts";
 import { MainTank, mainTanks } from "./classes/Enemy/MainTank.ts";
 import { Tank, tanks } from "./classes/Enemy/Tank.ts";
@@ -57,8 +57,8 @@ guardEnemy.forEach((enemy) => {
 
 //Running Enemy
 runningEnemy.forEach((enemy) => {
-  const newRunningEnemy = new Enemy(enemy.positionX, enemy.positionY);
-  enemies.push(newRunningEnemy);
+  const newRunningEnemy = new RunningEnemy(enemy.positionX, enemy.positionY);
+  runningEnemies.push(newRunningEnemy);
 });
 
 //Tank
@@ -94,10 +94,17 @@ function draw() {
 
   //update player with platform Collision Detection
   player.draw(ctx);
-  player.update(ctx, enemies, guardEnemies, tanks, mainTanks, powerUpBlocks);
+  player.update(
+    ctx,
+    runningEnemies,
+    guardEnemies,
+    tanks,
+    mainTanks,
+    powerUpBlocks
+  );
 
   //Render Enemy
-  enemies.forEach((enemy) => {
+  runningEnemies.forEach((enemy) => {
     enemy.draw(ctx);
     enemy.update();
   });
