@@ -1,6 +1,6 @@
-import healthPowerUp from "../../assets/images/healthPowerSprite.png";
+import healthPowerUp from "../assets/images/healthPowerSprite.png";
 import { PLAYER, POWER_UP } from "../constants/constant";
-import Map from "../Map/Map";
+import Map from "./Map";
 
 export const powerUpArray: powerUP[] = [];
 export class powerUP {

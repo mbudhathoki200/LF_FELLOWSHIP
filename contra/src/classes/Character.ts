@@ -1,6 +1,6 @@
-import { collisionDetections } from "../utils/collisionDetection.ts";
-import { CANVAS } from "../constants/constant.ts";
 import { platformValues } from "../Platform/platformValues.ts";
+import { CANVAS } from "../constants/constant.ts";
+import { collisionDetections } from "../utils/collisionDetection.ts";
 
 interface ICharacter {
   positionX: number;
@@ -9,7 +9,7 @@ interface ICharacter {
   height: number;
   velocityX: number;
   velocityY: number;
-  isGrounded: boolean;
+  isInGrounded: boolean;
 }
 
 export class Character implements ICharacter {
@@ -19,7 +19,7 @@ export class Character implements ICharacter {
   height: number;
   velocityX: number;
   velocityY: number;
-  isGrounded: boolean;
+  isInGrounded: boolean;
 
   constructor(
     positionX: number,
@@ -33,7 +33,7 @@ export class Character implements ICharacter {
     this.height = height;
     this.velocityX = 0;
     this.velocityY = 0;
-    this.isGrounded = true;
+    this.isInGrounded = true;
   }
 
   gravity(): void {

@@ -1,4 +1,4 @@
-import powerUpBlockImage from "../../assets/images/Contra-Tanks.gif";
+import powerUpBlockImage from "../assets/images/Contra-Tanks.gif";
 import { TANK } from "../constants/constant";
 import Map from "./Map";
 import Player from "./Player";

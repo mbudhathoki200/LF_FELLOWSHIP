@@ -1,8 +1,8 @@
 import { PLAYER, TANK } from "../constants/constant";
 import { Character } from "./Character";
 
-import tankImage from "../../assets/images/Contra-Tanks.gif";
-import tankBulletImage from "../../assets/images/goldBall.png";
+import tankImage from "../assets/images/Contra-Tanks.gif";
+import tankBulletImage from "../assets/images/goldBall.png";
 import { collisionBetweenCharacters } from "../utils/collisionDetection";
 import { Bullet } from "./Bullet";
 import Map from "./Map";

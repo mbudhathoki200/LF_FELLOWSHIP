@@ -1,4 +1,4 @@
-import enemySprite from "../../assets/images/Enemies.gif";
+import enemySprite from "../assets/images/Enemies.gif";
 import { ENEMY, PLAYER } from "../constants/constant";
 import { player } from "../main";
 import { gunEnemy, sprite } from "../spriteCords/EnemySpriteCords";
@@ -17,7 +17,7 @@ interface IEnemy {
 export class GuardEnemy extends Character implements IEnemy {
   positionX: number;
   positionY: number;
-  isGrounded: boolean;
+  isInGrounded: boolean;
   guardImg: HTMLImageElement;
   enemyAction: sprite;
   isPlayerLeft: boolean;
@@ -35,7 +35,7 @@ export class GuardEnemy extends Character implements IEnemy {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
     this.positionX = positionX;
     this.positionY = positionY;
-    this.isGrounded = false;
+    this.isInGrounded = false;
     this.guardImg = new Image();
     this.guardImg.src = enemySprite;
     this.enemyAction = gunEnemy.right;

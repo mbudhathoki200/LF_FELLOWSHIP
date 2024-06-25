@@ -1,4 +1,4 @@
-import enemySprite from "../../assets/images/Enemies.gif";
+import enemySprite from "../assets/images/Enemies.gif";
 import { ENEMY } from "../constants/constant";
 import { Character } from "./Character";
 import { runningEnemy, sprite } from "../spriteCords/EnemySpriteCords";
@@ -14,7 +14,7 @@ interface IEnemy {
 export class RunningEnemy extends Character implements IEnemy {
   positionX: number;
   positionY: number;
-  isGrounded: boolean;
+  isInGrounded: boolean;
   animationCounter: number;
   animationTimer: number;
   lastUpdateTime: number;
@@ -27,7 +27,7 @@ export class RunningEnemy extends Character implements IEnemy {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
     this.positionX = positionX;
     this.positionY = positionY;
-    this.isGrounded = false;
+    this.isInGrounded = false;
     this.animationCounter = 0;
     this.animationTimer = 0;
     this.lastUpdateTime = Date.now();
@@ -57,7 +57,7 @@ export class RunningEnemy extends Character implements IEnemy {
     const deltaTime = currentTime - this.lastUpdateTime;
     this.lastUpdateTime = currentTime;
 
-    if (!this.isGrounded) {
+    if (!this.isInGrounded) {
       this.gravity(); // For Gravity Effect
     }
     this.checkVerticalCollision();

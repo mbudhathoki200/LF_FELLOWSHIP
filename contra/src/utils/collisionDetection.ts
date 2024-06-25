@@ -1,5 +1,5 @@
 import { Bullet } from "../classes/Bullet";
-import Map from "../classes/Map/Map";
+import Map from "../classes/Map";
 import { Platfrom } from "../classes/Platform";
 import { PowerUpBox } from "../classes/PowerUpBox";
 import { powerUP } from "../classes/powerUp";

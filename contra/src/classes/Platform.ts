@@ -1,4 +1,4 @@
-import Map from "../Map/Map";
+import Map from "./Map";
 interface IPlatfrom {
   x: number;
   y: number;

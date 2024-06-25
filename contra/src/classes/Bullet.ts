@@ -1,5 +1,5 @@
-import bulletImgL from "../../assets/images/leftBullet.png";
-import bulletImgR from "../../assets/images/rightBullet.png";
+import bulletImgL from "../assets/images/leftBullet.png";
+import bulletImgR from "../assets/images/rightBullet.png";
 import {
   collisionBetweenCharacters,
   collisionBetweenWithGuardBullet,

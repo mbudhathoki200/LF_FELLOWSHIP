@@ -1,4 +1,4 @@
-import playerSheet from "../../assets/images/player.gif";
+import playerSheet from "../assets/images/player.gif";
 import {
   collisionBetweenCharacters,
   collisionWithPowerUp,
@@ -41,7 +41,7 @@ export default class Player extends Character implements IPlayer {
   SPEED: number;
   life: number;
 
-  isGrounded: boolean;
+  isInGrounded: boolean;
   inWater: boolean;
   isJumping: boolean;
   isRunning: boolean;
@@ -62,7 +62,7 @@ export default class Player extends Character implements IPlayer {
 
     this.isJumping = false;
     this.isRunning = false;
-    this.isGrounded = false;
+    this.isInGrounded = false;
     this.inWater = false;
     this.isProne = false;
 
@@ -100,7 +100,7 @@ export default class Player extends Character implements IPlayer {
     mainTanks: MainTank[],
     powerUpBlocks: PowerUpBox[]
   ): void {
-    if (!this.isGrounded) {
+    if (!this.isInGrounded) {
       this.gravity(); //For Gravity Effect
     }
 
@@ -275,7 +275,7 @@ export default class Player extends Character implements IPlayer {
 
   jump(): void {
     this.isJumping = true;
-    this.isGrounded = false;
+    this.isInGrounded = false;
     this.velocityY = -PLAYER.JUMP_POWER;
   }
 

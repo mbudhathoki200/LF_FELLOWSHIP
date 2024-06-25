@@ -1,10 +1,10 @@
-import explosionImage from "../../assets/images/Contra-Extras.gif";
-import { EXPLOSION } from "../../constants/constant";
+import explosionImage from "../assets/images/Contra-Extras.gif";
+import { EXPLOSION } from "../constants/constant";
 import {
   cloudExplosionSprite,
   extraSprite,
   normalExplosionSprite,
-} from "./ExtraSpriteCords";
+} from "../spriteCords/ExtraSpriteCords";
 
 export const explosionArray: Explosion[] = [];
 

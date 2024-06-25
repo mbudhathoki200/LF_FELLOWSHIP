@@ -1,7 +1,7 @@
-import { MAP } from "../../constants/constant";
+import { MAP } from "../constants/constant";
 
 // images
-import bgImage from "../../assets/images/NES - Contra - Level 1.png";
+import bgImage from "../assets/images/NES - Contra - Level 1.png";
 
 interface IMap {
   WIDTH: number;
