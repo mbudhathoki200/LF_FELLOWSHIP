@@ -1,4 +1,5 @@
 import enemySprite from "../assets/images/Enemies.gif";
+import guardBulletImg from "../assets/images/RedBall2.png";
 import { ENEMY, PLAYER } from "../constants/constant";
 import { player } from "../main";
 import { gunEnemy, sprite } from "../spriteCoordinates/EnemySpriteCords";
@@ -19,6 +20,7 @@ export class GuardEnemy extends Character implements IEnemy {
   positionY: number;
   isInGrounded: boolean;
   guardImg: HTMLImageElement;
+  guardBulletImg: HTMLImageElement;
   enemyAction: sprite;
   isPlayerLeft: boolean;
   isPlayerRight: boolean;
@@ -38,6 +40,8 @@ export class GuardEnemy extends Character implements IEnemy {
     this.isInGrounded = false;
     this.guardImg = new Image();
     this.guardImg.src = enemySprite;
+    this.guardBulletImg = new Image();
+    this.guardBulletImg.src = guardBulletImg;
     this.enemyAction = gunEnemy.right;
     this.health = 2;
     this.isPlayerLeft = false;
@@ -63,7 +67,7 @@ export class GuardEnemy extends Character implements IEnemy {
       this.height
     );
     // Draw bullets
-    this.bullets.forEach((bullet) => bullet.draw(ctx));
+    this.bullets.forEach((bullet) => bullet.draw(ctx, this.guardBulletImg));
   }
   update(player: Player) {
     this.checkVerticalCollision();
@@ -84,7 +88,6 @@ export class GuardEnemy extends Character implements IEnemy {
 
   handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
     player.playerHit();
-    console.log(`${PLAYER.LIFE} Remaining`);
     bullets.splice(bulletIndex, 1);
   }
 
