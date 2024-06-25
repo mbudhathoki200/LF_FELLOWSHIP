@@ -14,6 +14,7 @@ import { explosionArray } from "./classes/Explosion.ts";
 import { Platfrom } from "./classes/Platform.ts";
 import { platformValues } from "./Platform/platformValues.ts";
 import { PowerUpBox, powerUpBlocks } from "./classes/PowerUpBox.ts";
+import { startBtn, startScreen } from "./elements.ts";
 import { powerUpArray } from "./classes/powerUp.ts";
 
 // Constants and Utilities
@@ -203,3 +204,8 @@ window.onkeyup = (event) => {
       break;
   }
 };
+
+startBtn.addEventListener("click", () => {
+  startScreen.style.display = "none";
+  canvas.style.display = "flex";
+});

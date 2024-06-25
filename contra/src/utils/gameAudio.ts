@@ -46,3 +46,5 @@ export function metalHitSound() {
 export function playerGunSound() {
   playAudio(playerGun);
 }
+//rxport const amusic = new audio()
+//
