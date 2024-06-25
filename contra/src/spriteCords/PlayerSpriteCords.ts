@@ -124,39 +124,6 @@ export const playerPronePosition = {
   },
 };
 
-const swimming = [
-  {
-    x: 82,
-    y: 217,
-    height: 17,
-    width: 25,
-  },
-  {
-    x: 110,
-    y: 217,
-    height: 17,
-    width: 25,
-  },
-  {
-    x: 131,
-    y: 217,
-    height: 17,
-    width: 20,
-  },
-  {
-    x: 149,
-    y: 217,
-    height: 17,
-    width: 22,
-  },
-  {
-    x: 169,
-    y: 217,
-    height: 17,
-    width: 30,
-  },
-];
-
 export const playerTargetUp = {
   left: {
     x: 58,
