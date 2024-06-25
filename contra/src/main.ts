@@ -35,13 +35,13 @@ const gameMap = new Map(0, 0);
 export let player = new Player(40, 100);
 
 let guardEnemies: GuardEnemy[] = [
-  new GuardEnemy(614, 150),
-  new GuardEnemy(900, 150),
-  new GuardEnemy(614, 340),
-  new GuardEnemy(1256, 340),
-  new GuardEnemy(2892, 340),
-  new GuardEnemy(4785, 150),
-  new GuardEnemy(5330, 239),
+  new GuardEnemy(614, 150, false),
+  new GuardEnemy(900, 150, false),
+  new GuardEnemy(614, 340, false),
+  new GuardEnemy(1256, 340, false),
+  new GuardEnemy(2892, 340, false),
+  new GuardEnemy(4785, 150, false),
+  new GuardEnemy(5330, 239, false),
 ];
 
 const enemies: Enemy[] = [

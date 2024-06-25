@@ -1,5 +1,3 @@
-import { powerUP, powerUpArray } from "./../PowerUpBlock/powerUp";
-import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox";
 import playerSheet from "../../assets/images/player.gif";
 import {
   collisionBetweenCharacters,
@@ -14,7 +12,10 @@ import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import { MainTank } from "../Enemy/MainTank.ts";
 import { Tank } from "../Enemy/Tank.ts";
 import Map from "../Map/Map";
+import { PowerUpBox } from "./../PowerUpBlock/PowerUpBox";
+import { powerUP, powerUpArray } from "./../PowerUpBlock/powerUp";
 
+import { playerHitSound } from "../../utils/gameAudio.ts";
 import {
   TargetUpLR,
   playerPronePosition,
@@ -24,7 +25,6 @@ import {
   runningRight,
   sprite,
 } from "./PlayerImage.ts";
-import { playerHitSound } from "../../utils/gameAudio.ts";
 
 interface IPlayer {
   positionX: number;
@@ -126,7 +126,8 @@ export default class Player extends Character implements IPlayer {
         bullet = new Bullet(
           this.positionX + PLAYER.WIDTH / 2,
           this.positionY + PLAYER.HEIGHT / 3,
-          bulletDirection
+          bulletDirection,
+          true
         );
       }
       if (input.down && input.right) {
@@ -144,7 +145,8 @@ export default class Player extends Character implements IPlayer {
       bullet = new Bullet(
         this.positionX + PLAYER.WIDTH,
         this.positionY + PLAYER.HEIGHT / 3,
-        bulletDirection
+        bulletDirection,
+        true
       );
       bullets.push(bullet);
     }
@@ -209,7 +211,8 @@ export default class Player extends Character implements IPlayer {
     bullet = new Bullet(
       this.positionX + PLAYER.WIDTH,
       this.positionY + PLAYER.HEIGHT / 3,
-      bulletDirection
+      bulletDirection,
+      true
     );
     bullets.push(bullet);
   }
@@ -266,6 +269,7 @@ export default class Player extends Character implements IPlayer {
 
     this.width = PLAYER.WIDTH + 20;
     this.height = PLAYER.HEIGHT - 22;
+
     if (this.playerDirection == "DIRECTION_LEFT") {
       this.playerAction = left;
     } else {
@@ -354,6 +358,7 @@ export default class Player extends Character implements IPlayer {
       this.playerAction = runningRight[0];
     }
   }
+
   //check collision with Running enemies
   checkCollisionsWithEnemies(enemies: Enemy[]): void {
     enemies.forEach((enemy, index) => {
@@ -371,15 +376,13 @@ export default class Player extends Character implements IPlayer {
     });
   }
 
-  checkCollisionWithGuardEnemies(guardEnemies: GuardEnemy[]): void {
-    console.log(guardEnemies);
-  }
   handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
     this.playerHit();
     console.log(`${PLAYER.LIFE} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
   }
+
   handleCollisionWithPowerUP(power: powerUP[], powerIndex: number): void {
     PLAYER.LIFE += 1; // Increase player life
     console.log(`${PLAYER.LIFE} Remaining`);

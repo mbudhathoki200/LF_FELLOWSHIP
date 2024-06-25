@@ -4,14 +4,15 @@ import {
   collisionBetweenCharacters,
   collisionBetweenWithGuardBullet,
 } from "../../utils/collisionDetection";
-import { BULLET_SPRITE, CANVAS } from "../../utils/constant";
+
+import { BULLET_SPRITE, CANVAS, PLAYER, SCORE } from "../../utils/constant";
+
 import { Enemy } from "../Enemy/Enemy";
 import { GuardEnemy } from "../Enemy/GuardEnemy.ts";
 import { MainTank } from "../Enemy/MainTank.ts";
 import { Tank } from "../Enemy/Tank.ts";
 import { PowerUpBox } from "../PowerUpBlock/PowerUpBox.ts";
 import { BULLET } from "./../../utils/constant";
-// import { Bullet } from "./Bullet";
 import { player } from "../../main.ts";
 import { enemyHitSound, metalHitSound } from "../../utils/gameAudio.ts";
 import { Explosion, explosionArray } from "../Explosion/Explosion.ts";
@@ -26,13 +27,15 @@ export class Bullet implements IBullet {
   height: number;
   width: number;
   bulletImg: HTMLImageElement;
+  isBulletFast: boolean;
 
   direction: string | undefined;
 
   constructor(
     positionX: number,
     positionY: number,
-    direction: string | undefined
+    direction: string | undefined,
+    isBulletFast: boolean = true
   ) {
     this.positionX = positionX;
     this.positionY = positionY;
@@ -42,6 +45,7 @@ export class Bullet implements IBullet {
     this.direction = direction;
     this.bulletImg.src =
       direction === "DIRECTION_RIGHT" ? bulletImgR : bulletImgL;
+    this.isBulletFast = isBulletFast;
   }
   draw(
     ctx: CanvasRenderingContext2D,
@@ -53,32 +57,66 @@ export class Bullet implements IBullet {
     ctx.drawImage(bulletImg, this.positionX, this.positionY, WIDTH, HEIGHT);
   }
 
+  //To move the bullets
   moveBullet(bullets: Bullet[]) {
     switch (this.direction) {
       case "DIRECTION_RIGHT":
-        this.positionX += BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionX += BULLET.SPEED;
+        } else {
+          this.positionX += BULLET.SLOW_SPEED;
+        }
         break;
       case "DIRECTION_LEFT":
-        this.positionX -= BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionX -= BULLET.SPEED;
+        } else {
+          this.positionX -= BULLET.SLOW_SPEED;
+        }
+
         break;
       case "DIRECTION_UP":
-        this.positionY -= BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionY -= BULLET.SPEED;
+        } else {
+          this.positionY -= BULLET.SLOW_SPEED;
+        }
         break;
       case "DIRECTION_DOWN_RIGHT":
-        this.positionX += BULLET.SPEED;
-        this.positionY += BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionX += BULLET.SPEED;
+          this.positionY += BULLET.SPEED;
+        } else {
+          this.positionX += BULLET.SLOW_SPEED;
+          this.positionY += BULLET.SLOW_SPEED;
+        }
         break;
       case "DIRECTION_DOWN_LEFT":
-        this.positionX -= BULLET.SPEED;
-        this.positionY += BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionX -= BULLET.SPEED;
+          this.positionY += BULLET.SPEED;
+        } else {
+          this.positionX -= BULLET.SLOW_SPEED;
+          this.positionY += BULLET.SLOW_SPEED;
+        }
         break;
       case "DIRECTION_UP_RIGHT":
-        this.positionX += BULLET.SPEED;
-        this.positionY -= BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionX += BULLET.SPEED;
+          this.positionY -= BULLET.SPEED;
+        } else {
+          this.positionX += BULLET.SLOW_SPEED;
+          this.positionY -= BULLET.SLOW_SPEED;
+        }
         break;
       case "DIRECTION_UP_LEFT":
-        this.positionX -= BULLET.SPEED;
-        this.positionY -= BULLET.SPEED;
+        if (this.isBulletFast) {
+          this.positionX -= BULLET.SPEED;
+          this.positionY -= BULLET.SPEED;
+        } else {
+          this.positionX -= BULLET.SLOW_SPEED;
+          this.positionY -= BULLET.SLOW_SPEED;
+        }
         break;
     }
     if (
@@ -96,6 +134,7 @@ export class Bullet implements IBullet {
       bullets.splice(index, 1);
     }
   }
+
   checkCollisionsWithEnemies(enemies: Enemy[], bullets: Bullet[]): void {
     enemies.forEach((enemy, enemyIndex) => {
       if (collisionBetweenCharacters(this, enemy)) {
@@ -103,13 +142,14 @@ export class Bullet implements IBullet {
       }
     });
   }
+
   checkCollisionsWithGuardEnemies(
     enemies: GuardEnemy[] | Tank[] | MainTank[],
     bullets: Bullet[]
   ): void {
     enemies.forEach((enemy, enemyIndex) => {
       if (collisionBetweenWithGuardBullet(this, enemy)) {
-        this.handleCollisionWithEnemy(enemies, bullets, enemyIndex);
+        this.handleCollisionWithGuardEnemy(enemies, bullets, enemyIndex, enemy);
       }
     });
   }
@@ -126,17 +166,45 @@ export class Bullet implements IBullet {
     bullets: Bullet[],
     enemyIndex: number
   ): void {
+    //Increase Score
+    PLAYER.SCORE += SCORE.RUNNING_ENEMY;
     enemyHitSound();
-    //explosion
-
+    //Explosion Push
     explosionArray.push(
       new Explosion(this.positionX, this.positionY, "PLAYER_EXPLOSION")
     );
-
     //remove enemy from array
     enemies.splice(enemyIndex, 1);
     // Remove bullet from array
     this.removeBullet(bullets);
+  }
+
+  //Handle Player Bullet Hit Guard Enemy
+  handleCollisionWithGuardEnemy(
+    enemies: GuardEnemy[] | Tank[] | MainTank[],
+    bullets: Bullet[],
+    enemyIndex: number,
+    enemy: GuardEnemy | Tank
+  ): void {
+    this.removeBullet(bullets);
+    enemy.health--;
+
+    if (enemy.health == 0) {
+      PLAYER.SCORE += SCORE.GUARD_ENEMY;
+      this.handleAfterEnemyHit(enemies, enemyIndex);
+    }
+  }
+
+  handleCollisionWithTankEnemy(
+    enemies: GuardEnemy[] | Tank[] | MainTank[],
+    bullets: Bullet[],
+    enemyIndex: number
+  ): void {
+    // Remove bullet from array
+    this.removeBullet(bullets);
+
+    PLAYER.SCORE += SCORE.TANK;
+    this.handleAfterEnemyHit(enemies, enemyIndex);
   }
 
   handleCollisionWithPowerUp(
@@ -144,14 +212,25 @@ export class Bullet implements IBullet {
     bullets: Bullet[],
     enemyIndex: number
   ): void {
-    console.log("HiTT");
-    console.log(player.positionX, player.positionY);
     metalHitSound();
     powerUpArray.push(new powerUP(player.positionX + 200, player.positionY));
 
-    // //remove enemy from array
+    //remove enemy from array
     powerUp.splice(enemyIndex, 1);
-    // // Remove bullet from array
+    // Remove bullet from array
     this.removeBullet(bullets);
+  }
+
+  handleAfterEnemyHit(
+    enemies: GuardEnemy[] | Tank[] | MainTank[],
+    enemyIndex: number
+  ) {
+    enemyHitSound();
+    //explosion
+    explosionArray.push(
+      new Explosion(this.positionX, this.positionY, "PLAYER_EXPLOSION")
+    );
+    //remove enemy from array
+    enemies.splice(enemyIndex, 1);
   }
 }

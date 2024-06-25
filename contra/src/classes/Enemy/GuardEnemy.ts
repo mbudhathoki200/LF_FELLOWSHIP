@@ -26,8 +26,10 @@ export class GuardEnemy extends Character implements IEnemy {
   lastShotTime: number;
   shotCooldown: number;
   shootingRange: number;
+  health: number;
+  isBulletFast: boolean;
 
-  constructor(positionX: number, positionY: number) {
+  constructor(positionX: number, positionY: number, isBulletFast: boolean) {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
     this.positionX = positionX;
     this.positionY = positionY;
@@ -35,6 +37,7 @@ export class GuardEnemy extends Character implements IEnemy {
     this.guardImg = new Image();
     this.guardImg.src = enemySprite;
     this.enemyAction = gunEnemy.right;
+    this.health = 2;
     this.isPlayerLeft = false;
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
@@ -42,6 +45,7 @@ export class GuardEnemy extends Character implements IEnemy {
     this.lastShotTime = 0;
     this.shotCooldown = 1000; // Set cooldown period in milliseconds
     this.shootingRange = 400; // Set the shooting range in pixels
+    this.isBulletFast = isBulletFast;
   }
   draw(ctx: CanvasRenderingContext2D) {
     const { x, y, width, height } = this.enemyAction;
@@ -156,7 +160,12 @@ export class GuardEnemy extends Character implements IEnemy {
     let direction = this.getPlayerDirection(player);
 
     // Create and add bullet
-    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction);
+    const bullet = new Bullet(
+      enemyX - Map.offsetX,
+      enemyY,
+      direction,
+      this.isBulletFast
+    );
     this.bullets.push(bullet);
 
     // Update the last shot time

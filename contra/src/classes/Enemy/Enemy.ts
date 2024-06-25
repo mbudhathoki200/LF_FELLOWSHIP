@@ -20,6 +20,7 @@ export class Enemy extends Character implements IEnemy {
   enemyImage: HTMLImageElement;
   enemyDirection: string;
   enemyAction: sprite;
+  health: number;
 
   constructor(positionX: number, positionY: number) {
     super(positionX, positionY, ENEMY.WIDTH, ENEMY.HEIGHT);
@@ -33,6 +34,7 @@ export class Enemy extends Character implements IEnemy {
     this.enemyImage.src = enemySprite;
     this.enemyDirection = "DIRECTION_LEFT";
     this.enemyAction = runningEnemy.runningLeft[0];
+    this.health = 1;
   }
 
   draw(ctx: CanvasRenderingContext2D) {

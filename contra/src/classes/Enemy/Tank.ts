@@ -32,6 +32,7 @@ export class Tank extends Character implements ITank {
   lastShotTime: number;
   shotCooldown: number;
   shootingRange: number;
+  health: number;
 
   constructor(positionX: number, positionY: number) {
     super(positionX, positionY, TANK.WIDTH, TANK.HEIGHT);
@@ -41,6 +42,7 @@ export class Tank extends Character implements ITank {
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
+    this.health = 3;
 
     this.tankImage = new Image();
     this.tankImage.src = tankImage;
@@ -157,7 +159,7 @@ export class Tank extends Character implements ITank {
     let direction = this.getPlayerDirection(player);
 
     // Create and add bullet
-    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction);
+    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction, true);
     this.bullets.push(bullet);
 
     // Update the last shot time

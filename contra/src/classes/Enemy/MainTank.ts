@@ -20,6 +20,7 @@ export class MainTank extends Character implements IMainTank {
   positionY: number;
   tankImage: HTMLImageElement;
   tankBUlletImage: HTMLImageElement;
+  health: number;
 
   isPlayerLeft: boolean;
   isPlayerRight: boolean;
@@ -41,6 +42,7 @@ export class MainTank extends Character implements IMainTank {
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
+    this.health = 5;
 
     this.tankImage = new Image();
     this.tankImage.src = tankImage;
@@ -158,7 +160,7 @@ export class MainTank extends Character implements IMainTank {
     let direction = this.getPlayerDirection(player);
 
     // Create and add bullet
-    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction);
+    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction, true);
     this.bullets.push(bullet);
 
     // Update the last shot time
