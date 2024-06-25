@@ -1,20 +1,6 @@
 import playerSheet from "../assets/images/player.gif";
-import {
-  collisionBetweenCharacters,
-  collisionWithPowerUp,
-} from "../utils/collisionDetection.ts";
 import { CANVAS, PLAYER } from "../constants/constant.ts";
-import { input } from "../utils/input.ts";
-import { Bullet } from "./Bullet.ts";
-import { Character } from "./Character.ts";
-import { RunningEnemy } from "./RunningEnemy.ts";
-import { GuardEnemy } from "./GuardEnemy.ts";
-import { MainTank } from "./MainTank.ts";
-import { Tank } from "./Tank.ts";
-import Map from "./Map.ts";
-import { PowerUpBox } from "./PowerUpBox.ts";
-import { powerUP, powerUpArray } from "./powerUp.ts";
-import { playerHitSound } from "../utils/gameAudio.ts";
+import { animationFrame } from "../main.ts";
 import {
   TargetUpLR,
   playerPronePosition,
@@ -24,6 +10,22 @@ import {
   runningRight,
   sprite,
 } from "../spriteCords/PlayerSpriteCords.ts";
+import {
+  collisionBetweenCharacters,
+  collisionWithPowerUp,
+} from "../utils/collisionDetection.ts";
+import displayGameOver from "../utils/displayGameOverScreen.ts";
+import { playerHitSound } from "../utils/gameAudio.ts";
+import { input } from "../utils/input.ts";
+import { Bullet } from "./Bullet.ts";
+import { Character } from "./Character.ts";
+import { GuardEnemy } from "./GuardEnemy.ts";
+import { MainTank } from "./MainTank.ts";
+import Map from "./Map.ts";
+import { PowerUpBox } from "./PowerUpBox.ts";
+import { RunningEnemy } from "./RunningEnemy.ts";
+import { Tank } from "./Tank.ts";
+import { powerUP, powerUpArray } from "./powerUp.ts";
 
 interface IPlayer {
   positionX: number;
@@ -373,20 +375,19 @@ export default class Player extends Character implements IPlayer {
 
   handleCollisionWithEnemy(enemies: RunningEnemy[], enemyIndex: number): void {
     this.playerHit();
-    console.log(`${PLAYER.LIFE} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
   }
 
   handleCollisionWithPowerUP(power: powerUP[], powerIndex: number): void {
     PLAYER.LIFE += 1; // Increase player life
-    console.log(`${PLAYER.LIFE} Remaining`);
     power.splice(powerIndex, 1);
   }
 
   reSpawn(): void {
-    if (PLAYER.LIFE <= 0) {
-      console.log("Ypu are dead");
+    if (PLAYER.LIFE <= 1) {
+      displayGameOver();
+      cancelAnimationFrame(animationFrame);
     } else {
       this.positionX = PLAYER.RESPAWN_POSITION_X;
       this.positionY = PLAYER.RESPAWN_POSITION_Y;
