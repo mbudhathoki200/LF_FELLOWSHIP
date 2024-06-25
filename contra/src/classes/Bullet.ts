@@ -171,9 +171,7 @@ export class Bullet implements IBullet {
     PLAYER.SCORE += SCORE.RUNNING_ENEMY;
     enemyHitSound();
     //Explosion Push
-    explosionArray.push(
-      new Explosion(this.positionX, this.positionY, "PLAYER_EXPLOSION")
-    );
+    explosionArray.push(new Explosion(this.positionX, this.positionY));
     //remove enemy from array
     enemies.splice(enemyIndex, 1);
     // Remove bullet from array
@@ -228,9 +226,7 @@ export class Bullet implements IBullet {
   ) {
     enemyHitSound();
     //explosion
-    explosionArray.push(
-      new Explosion(this.positionX, this.positionY, "PLAYER_EXPLOSION")
-    );
+    explosionArray.push(new Explosion(this.positionX, this.positionY));
     //remove enemy from array
     enemies.splice(enemyIndex, 1);
   }

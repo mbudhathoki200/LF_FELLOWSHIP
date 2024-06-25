@@ -112,7 +112,7 @@ export const runningEnemy: RunningEnemy = {
   ],
 };
 
-/* ----------------------- Soldier Enemy Sprite Coords ---------------------- */
+/* ----------------------- Gun Enemy Sprite Coords ---------------------- */
 export type GunEnemy = {
   left: sprite;
   right: sprite;

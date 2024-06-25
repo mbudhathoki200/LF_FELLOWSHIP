@@ -12,26 +12,6 @@ export const enemyDeathSprite: extraSprite = {
   width: 17,
 };
 
-export const cloudExplosionSprite: extraSprite[] = [
-  {
-    x: 156,
-    y: 511,
-    height: 36,
-    width: 36,
-  },
-  {
-    x: 190,
-    y: 514,
-    height: 31,
-    width: 27,
-  },
-  {
-    x: 216,
-    y: 523,
-    height: 23,
-    width: 19,
-  },
-];
 export const normalExplosionSprite: extraSprite[] = [
   {
     x: 235,
