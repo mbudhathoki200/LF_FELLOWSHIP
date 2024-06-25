@@ -67,6 +67,12 @@ export class RunningEnemy extends Character implements IEnemy {
     this.updateAnimation(deltaTime);
   }
 
+  /**
+   * The function updates the animation of a running enemy based on the elapsed time.
+   * @param {number} deltaTime - Delta time is the time elapsed since the last frame update, typically
+   * measured in milliseconds. It is used to ensure smooth and consistent animation by adjusting the
+   * movement or changes in the game objects based on the time passed.
+   */
   updateAnimation(deltaTime: number): void {
     this.animationTimer += deltaTime;
     const FRAME_DURATION = 100; // Duration for each frame in milliseconds

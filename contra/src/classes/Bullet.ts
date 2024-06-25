@@ -136,6 +136,15 @@ export class Bullet implements IBullet {
     }
   }
 
+  /**
+   * The function checks for collisions between the bullet and running enemies, and handles the
+   * collisions accordingly.
+   * @param {RunningEnemy[]} enemies - An array of RunningEnemy objects representing the enemies in the
+   * game.
+   * @param {Bullet[]} bullets - The `bullets` parameter in the `checkCollisionsWithEnemies` function is
+   * an array of `Bullet` objects. This array contains the bullets that are fired and used to check for
+   * collisions with enemies.
+   */
   checkCollisionsWithEnemies(enemies: RunningEnemy[], bullets: Bullet[]): void {
     enemies.forEach((enemy, enemyIndex) => {
       if (collisionBetweenCharacters(this, enemy)) {
@@ -144,6 +153,16 @@ export class Bullet implements IBullet {
     });
   }
 
+  /**
+   * The function checks for collisions between the player bullet and static enemies and handles the collisions
+   * accordingly.
+   * @param {GuardEnemy[] | Tank[] | MainTank[]} enemies - The `enemies` parameter in the
+   * `checkCollisionsWithStaticEnemies` function can be of type `GuardEnemy[]`, `Tank[]`, or
+   * `MainTank[]`. It represents an array of enemy objects that the player needs to check for collisions
+   * with.
+   * @param {Bullet[]} bullets - The `bullets` parameter is an array of objects representing bullets
+   * fired in the game.
+   */
   checkCollisionsWithStaticEnemies(
     enemies: GuardEnemy[] | Tank[] | MainTank[],
     bullets: Bullet[]
@@ -154,6 +173,16 @@ export class Bullet implements IBullet {
       }
     });
   }
+
+  /**
+   * The function `checkCollisionsWithpowerUp` iterates through power-up boxes and handles collisions
+   * with the player's  bullets.
+   * @param {PowerUpBox[]} powerUps - PowerUpBox[] - an array of power-up boxes on the game screen
+   * @param {Bullet[]} bullets - The `bullets` parameter in the `checkCollisionsWithpowerUp` method is an
+   * array of `Bullet` objects. This array contains the bullets that are currently active and moving
+   * within the game environment. The method iterates over this array to check for collisions between the
+   * player character (represented by
+   */
   checkCollisionsWithpowerUp(powerUps: PowerUpBox[], bullets: Bullet[]): void {
     powerUps.forEach((powerUp, enemyIndex) => {
       if (collisionBetweenWithGuardBullet(this, powerUp)) {
@@ -162,6 +191,19 @@ export class Bullet implements IBullet {
     });
   }
 
+  /**
+   * This function handles collisions between the player bullet and various types of enemies, updating the
+   * player's score, playing a sound effect, creating an explosion effect, and removing the enemy and
+   * bullet from their respective arrays.
+   * @param {RunningEnemy[] | GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[]} enemies - The `enemies`
+   * parameter is an array that can contain objects of type `RunningEnemy`, `GuardEnemy`, `Tank`,
+   * `MainTank`, or `PowerUpBox`.
+   * @param {Bullet[]} bullets - The `bullets` parameter is an array of objects representing bullets
+   * fired in the game.
+   * @param {number} enemyIndex - The `enemyIndex` parameter is the index of the enemy that the player
+   * has collided with in the `enemies` array. This index is used to identify the specific enemy that the
+   * player has collided with so that it can be removed from the array after the collision.
+   */
   handleCollisionWithEnemy(
     enemies: RunningEnemy[] | GuardEnemy[] | Tank[] | MainTank[] | PowerUpBox[],
     bullets: Bullet[],
@@ -179,6 +221,7 @@ export class Bullet implements IBullet {
   }
 
   //Handle Player Bullet Hit Guard Enemy
+
   handleCollisionWithGuardEnemy(
     enemies: GuardEnemy[] | Tank[] | MainTank[],
     bullets: Bullet[],
@@ -194,6 +237,16 @@ export class Bullet implements IBullet {
     }
   }
 
+  /**
+   * This function handles collisions between player bullets and tank enemies, updating the player's
+   * score and removing the bullet from the array.
+   * @param {GuardEnemy[] | Tank[] | MainTank[]} enemies - The `enemies` parameter is an array that can
+   * contain instances of `GuardEnemy`, `Tank`, or `MainTank` objects.
+   * @param {Bullet[]} bullets - The `bullets` parameter is an array of objects representing bullets
+   * fired in the game.
+   * @param {number} enemyIndex - The `enemyIndex` parameter is the index of the enemy that the collision
+   * occurred with in the `enemies` array.
+   */
   handleCollisionWithTankEnemy(
     enemies: GuardEnemy[] | Tank[] | MainTank[],
     bullets: Bullet[],
@@ -206,6 +259,17 @@ export class Bullet implements IBullet {
     this.handleAfterEnemyHit(enemies, enemyIndex);
   }
 
+  /**
+   * The function `handleCollisionWithPowerUp` handles collisions between the player's bullet and power-ups,
+   * triggering a sound effect, spawning a new power-up, and removing the collided power-up and bullets
+   * from their respective arrays.
+   * @param {PowerUpBox[]} powerUp - The `powerUp` parameter is an array of `PowerUpBox` objects
+   * representing power-up boxes in the game.
+   * @param {Bullet[]} bullets - The `bullets` parameter is an array of Bullet objects.
+   * @param {number} enemyIndex - The `enemyIndex` parameter in the `handleCollisionWithPowerUp` function
+   * represents the index of the enemy in the `powerUp` array that has collided with the player. This
+   * index is used to remove the specific enemy from the array after the collision has occurred.
+   */
   handleCollisionWithPowerUp(
     powerUp: PowerUpBox[],
     bullets: Bullet[],
@@ -220,6 +284,14 @@ export class Bullet implements IBullet {
     this.removeBullet(bullets);
   }
 
+  /**
+   * The function `handleAfterEnemyHit` plays a sound, creates an explosion, and removes an enemy from an
+   * array based on the enemy index.
+   * @param {GuardEnemy[] | Tank[] | MainTank[]} enemies - The `enemies` parameter is an array that can
+   * contain instances of `GuardEnemy`, `Tank`, or `MainTank` objects.
+   * @param {number} enemyIndex - The `enemyIndex` parameter is the index of the enemy that was hit and
+   * needs to be removed from the `enemies` array.
+   */
   handleAfterEnemyHit(
     enemies: GuardEnemy[] | Tank[] | MainTank[],
     enemyIndex: number

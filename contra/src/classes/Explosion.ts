@@ -53,6 +53,11 @@ export class Explosion implements explosion {
       this.size
     );
   }
+  /**
+   * The `update` function increments the frame of an explosion animation sprite every 5 animation timer
+   * ticks until reaching the last frame, then sets a timeout to remove the explosion after a specified
+   * end time.
+   */
   update() {
     const lastFrame = normalExplosionSprite.length - 1;
 

@@ -6,7 +6,7 @@ import "./style.css";
 import Map from "./classes/Map.ts";
 import Player from "./classes/Player.ts";
 
-import { platformValues } from "./Platform/platformValues.ts";
+import { platformValues } from "./constants/platformValues.ts";
 import { explosionArray } from "./classes/Explosion.ts";
 import { GuardEnemy, guardEnemies } from "./classes/GuardEnemy.ts";
 import { MainTank, mainTanks } from "./classes/MainTank.ts";

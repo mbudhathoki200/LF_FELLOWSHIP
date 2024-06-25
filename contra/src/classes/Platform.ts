@@ -1,4 +1,3 @@
-import Map from "./Map";
 interface IPlatfrom {
   x: number;
   y: number;
@@ -19,9 +18,5 @@ export class Platfrom implements IPlatfrom {
     this.w = width;
     this.h = height;
     this.id = id;
-  }
-  draw(ctx: CanvasRenderingContext2D) {
-    ctx.strokeStyle = "red";
-    ctx.strokeRect(this.x - Map.offsetX, this.y, this.w, this.h);
   }
 }

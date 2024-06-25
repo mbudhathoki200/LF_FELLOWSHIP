@@ -1,4 +1,4 @@
-import { platformValues } from "../Platform/platformValues.ts";
+import { platformValues } from "../constants/platformValues.ts";
 import { CANVAS } from "../constants/constant.ts";
 import { collisionDetections } from "../utils/collisionDetection.ts";
 
@@ -36,6 +36,10 @@ export class Character implements ICharacter {
     this.isInGrounded = true;
   }
 
+  /**
+   * The gravity function updates the position of an object based on its vertical velocity, simulating a
+   * gravitational effect.
+   */
   gravity(): void {
     if (this.positionY + this.height + this.velocityY < CANVAS.HEIGHT) {
       this.positionY += this.velocityY;
@@ -45,6 +49,10 @@ export class Character implements ICharacter {
     }
   }
 
+  /**
+   * The function `checkVerticalCollision` checks for collisions with platforms and adjusts the player's
+   * position and velocity accordingly.
+   */
   checkVerticalCollision(): void {
     platformValues.forEach((platform: any) => {
       if (collisionDetections(this, platform)) {
