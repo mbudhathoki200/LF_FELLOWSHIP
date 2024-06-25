@@ -12,16 +12,16 @@ import Player from "./classes/Player/Player.ts";
 import { GuardEnemy } from "./classes/Enemy/GuardEnemy.ts";
 import { MainTank } from "./classes/Enemy/MainTank.ts";
 import { Tank } from "./classes/Enemy/Tank.ts";
+import { explosionArray } from "./classes/Explosion/Explosion.ts";
 import { PowerUpBox } from "./classes/PowerUpBlock/PowerUpBox.ts";
 import { powerUpArray } from "./classes/PowerUpBlock/powerUp.ts";
 import { CANVAS } from "./utils/constant.ts";
-import { input } from "./utils/input.ts";
 import {
   displayPlayerLife,
   displayPlayerScore,
 } from "./utils/displayParameters.ts";
 import { playerGunSound } from "./utils/gameAudio.ts";
-import { explosionArray } from "./classes/Explosion/Explosion.ts";
+import { input } from "./utils/input.ts";
 
 const canvas = document.querySelector("#canvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
@@ -44,7 +44,7 @@ let guardEnemies: GuardEnemy[] = [
   new GuardEnemy(5330, 239, false),
 ];
 
-const enemies: Enemy[] = [
+export const enemies: Enemy[] = [
   new Enemy(CANVAS.WIDTH, 100),
   new Enemy(CANVAS.WIDTH - 200, 100),
   new Enemy(CANVAS.WIDTH * 2, 100),
