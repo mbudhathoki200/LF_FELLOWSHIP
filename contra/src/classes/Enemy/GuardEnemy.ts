@@ -1,4 +1,5 @@
 import enemySprite from "../../assets/images/Enemies.gif";
+import { player } from "../../main";
 import { collisionBetweenCharacters } from "../../utils/collisionDetection";
 import { ENEMY } from "../../utils/constant";
 import { Character } from "../Character/Character";
@@ -79,7 +80,7 @@ export class GuardEnemy extends Character implements IEnemy {
     this.shootAtPlayer(player);
   }
   handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
-    PLAYER.LIFE -= 1;
+    player.playerHit();
     console.log(`${PLAYER.LIFE} Remaining`);
     bullets.splice(bulletIndex, 1);
   }
@@ -96,10 +97,10 @@ export class GuardEnemy extends Character implements IEnemy {
 
     this.isPlayerAbove = playerY < enemyY - PLAYER.HEIGHT;
 
-    return this.changeEnemySprite();
+    return this.changeSprite();
   }
 
-  changeEnemySprite() {
+  changeSprite() {
     if (this.isPlayerLeft && this.isPlayerAbove) {
       this.enemyAction = gunEnemy.upLeft;
       return "DIRECTION_UP_LEFT";

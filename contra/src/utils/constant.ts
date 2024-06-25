@@ -29,6 +29,8 @@ type player = {
   JUMP_POWER: number;
   GRAVITY: number;
   SCORE: number;
+  RESPAWN_POSITION_X: number;
+  RESPAWN_POSITION_Y: number;
 };
 
 export const PLAYER: player = {
@@ -39,6 +41,8 @@ export const PLAYER: player = {
   JUMP_POWER: 6,
   GRAVITY: 0.5,
   SCORE: 0,
+  RESPAWN_POSITION_X: 40,
+  RESPAWN_POSITION_Y: 100,
 };
 
 //----------------------------PLAYER SPRITE CONSTANTS

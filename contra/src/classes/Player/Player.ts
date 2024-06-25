@@ -24,6 +24,7 @@ import {
   runningRight,
   sprite,
 } from "./PlayerImage.ts";
+import { playerHitSound } from "../../utils/gameAudio.ts";
 
 interface IPlayer {
   positionX: number;
@@ -200,6 +201,9 @@ export default class Player extends Character implements IPlayer {
     //chech collision with powerUps
     this.checkCollisionsWithPowerUp(powerUpArray);
     // checkCollisionsWithPowerUp(powerUpArray: powerUP[])
+    // if (PLAYER.LIFE = 0) {
+    //   this.reSpawn();
+    // }
   }
   makeDefaultBullet(bulletDirection: string) {
     bullet = new Bullet(
@@ -358,6 +362,7 @@ export default class Player extends Character implements IPlayer {
       }
     });
   }
+  //collision with powerUps
   checkCollisionsWithPowerUp(powerUpArray: powerUP[]): void {
     powerUpArray.forEach((power, index) => {
       if (collisionWithPowerUp(this, power)) {
@@ -370,7 +375,7 @@ export default class Player extends Character implements IPlayer {
     console.log(guardEnemies);
   }
   handleCollisionWithEnemy(enemies: Enemy[], enemyIndex: number): void {
-    PLAYER.LIFE -= 1; // Decrease player life
+    this.playerHit();
     console.log(`${PLAYER.LIFE} Remaining`);
     // Remove the enemy from the array
     enemies.splice(enemyIndex, 1);
@@ -379,5 +384,19 @@ export default class Player extends Character implements IPlayer {
     PLAYER.LIFE += 1; // Increase player life
     console.log(`${PLAYER.LIFE} Remaining`);
     power.splice(powerIndex, 1);
+  }
+
+  reSpawn(): void {
+    if (PLAYER.LIFE <= 0) {
+      console.log("Ypu are dead");
+    } else {
+      this.positionX = PLAYER.RESPAWN_POSITION_X;
+      this.positionY = PLAYER.RESPAWN_POSITION_Y;
+    }
+  }
+  playerHit() {
+    this.reSpawn();
+    playerHitSound();
+    PLAYER.LIFE -= 1; // Decrease player life
   }
 }

@@ -8,6 +8,7 @@ import { Bullet } from "../Bullet/Bullet";
 import Map from "../Map/Map";
 import Player from "../Player/Player";
 import { sprite, tankSprites } from "./EnemySpriteCords";
+import { player } from "../../main";
 
 interface IMainTank {
   positionX: number;
@@ -83,7 +84,7 @@ export class MainTank extends Character implements IMainTank {
     });
   }
   handleBulletCollision(bullets: Bullet[], bulletIndex: number): void {
-    PLAYER.LIFE -= 1;
+    player.playerHit();
     console.log(`${PLAYER.LIFE} Remaining`);
     bullets.splice(bulletIndex, 1);
   }

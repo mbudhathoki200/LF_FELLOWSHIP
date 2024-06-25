@@ -12,12 +12,10 @@ import { Tank } from "../Enemy/Tank.ts";
 import { PowerUpBox } from "../PowerUpBlock/PowerUpBox.ts";
 import { BULLET } from "./../../utils/constant";
 // import { Bullet } from "./Bullet";
-import powerUpSprite from "../../assets/images/healthPowerSprite.png";
-import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
 import { player } from "../../main.ts";
 import { enemyHitSound, metalHitSound } from "../../utils/gameAudio.ts";
 import { Explosion, explosionArray } from "../Explosion/Explosion.ts";
-import Map from "../Map/Map.ts";
+import { powerUP, powerUpArray } from "../PowerUpBlock/powerUp.ts";
 interface IBullet {
   positionX: number;
   positionY: number;
