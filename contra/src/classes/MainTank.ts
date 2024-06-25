@@ -43,7 +43,7 @@ export class MainTank extends Character implements IMainTank {
     this.isPlayerRight = false;
     this.isPlayerAbove = false;
     this.isPlayerBelow = false;
-    this.health = 5;
+    this.health = 3;
 
     this.tankImage = new Image();
     this.tankImage.src = tankImage;

@@ -43,7 +43,7 @@ export const guardEnemy = [
   },
   {
     positionX: 3281,
-    positionY: 60,
+    positionY: 76,
     isBulletFast: true,
   },
 ];

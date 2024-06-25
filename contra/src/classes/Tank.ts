@@ -160,7 +160,7 @@ export class Tank extends Character implements ITank {
     let direction = this.getPlayerDirection(player);
 
     // Create and add bullet
-    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction, true);
+    const bullet = new Bullet(enemyX - Map.offsetX, enemyY, direction);
     this.bullets.push(bullet);
 
     // Update the last shot time

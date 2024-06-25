@@ -76,7 +76,7 @@ type bullet = {
 };
 
 export const BULLET: bullet = {
-  SPEED: 8,
+  SPEED: 7,
   SLOW_SPEED: 5,
 };
 
