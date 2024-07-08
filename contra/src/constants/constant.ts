@@ -38,7 +38,7 @@ export const PLAYER: player = {
   WIDTH: 33,
   HEIGHT: 72,
   SPEED: 8,
-  LIFE: 3,
+  LIFE: 30,
   JUMP_POWER: 6,
   GRAVITY: 0.5,
   SCORE: 0,

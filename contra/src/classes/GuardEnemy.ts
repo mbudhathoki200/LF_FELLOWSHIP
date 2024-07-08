@@ -107,6 +107,9 @@ export class GuardEnemy extends Character implements IEnemy {
   }
 
   changeSprite() {
+    //switch(direction){
+    //
+    //
     if (this.isPlayerLeft && this.isPlayerAbove) {
       this.enemyAction = gunEnemy.upLeft;
       return "DIRECTION_UP_LEFT";
@@ -135,7 +138,7 @@ export class GuardEnemy extends Character implements IEnemy {
   }
 
   isPlayerInRange(player: Player): boolean {
-    let { positionX: playerX, positionY: playerY } = player;
+    const { positionX: playerX, positionY: playerY } = player;
     const { positionX: enemyX, positionY: enemyY } = this;
 
     // Calculate distance to player

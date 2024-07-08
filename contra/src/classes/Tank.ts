@@ -105,6 +105,7 @@ export class Tank extends Character implements ITank {
 
     return this.changeTankSprite();
   }
+
   changeTankSprite() {
     if (this.isPlayerLeft && this.isPlayerAbove) {
       this.tankAction = turretSprites.upLeft;

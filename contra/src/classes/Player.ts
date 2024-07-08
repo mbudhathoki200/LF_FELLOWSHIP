@@ -28,8 +28,8 @@ import { Tank } from "./Tank.ts";
 import { powerUP, powerUpArray } from "./powerUp.ts";
 
 interface IPlayer {
-  positionX: number;
-  positionY: number;
+  // positionX: number;
+  // positionY: number;
 }
 //Bullet Array
 const bullets: Bullet[] = [];
@@ -401,7 +401,7 @@ export default class Player extends Character implements IPlayer {
     }
   }
   playerHit() {
-    this.reSpawn();
+    // this.reSpawn();
     playerHitSound();
     PLAYER.LIFE -= 1; // Decrease player life
   }

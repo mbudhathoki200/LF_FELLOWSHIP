@@ -276,6 +276,7 @@ export class Bullet implements IBullet {
     enemyIndex: number
   ): void {
     metalHitSound();
+    //push power UP
     powerUpArray.push(new powerUP(player.positionX + 200, player.positionY));
 
     //remove enemy from array
