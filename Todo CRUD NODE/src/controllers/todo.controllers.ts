@@ -4,12 +4,13 @@ import { getTodosById } from "../models/todo.model";
 
 export function getTodo(req: Request, res: Response) {
   const data = todoServices.getTodos();
-  console.log(data);
+  if (!data) {
+    res.status(400).send({ message: "Unable to get todo" });
+  }
   res.status(200).send(data);
 }
 export function getTodoById(req: Request, res: Response) {
   const { id } = req.params;
-  console.log(req.params);
   const data = getTodosById(id);
   res.status(200).send(data);
 }
