@@ -7,7 +7,9 @@ import authRoutes from "./auth.user.routes";
 const router = express.Router();
 
 router.use("/todo", todoRoutes);
+
 router.use("/user", userRoutes);
+
 router.use("/user", authRoutes);
 
 export default router;

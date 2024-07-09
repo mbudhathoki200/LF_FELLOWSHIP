@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { IUser } from "../interfaces/user.interface";
 import { getUserByEmail } from "./user.services";
 import { error } from "console";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import config from "../config";
 
 export function logIn(body: Pick<IUser, "email" | "password">) {
@@ -34,4 +34,18 @@ export function logIn(body: Pick<IUser, "email" | "password">) {
   });
 
   return { accessToken, refreshToken };
+}
+
+export function refreshToken(refresh: string) {
+  const decoded: any = verify(refresh, config.jwt.secret!);
+
+  const payload = {
+    id: decoded.id,
+    name: decoded.name,
+    email: decoded.email,
+  };
+  const accessToken = sign(payload, config.jwt.secret!, {
+    expiresIn: config.jwt.accessTokenExpiryMS,
+  });
+  return accessToken;
 }

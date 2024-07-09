@@ -1,3 +1,4 @@
+import { error } from "console";
 import { IUser } from "../interfaces/user.interface";
 
 const users: IUser[] = [];
@@ -19,6 +20,11 @@ export function signUp(newUser: IUser) {
 }
 
 export function getUser() {
+  if (users.length == 0) {
+    return {
+      error: "No users Registered!!",
+    };
+  }
   return users;
 }
 
