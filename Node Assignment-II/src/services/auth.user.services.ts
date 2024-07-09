@@ -1,9 +1,8 @@
 import bcrypt from "bcrypt";
-import { IUser } from "../interfaces/user.interface";
-import { getUserByEmail } from "./user.services";
-import { error } from "console";
 import { sign, verify } from "jsonwebtoken";
 import config from "../config";
+import { IUser } from "../interfaces/user.interface";
+import { getUserByEmail } from "./user.services";
 
 export function logIn(body: Pick<IUser, "email" | "password">) {
   const existingUser = getUserByEmail(body.email);

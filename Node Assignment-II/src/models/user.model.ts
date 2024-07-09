@@ -1,21 +1,21 @@
-import { error } from "console";
 import { IUser } from "../interfaces/user.interface";
 
 const users: IUser[] = [];
 
 export function signUp(newUser: IUser) {
-  users.map((user) => {
-    if (user.email == newUser.email) {
-      return {
-        error: "User Already Exists",
-      };
-    }
-  });
+  const user = getUserByEmail(newUser.email);
+
+  if (user) {
+    return {
+      error: "User with this email already exists",
+    };
+  }
 
   users.push({
     ...newUser,
     id: `${users.length + 1}`,
   });
+
   return users;
 }
 
