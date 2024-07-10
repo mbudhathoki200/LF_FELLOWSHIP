@@ -1,24 +1,51 @@
+import { todo } from "node:test";
 import ITODO from "../interfaces/todo.interface";
+import { error } from "node:console";
 
 let todos = [
   {
     id: "1",
     title: "CODE",
     description: "CODE CODE CODE",
+    userId: "1",
+  },
+  {
+    id: "2",
+    title: "COOK",
+    description: "COOK COOK COOK",
+    userId: "2",
+  },
+  {
+    id: "3",
+    title: "PLAY",
+    description: "FOOTBALL",
+    userId: "1",
+  },
+  {
+    id: "4",
+    title: "ASSIGNMENT",
+    description: "Do Assignment",
+    userId: "2",
   },
 ];
 
-export function getTodos() {
-  return todos;
+export function getTodos(userId: string) {
+  const todo = todos.filter((todo) => todo.userId == userId);
+  if (!todo) {
+    error: "Todos with the user Id doesnot exists";
+  }
+  return todo;
 }
 
 export function getTodosById(id: string) {
   return todos.find(({ id: userId }) => userId == id);
 }
-export function createTodo(todo: ITODO) {
+export function createTodo(userId: string, todo: ITODO) {
+  console.log(todo);
   todos.push({
-    id: `${todos.length + 1}`,
     ...todo,
+    id: `${todos.length + 1}`,
+    userId: `${userId}`,
   });
   return todos;
 }
@@ -30,8 +57,21 @@ export function updateTodo(id: string, newTodo: ITODO) {
   return todos;
 }
 
-export function deleteTodo(id: string) {
+export function deleteTodo(id: string, userId: string) {
+  const todo = todos.find((todo) => todo.id == id);
+  if (!todo) {
+    return {
+      message: `Todo with the id ${id} does not exists`,
+    };
+  }
+
+  const isOwnerOfTodo = todo.userId === userId;
+
+  if (!isOwnerOfTodo) {
+    return {
+      message: "Unauthorized deletion",
+    };
+  }
+
   todos = todos.filter((todo) => todo.id !== id);
-  console.log(todos);
-  return todos;
 }

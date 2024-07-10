@@ -16,7 +16,7 @@ export function auth(req: Request, res: Response, next: NextFunction) {
     return;
   }
 
-  verify(token[1], config.jwt.secret!);
+  const payload = verify(token[1], config.jwt.secret!);
 
   next();
 }

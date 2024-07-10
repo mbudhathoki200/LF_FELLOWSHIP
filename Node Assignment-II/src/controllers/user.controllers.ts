@@ -3,7 +3,6 @@ import * as UserService from "../services/user.services";
 
 export function signUp(req: Request, res: Response) {
   const userDetails = req.body;
-  console.log(userDetails);
   UserService.signUp(userDetails);
   return res.status(200).send("User Succesfully Signed Up");
 }
