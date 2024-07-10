@@ -12,8 +12,8 @@ export function getTodos(userId: string) {
   return data;
 }
 
-export function getTodoById(id: string) {
-  const data = TodoModel.getTodosById(id);
+export function getTodoById(id: string, userId: string) {
+  const data = TodoModel.getTodosById(id, userId);
   if (!data) {
     return {
       error: "Error Retriving todo datas",
@@ -26,8 +26,8 @@ export function createTodo(userId: string, todo: ITODO) {
   TodoModel.createTodo(userId, todo);
 }
 
-export function updateTodo(id: string, newTodo: ITODO) {
-  return TodoModel.updateTodo(id, newTodo);
+export function updateTodo(id: string, newTodo: ITODO, userId: string) {
+  return TodoModel.updateTodo(id, newTodo, userId);
 }
 export function deleteTodo(id: string, userId: string) {
   return TodoModel.deleteTodo(id, userId);

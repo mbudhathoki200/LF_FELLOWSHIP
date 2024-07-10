@@ -29,6 +29,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
 
   next();
 }
+
 export function authorize(permission: string) {
   return (req: Request, res: Response, next: NextFunction) => {
     const user = req.user!;

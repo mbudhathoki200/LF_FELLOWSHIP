@@ -6,17 +6,18 @@ import {
   getTodoById,
   updateTodo,
 } from "../controllers/todo.controllers";
+import { authenticate } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 
-router.get("/get", getTodo);
+router.get("/get", authenticate, getTodo);
 
-router.get("/get/:id", getTodoById);
+router.get("/get/:id", authenticate, getTodoById);
 
-router.post("/add", createTodo);
+router.post("/add", authenticate, createTodo);
 
-router.put("/update/:id", updateTodo);
+router.put("/update/:id", authenticate, updateTodo);
 
-router.delete("/delete/:id", deleteTodo);
+router.delete("/delete/:id", authenticate, deleteTodo);
 
 export default router;

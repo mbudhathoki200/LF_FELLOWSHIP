@@ -1,6 +1,4 @@
-import { todo } from "node:test";
 import ITODO from "../interfaces/todo.interface";
-import { error } from "node:console";
 
 let todos = [
   {
@@ -37,11 +35,14 @@ export function getTodos(userId: string) {
   return todo;
 }
 
-export function getTodosById(id: string) {
-  return todos.find(({ id: userId }) => userId == id);
+export function getTodosById(id: string, userId: string) {
+  // console.log(userId);
+
+  const todo = todos.find(({ id: userIds }) => userIds == id && userId == id);
+
+  return todo;
 }
 export function createTodo(userId: string, todo: ITODO) {
-  console.log(todo);
   todos.push({
     ...todo,
     id: `${todos.length + 1}`,
@@ -50,11 +51,14 @@ export function createTodo(userId: string, todo: ITODO) {
   return todos;
 }
 
-export function updateTodo(id: string, newTodo: ITODO) {
-  todos = todos.map((todo) => {
-    return todo.id === id ? { ...newTodo, id: todo.id } : todo;
+export function updateTodo(id: string, newTodo: ITODO, userId: string) {
+  const updatedTodo = todos.map((todo) => {
+    return todo.id === id
+      ? { ...newTodo, id: todo.id, userId: todo.userId }
+      : todo;
   });
-  return todos;
+  const authTodos = updatedTodo.filter((todo) => todo.userId == userId);
+  return authTodos;
 }
 
 export function deleteTodo(id: string, userId: string) {
