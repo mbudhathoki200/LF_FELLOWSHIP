@@ -1,4 +1,6 @@
+import { todo } from "node:test";
 import ITODO from "../interfaces/todo.interface";
+import { error } from "node:console";
 
 let todos = [
   {
@@ -51,8 +53,21 @@ export function updateTodo(id: string, newTodo: ITODO) {
   return todos;
 }
 
-export function deleteTodo(id: string) {
+export function deleteTodo(id: string, userId: string) {
+  const todo = todos.find((todo) => todo.id == id);
+  if (!todo) {
+    return {
+      message: `Todo with the id ${id} does not exists`,
+    };
+  }
+
+  const isOwnerOfTodo = todo.userId === userId;
+
+  if (!isOwnerOfTodo) {
+    return {
+      message: "Unauthorized deletion",
+    };
+  }
+
   todos = todos.filter((todo) => todo.id !== id);
-  console.log(todos);
-  return todos;
 }

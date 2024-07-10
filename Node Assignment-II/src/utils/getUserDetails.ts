@@ -14,10 +14,15 @@ export function getUserDetails(req: Request) {
     return new Error("Unauthenticated");
   }
 
-  const payload = verify(token[1], config.jwt.secret!);
-
-  if (typeof payload === "string") {
-    return;
+  try {
+    const payload = verify(token[1], config.jwt.secret!);
+    if (typeof payload === "string") {
+      return;
+    }
+    return payload.id;
+  } catch (error) {
+    return {
+      error: "Unauthorized token",
+    };
   }
-  return payload.id;
 }

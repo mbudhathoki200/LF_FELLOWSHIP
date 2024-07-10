@@ -1,3 +1,4 @@
+import { error } from "node:console";
 import { Request, Response } from "express";
 import * as todoServices from "../services/todo.services";
 import { getTodosById } from "../models/todo.model";
@@ -31,15 +32,21 @@ export function updateTodo(req: Request, res: Response) {
   const data = todoServices.updateTodo(id, newTodo);
   res.status(200).send({
     message: "Upated Succesfully",
-    data: data,
+    todos: data,
   });
 }
 
 export function deleteTodo(req: Request, res: Response) {
   const { id } = req.params;
-  const todos = todoServices.deleteTodo(id);
+  const userId = getUserDetails(req);
+  const errorMessage = todoServices.deleteTodo(id, userId);
+
+  if (errorMessage) {
+    res.status(400).send({
+      errorMessage,
+    });
+  }
   res.status(200).send({
     message: `Todo with id: ${id} deleted succesfully`,
-    todos: todos,
   });
 }

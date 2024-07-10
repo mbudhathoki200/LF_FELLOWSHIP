@@ -29,6 +29,6 @@ export function createTodo(userId: string, todo: ITODO) {
 export function updateTodo(id: string, newTodo: ITODO) {
   return TodoModel.updateTodo(id, newTodo);
 }
-export function deleteTodo(id: string) {
-  return TodoModel.deleteTodo(id);
+export function deleteTodo(id: string, userId: string) {
+  return TodoModel.deleteTodo(id, userId);
 }
