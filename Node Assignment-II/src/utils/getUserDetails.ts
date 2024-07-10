@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { verify } from "jsonwebtoken";
+import { JwtHeader, JwtPayload, verify } from "jsonwebtoken";
 import config from "../config";
 
 let payload;
@@ -16,14 +16,12 @@ export function getUserDetails(req: Request) {
   }
 
   try {
-    payload = verify(token[1], config.jwt.secret!);
+    payload = verify(token[1], config.jwt.secret!) as JwtPayload;
   } catch (error) {
     return {
       error: "Unauthorized token",
     };
   }
-  if (typeof payload === "string") {
-    return;
-  }
+
   return payload.id;
 }

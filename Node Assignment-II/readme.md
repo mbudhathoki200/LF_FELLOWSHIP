@@ -4,9 +4,16 @@ A simple Express-based CRUD API for managing TODO items.
 
 ## Features
 
-- Create, Read, Update, and Delete TODO items
-- RESTful API endpoints
-- JSON data format
+- **User Authentication**: Secure user authentication using JWT.
+- **Password Hashing**: Passwords are hashed using bcrypt for enhanced security.
+- **CRUD Operations**: Users can create, read, update, and delete their own todos.
+- **Authorization**: Users can only access their own todos, ensuring data privacy and security.
+
+## Technologies Used
+
+- **Express**: Fast, unopinionated, minimalist web framework for Node.js.
+- **JWT**: For secure user authentication.
+- **bcrypt**: For hashing passwords to enhance security.
 
 ## Installation
 
@@ -23,21 +30,63 @@ A simple Express-based CRUD API for managing TODO items.
    npm start
    ```
 
+OR
+
+1. With docker
+
+```bash
+  docker pull manishbudhathoki/todo-auth:latest
+```
+
 ## API Endpoints
 
-- For TODO
-- `GET /todo/getTodo`: Retrieve all TODO items
-- `GET /todos/:id`: Retrieve a specific TODO item
-- `POST /todo/createTodo`: Create a new TODO item
-- `PUT /todo/update/:id`: Update an existing TODO item
-- `DELETE /todo/delete/:id`: Delete a TODO item
+- **POST /user/signup**: Register a new user.
 
-- For USER
-- `GET /user/login`: To login user
-- `GET /user/signup`: To signup User
-- `POST /user`: To get user
-- `PUT /user/refresh`: For refresh token
+  ```json
+  {
+    "name": "example",
+    "email": "example@gmail.com",
+    "password": "example"
+  }
+  ```
 
-## Usage
+- **POST /user/login`**: Login a user and receive a JWT.
 
-Send HTTP requests to `http://localhost:3000/todos` using your preferred method (e.g., cURL, Postman, or fetch API).
+  ```json
+  {
+    "email": "example@gmail.com",
+    "password": "example"
+  }
+  ```
+
+- **POST /user/refresh**: refresh by passing the refresh token and receive a new access token.
+
+  ```json
+  {
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJuYW1lIjoiYWR3OCIsImVtYWlsIjoiYWR3OEBnbWFpbC5jb20iLCJpYXQiOjE3MjA1MjMzMTIsImV4cCI6MTcyMDUyNjMxMn0.ysHfrDmJTibjah2XYPEod-bfAgQs9fqtN35kUDdtNVI"
+  }
+  ```
+
+- **GET /todo/getTodo**: Get all todos for the authenticated user.
+
+- **GET /todos/:id**: Get specific todos for the authenticated user.
+
+- **POST /todo/createTodo**: Create a new todo for the authenticated user.
+
+  ```json
+  {
+    "title": "todo title",
+    "description": "todo description"
+  }
+  ```
+
+- **PUT /todo/update/:id**: Update a todo by ID for the authenticated user.
+
+  ```json
+  {
+    "title": "todo title",
+    "description": "todo description"
+  }
+  ```
+
+- **DELETE /todo/delete/:id**: Delete a todo by ID for the authenticated user.
