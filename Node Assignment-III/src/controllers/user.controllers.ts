@@ -19,8 +19,8 @@ export function updateUser(req: Request, res: Response) {
   const { id } = req.params;
   const newUserDetails = req.body;
 
-  const data = UserService.updateTodo(id, newUserDetails);
-  res.status(200).send({
+  const data = UserService.updateUser(id, newUserDetails);
+  res.status(HttpStatusCodes.OK).send({
     message: "Upated Succesfully",
     todos: data,
   });

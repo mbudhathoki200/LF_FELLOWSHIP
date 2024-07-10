@@ -34,7 +34,6 @@ export function authorize(permission: string) {
     const user = req.user!;
 
     if (!user.permissions.includes(permission)) {
-      console.log("inside forbidden");
       next(new UnauthenticatedError("Forbidden"));
     }
 

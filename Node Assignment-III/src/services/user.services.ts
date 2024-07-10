@@ -20,7 +20,7 @@ export function getUserByEmail(email: string) {
   return data;
 }
 
-export function updateTodo(id: string, newUserDetails: IUser) {
+export function updateUser(id: string, newUserDetails: IUser) {
   return UserModel.updateUser(id, newUserDetails);
 }
 
