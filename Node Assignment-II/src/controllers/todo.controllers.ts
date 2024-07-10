@@ -5,9 +5,10 @@ import { getTodosById } from "../models/todo.model";
 import { getUserDetails } from "../utils/getUserDetails";
 
 export function getTodo(req: Request, res: Response) {
-  const data = todoServices.getTodos();
+  const userId = getUserDetails(req);
+  const data = todoServices.getTodos(userId);
   if (!data) {
-    res.status(400).send({ message: "Unable to get todo" });
+    res.status(400).send({ message: "Unable to retrive todo" });
   }
   res.status(200).send(data);
 }

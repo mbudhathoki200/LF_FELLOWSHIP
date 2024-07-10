@@ -2,6 +2,7 @@ import { Request } from "express";
 import { verify } from "jsonwebtoken";
 import config from "../config";
 
+let payload;
 export function getUserDetails(req: Request) {
   const { authorization } = req.headers;
   if (!authorization) {
@@ -15,14 +16,14 @@ export function getUserDetails(req: Request) {
   }
 
   try {
-    const payload = verify(token[1], config.jwt.secret!);
-    if (typeof payload === "string") {
-      return;
-    }
-    return payload.id;
+    payload = verify(token[1], config.jwt.secret!);
   } catch (error) {
     return {
       error: "Unauthorized token",
     };
   }
+  if (typeof payload === "string") {
+    return;
+  }
+  return payload.id;
 }

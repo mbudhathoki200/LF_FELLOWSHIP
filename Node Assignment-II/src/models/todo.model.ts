@@ -29,8 +29,12 @@ let todos = [
   },
 ];
 
-export function getTodos() {
-  return todos;
+export function getTodos(userId: string) {
+  const todo = todos.filter((todo) => todo.userId == userId);
+  if (!todo) {
+    error: "Todos with the user Id doesnot exists";
+  }
+  return todo;
 }
 
 export function getTodosById(id: string) {
