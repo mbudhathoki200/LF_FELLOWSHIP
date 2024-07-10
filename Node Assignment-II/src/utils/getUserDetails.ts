@@ -1,22 +1,23 @@
+import { Request } from "express";
 import { verify } from "jsonwebtoken";
-import { NextFunction, Request, Response } from "express";
 import config from "../config";
 
-export function auth(req: Request, res: Response, next: NextFunction) {
+export function getUserDetails(req: Request) {
   const { authorization } = req.headers;
   if (!authorization) {
-    next(new Error("Unauthenticated"));
-    return;
+    return new Error("Unauthenticated");
   }
 
   const token = authorization.split(" ");
 
   if (token.length !== 2 || token[0] !== "Bearer") {
-    next(new Error("Unauthenticated"));
-    return;
+    return new Error("Unauthenticated");
   }
 
   const payload = verify(token[1], config.jwt.secret!);
 
-  next();
+  if (typeof payload === "string") {
+    return;
+  }
+  return payload.id;
 }

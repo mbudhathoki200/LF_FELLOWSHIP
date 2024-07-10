@@ -6,6 +6,7 @@ import {
   getTodoById,
   updateTodo,
 } from "../controllers/todo.controllers";
+import { auth } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 

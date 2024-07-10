@@ -5,6 +5,25 @@ let todos = [
     id: "1",
     title: "CODE",
     description: "CODE CODE CODE",
+    userId: "1",
+  },
+  {
+    id: "2",
+    title: "COOK",
+    description: "COOK COOK COOK",
+    userId: "2",
+  },
+  {
+    id: "3",
+    title: "PLAY",
+    description: "FOOTBALL",
+    userId: "1",
+  },
+  {
+    id: "4",
+    title: "ASSIGNMENT",
+    description: "Do Assignment",
+    userId: "2",
   },
 ];
 
@@ -15,10 +34,12 @@ export function getTodos() {
 export function getTodosById(id: string) {
   return todos.find(({ id: userId }) => userId == id);
 }
-export function createTodo(todo: ITODO) {
+export function createTodo(userId: string, todo: ITODO) {
+  console.log(todo);
   todos.push({
-    id: `${todos.length + 1}`,
     ...todo,
+    id: `${todos.length + 1}`,
+    userId: `${userId}`,
   });
   return todos;
 }

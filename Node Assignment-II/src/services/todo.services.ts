@@ -22,8 +22,8 @@ export function getTodoById(id: string) {
   return data;
 }
 
-export function createTodo(todo: ITODO) {
-  TodoModel.createTodo(todo);
+export function createTodo(userId: string, todo: ITODO) {
+  TodoModel.createTodo(userId, todo);
 }
 
 export function updateTodo(id: string, newTodo: ITODO) {

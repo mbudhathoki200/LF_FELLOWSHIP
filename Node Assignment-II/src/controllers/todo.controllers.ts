@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as todoServices from "../services/todo.services";
 import { getTodosById } from "../models/todo.model";
+import { getUserDetails } from "../utils/getUserDetails";
 
 export function getTodo(req: Request, res: Response) {
   const data = todoServices.getTodos();
@@ -16,8 +17,9 @@ export function getTodoById(req: Request, res: Response) {
 }
 
 export function createTodo(req: Request, res: Response) {
-  const { todo } = req.body;
-  todoServices.createTodo(todo);
+  const userId = getUserDetails(req);
+  const todo = req.body;
+  todoServices.createTodo(userId, todo);
   res.status(200).send({
     message: "Todo Succesfully Created",
   });
