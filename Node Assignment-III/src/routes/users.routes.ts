@@ -5,6 +5,7 @@ import {
   getUser,
   updateUser,
 } from "../controllers/user.controllers";
+
 import { authenticate } from "../middlewares/auth.middleware";
 
 const router = express();
@@ -15,6 +16,6 @@ router.post("/create", authenticate, createUser);
 
 router.put("/:id", updateUser);
 
-router.delete("/:id", deleteUser);
+router.delete("/delete/:id", deleteUser);
 
 export default router;

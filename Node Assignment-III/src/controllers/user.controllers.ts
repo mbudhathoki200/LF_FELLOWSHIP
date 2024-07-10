@@ -1,4 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
+import HttpStatusCodes from "http-status-codes";
+import { BadRequest } from "../error/BadRequest";
 import * as UserService from "../services/user.services";
 
 export function getUser(req: Request, res: Response) {
@@ -24,4 +26,20 @@ export function updateUser(req: Request, res: Response) {
   });
 }
 
-export function deleteUser(req: Request, res: Response) {}
+export function deleteUser(req: Request, res: Response, next: NextFunction) {
+  const { id } = req.params;
+  console.log(id);
+  const user = UserService.deleteUser(id);
+  if (user === null) {
+    next(new BadRequest(`User with id: ${id} not found`));
+    return;
+  }
+  res.status(HttpStatusCodes.OK).send(`User with id:${id} deleted`);
+}
+
+export function getUserById(req: Request, res: Response) {
+  const { id } = req.params;
+  console.log(id);
+  const user = UserService.getUserById(id);
+  res.status(HttpStatusCodes.OK).send(user);
+}

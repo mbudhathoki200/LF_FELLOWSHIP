@@ -1,3 +1,4 @@
+import { error } from "console";
 import { IUser } from "../interfaces/user.interface";
 
 let users: IUser[] = [
@@ -45,6 +46,9 @@ export function getUser() {
   return users;
 }
 
+export function getUserById(id: string) {
+  return users.find(({ id: userId }) => userId == id);
+}
 export function getUserByEmail(email: string) {
   return users.find(({ email: userEmail }) => userEmail === email);
 }
@@ -54,4 +58,8 @@ export function updateUser(id: string, newUserDetails: IUser) {
     return user.id === id ? { ...newUserDetails, id: user.id } : user;
   });
   return users;
+}
+
+export function deleteUser(id: string) {
+  users = users.filter((user) => user.id !== id);
 }

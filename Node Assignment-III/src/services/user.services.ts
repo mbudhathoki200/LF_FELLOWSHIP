@@ -23,3 +23,15 @@ export function getUserByEmail(email: string) {
 export function updateTodo(id: string, newUserDetails: IUser) {
   return UserModel.updateUser(id, newUserDetails);
 }
+
+export function getUserById(id: string) {
+  return UserModel.getUserById(id);
+}
+
+export function deleteUser(id: string) {
+  const data = UserModel.getUserById(id);
+  if (!data) {
+    return null;
+  }
+  UserModel.deleteUser(id);
+}
