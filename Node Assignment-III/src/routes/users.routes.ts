@@ -6,11 +6,11 @@ import {
   updateUser,
 } from "../controllers/user.controllers";
 
-import { authenticate } from "../middlewares/auth.middleware";
+import { authenticate, authorize } from "../middlewares/auth.middleware";
 
 const router = express();
 
-router.get("/", authenticate, getUser);
+router.get("/", authenticate, authorize("superAdmin"), getUser);
 
 router.post("/create", authenticate, createUser);
 

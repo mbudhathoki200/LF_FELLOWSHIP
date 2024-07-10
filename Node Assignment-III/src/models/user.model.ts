@@ -1,4 +1,3 @@
-import { error } from "console";
 import { IUser } from "../interfaces/user.interface";
 
 let users: IUser[] = [
@@ -14,7 +13,7 @@ let users: IUser[] = [
     email: "manish@gmail.com",
     password: "$2b$10$.RKwtAn9DSJyWx5FApO2J.gOyAuNnGNAZpJuMphmcwpfl6s.qDtGK",
     id: "2",
-    permissions: ["superUser"],
+    permissions: ["superAdmin"],
   },
 ];
 
@@ -49,6 +48,7 @@ export function getUser() {
 export function getUserById(id: string) {
   return users.find(({ id: userId }) => userId == id);
 }
+
 export function getUserByEmail(email: string) {
   return users.find(({ email: userEmail }) => userEmail === email);
 }

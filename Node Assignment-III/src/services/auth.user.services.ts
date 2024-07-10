@@ -4,6 +4,7 @@ import config from "../config";
 import { IUser } from "../interfaces/user.interface";
 import { getUserByEmail } from "./user.services";
 import * as UserServices from "../services/user.services";
+import { permission } from "process";
 
 export function logIn(body: Pick<IUser, "email" | "password">) {
   const existingUser = getUserByEmail(body.email);
@@ -23,6 +24,7 @@ export function logIn(body: Pick<IUser, "email" | "password">) {
     id: existingUser.id,
     name: existingUser.name,
     email: existingUser.email,
+    permissions: existingUser.permissions,
   };
 
   const accessToken = sign(payload, config.jwt.secret!, {
@@ -50,6 +52,7 @@ export function refreshToken(refresh: string) {
     id: decoded.id,
     name: decoded.name,
     email: decoded.email,
+    permissions: decoded.permissions,
   };
   const accessToken = sign(payload, config.jwt.secret!, {
     expiresIn: config.jwt.accessTokenExpiryMS,
