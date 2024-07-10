@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 
 import { Request } from "../interfaces/auth.interface";
+
 import loggerWithNameSpace from "../utils/logger";
 
 const logger = loggerWithNameSpace("RequestLogger");

@@ -23,3 +23,5 @@ export function updateUser(req: Request, res: Response) {
     todos: data,
   });
 }
+
+export function deleteUser(req: Request, res: Response) {}
