@@ -12,7 +12,7 @@ A simple Express-based CRUD API for managing TODO items.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/mbudhathoki200/LF_FELLOWSHIP/tree/master/Todo%20CRUD%20NODE
+   git clone https://github.com/mbudhathoki200/LF_FELLOWSHIP/tree/master/Node%20Assignment-II
    ```
 2. Install dependencies:
    ```bash
@@ -25,19 +25,18 @@ A simple Express-based CRUD API for managing TODO items.
 
 ## API Endpoints
 
+- For TODO
 - `GET /todo/getTodo`: Retrieve all TODO items
 - `GET /todos/:id`: Retrieve a specific TODO item
 - `POST /todo/createTodo`: Create a new TODO item
 - `PUT /todo/update/:id`: Update an existing TODO item
 - `DELETE /todo/delete/:id`: Delete a TODO item
 
-## docker pull
-
-docker push manishbudhathoki/todo-app:V1.0.0
-
-## Docker Image
-
-https://hub.docker.com/repository/docker/manishbudhathoki/todo-app/general
+- For USER
+- `GET /user/login`: To login user
+- `GET /user/signup`: To signup User
+- `POST /user`: To get user
+- `PUT /user/refresh`: For refresh token
 
 ## Usage
 
