@@ -1,6 +1,6 @@
 import { IUser } from "../interfaces/user.interface";
 
-const users: IUser[] = [
+let users: IUser[] = [
   {
     name: "test",
     email: "test@gmail.com",
@@ -13,7 +13,7 @@ const users: IUser[] = [
     email: "manish@gmail.com",
     password: "$2b$10$.RKwtAn9DSJyWx5FApO2J.gOyAuNnGNAZpJuMphmcwpfl6s.qDtGK",
     id: "2",
-    permissions: [""],
+    permissions: ["superUser"],
   },
 ];
 
@@ -47,4 +47,11 @@ export function getUser() {
 
 export function getUserByEmail(email: string) {
   return users.find(({ email: userEmail }) => userEmail === email);
+}
+
+export function updateUser(id: string, newUserDetails: IUser) {
+  users = users.map((user) => {
+    return user.id === id ? { ...newUserDetails, id: user.id } : user;
+  });
+  return users;
 }

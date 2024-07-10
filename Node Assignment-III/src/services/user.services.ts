@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import * as UserModel from "../models/user.model";
 import { IUser } from "./../interfaces/user.interface";
 
@@ -19,4 +18,8 @@ export function createUser(user: IUser) {
 export function getUserByEmail(email: string) {
   const data = UserModel.getUserByEmail(email);
   return data;
+}
+
+export function updateTodo(id: string, newUserDetails: IUser) {
+  return UserModel.updateUser(id, newUserDetails);
 }

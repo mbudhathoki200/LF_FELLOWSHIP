@@ -10,6 +10,6 @@ router.use("/todo", todoRoutes);
 
 router.use("/user", userRoutes);
 
-router.use("/user", authRoutes);
+router.use("/auth", authRoutes);
 
 export default router;

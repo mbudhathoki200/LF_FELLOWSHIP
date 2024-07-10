@@ -6,3 +6,20 @@ export function getUser(req: Request, res: Response) {
   console.log(data);
   res.send(data);
 }
+
+export function createUser(req: Request, res: Response) {
+  const userDetails = req.body;
+  UserService.createUser(userDetails);
+  return res.status(200).send("User Succesfully Signed Up");
+}
+
+export function updateUser(req: Request, res: Response) {
+  const { id } = req.params;
+  const newUserDetails = req.body;
+
+  const data = UserService.updateTodo(id, newUserDetails);
+  res.status(200).send({
+    message: "Upated Succesfully",
+    todos: data,
+  });
+}
