@@ -7,17 +7,38 @@ import {
   updateTodo,
 } from "../controllers/todo.controllers";
 import { authenticate } from "../middlewares/auth.middleware";
+import {
+  validateReqBody,
+  validateReqQuery,
+} from "../middlewares/validator.middleware";
+import { todoBodySchema } from "../schema/todo.schema";
+import { getQuerySchema } from "../schema/query.schema";
 
 const router = express.Router();
 
 router.get("/get", authenticate, getTodo);
 
-router.get("/get/:id", authenticate, getTodoById);
+router.get(
+  "/get/:id",
+  validateReqQuery(getQuerySchema),
+  authenticate,
+  getTodoById
+);
 
-router.post("/add", authenticate, createTodo);
+router.post("/add", validateReqBody(todoBodySchema), authenticate, createTodo);
 
-router.put("/update/:id", authenticate, updateTodo);
+router.put(
+  "/update/:id",
+  validateReqBody(todoBodySchema),
+  authenticate,
+  updateTodo
+);
 
-router.delete("/delete/:id", authenticate, deleteTodo);
+router.delete(
+  "/delete/:id",
+  validateReqQuery(getQuerySchema),
+  authenticate,
+  deleteTodo
+);
 
 export default router;

@@ -4,7 +4,7 @@ export const createUserBodySchema = Joi.object({
   name: Joi.string().required().messages({
     "any.required": "Name is required",
   }),
-  email: Joi.string().required().messages({
+  email: Joi.string().email().required().messages({
     "any.required": "Email is required",
     "string.email": "Email must be a valid format",
   }),
@@ -22,13 +22,13 @@ export const createUserBodySchema = Joi.object({
         "password must contain atleast one special character(!@#$%)",
     })
     .custom((value, helpers) => {
-      if (/[A-Z]/.test(value)) {
+      if (!/[A-Z]/.test(value)) {
         return helpers.error("password.uppercase");
       }
-      if (/[a-z]/.test(value)) {
+      if (!/[a-z]/.test(value)) {
         return helpers.error("password.lowercase");
       }
-      if (/[!@#$%]/.test(value)) {
+      if (!/[!@#$%]/.test(value)) {
         return helpers.error("password.special");
       }
       return value;

@@ -8,6 +8,12 @@ import {
 
 import { authenticate, authorize } from "../middlewares/auth.middleware";
 import { PERMISSIONS } from "../constants/permission";
+import { createUserBodySchema } from "../schema/user.schema";
+import {
+  validateReqBody,
+  validateReqQuery,
+} from "../middlewares/validator.middleware";
+import { getQuerySchema } from "../schema/query.schema";
 
 const router = express();
 
@@ -15,6 +21,7 @@ router.get("/", authenticate, authorize(PERMISSIONS.SUPER_ADMIN), getUser);
 
 router.post(
   "/create",
+  validateReqBody(createUserBodySchema),
   authenticate,
   authorize(PERMISSIONS.SUPER_ADMIN),
   createUser
@@ -22,6 +29,7 @@ router.post(
 
 router.put(
   "/:id",
+  validateReqBody(createUserBodySchema),
   authenticate,
   authorize(PERMISSIONS.SUPER_ADMIN),
   updateUser
@@ -29,6 +37,7 @@ router.put(
 
 router.delete(
   "/delete/:id",
+  validateReqQuery(getQuerySchema),
   authenticate,
   authorize(PERMISSIONS.SUPER_ADMIN),
   deleteUser
