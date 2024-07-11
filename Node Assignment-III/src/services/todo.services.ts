@@ -9,11 +9,6 @@ const logger = loggerWithaNameSpace("TodoServices");
 export function getTodos(userId: string) {
   logger.info("getTodos");
   const data = TodoModel.getTodos(userId);
-  if (!data) {
-    return {
-      error: "Error Retriving todo datas",
-    };
-  }
   return data;
 }
 

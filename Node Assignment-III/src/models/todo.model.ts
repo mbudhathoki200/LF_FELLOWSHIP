@@ -32,17 +32,22 @@ let todos = [
 
 export function getTodos(userId: string) {
   logger.info("get todos");
+
   const todo = todos.filter((todo) => todo.userId == userId);
+
   if (!todo) {
     error: "Todos with the user Id doesnot exists";
   }
+
   return todo;
 }
 
 export function getTodosById(id: string, userId: string) {
   logger.info("get todo by id");
 
-  const todo = todos.find(({ id: userIds }) => userIds == id && userId == id);
+  const todo = todos.find(
+    ({ id: todoId, userId: owner }) => todoId === id && userId === owner
+  );
 
   return todo;
 }

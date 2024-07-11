@@ -1,34 +1,36 @@
-import { Response } from "express";
+import { NextFunction, Response } from "express";
 import HttpStatusCodes from "http-status-codes";
 import { Request } from "../interfaces/auth.interface";
 import { getTodosById } from "../models/todo.model";
 import * as todoServices from "../services/todo.services";
 import loggerWithNameSpace from "../utils/logger";
+import { NotFoundError } from "../error/NotFoundError";
+import { UnauthenticatedError } from "../error/UnauthenticatedError";
 
 const logger = loggerWithNameSpace("TodoController");
 
-export function getTodo(req: Request, res: Response) {
+export function getTodo(req: Request, res: Response, next: NextFunction) {
   logger.info("get todo");
   const userId = req.user?.id;
 
   const data = todoServices.getTodos(userId!);
 
-  if (!data) {
-    res
-      .status(HttpStatusCodes.BAD_REQUEST)
-      .send({ message: "Unable to retrive todo" });
+  if (data.length == 0) {
+    next(new NotFoundError("No todos Exists"));
+    return;
   }
-  res.status(HttpStatusCodes.OK).send(data);
+  return res.status(HttpStatusCodes.OK).send(data);
 }
-export function getTodoById(req: Request, res: Response) {
+export function getTodoById(req: Request, res: Response, next: NextFunction) {
   logger.info("get todo by id");
-  const userId = req.user?.id;
+  const userId = req.user?.id!;
   const { id } = req.params;
-  const data = getTodosById(id, userId!);
+  const data = getTodosById(id, userId);
   if (!data) {
-    res.status(HttpStatusCodes.BAD_REQUEST).send({ message: "Unauthorized" });
+    next(new UnauthenticatedError("Unauthorized"));
+    return;
   }
-  res.status(HttpStatusCodes.OK).send({
+  return res.status(HttpStatusCodes.OK).send({
     todo: data,
   });
 }
@@ -43,7 +45,7 @@ export function createTodo(req: Request, res: Response) {
   });
 }
 
-export function updateTodo(req: Request, res: Response) {
+export function updateTodo(req: Request, res: Response, next: NextFunction) {
   logger.info("udpate todo");
   const userId = req.user?.id!;
   const { id } = req.params;
@@ -51,7 +53,8 @@ export function updateTodo(req: Request, res: Response) {
   const data = todoServices.updateTodo(id, newTodo, userId);
 
   if (!data) {
-    res.status(HttpStatusCodes.BAD_REQUEST).send({ message: "Unauthorized" });
+    next(new UnauthenticatedError("Unauthorized"));
+    return;
   }
   res.status(HttpStatusCodes.OK).send({
     message: "Upated Succesfully",
