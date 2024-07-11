@@ -3,14 +3,18 @@ import HttpStatusCodes from "http-status-codes";
 import { BadRequest } from "../error/BadRequest";
 import * as UserService from "../services/user.services";
 import loggerWithNameSpace from "../utils/logger";
+import { NotFoundError } from "../error/NotFoundError";
 
 const logger = loggerWithNameSpace("UserController");
 
-export function getUser(req: Request, res: Response) {
+export function getUser(req: Request, res: Response, next: NextFunction) {
   logger.info("get user");
-  const data = UserService.getUser();
-  console.log(data);
-  res.send(data);
+  const users = UserService.getUser();
+  if (!users) {
+    next(new NotFoundError(`No users Found`));
+    return;
+  }
+  res.status(HttpStatusCodes.OK).send(users);
 }
 
 export function createUser(req: Request, res: Response) {

@@ -42,11 +42,6 @@ export function createUser(
 
 export function getUser() {
   logger.info("get user");
-  if (users.length == 0) {
-    return {
-      error: "No users Registered!!",
-    };
-  }
   return users;
 }
 
