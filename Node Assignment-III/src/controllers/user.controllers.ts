@@ -17,7 +17,7 @@ export function createUser(req: Request, res: Response) {
   logger.info("create user");
   const userDetails = req.body;
   UserService.createUser(userDetails);
-  return res.status(200).send("User Succesfully Signed Up");
+  return res.status(HttpStatusCodes.OK).send("User Succesfully Signed Up");
 }
 
 export function updateUser(req: Request, res: Response) {
@@ -47,7 +47,6 @@ export function deleteUser(req: Request, res: Response, next: NextFunction) {
 export function getUserById(req: Request, res: Response) {
   logger.info("get user by id");
   const { id } = req.params;
-  console.log(id);
   const user = UserService.getUserById(id);
   res.status(HttpStatusCodes.OK).send(user);
 }
