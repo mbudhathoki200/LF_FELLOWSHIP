@@ -2,11 +2,14 @@ import bcrypt from "bcrypt";
 import { sign, verify } from "jsonwebtoken";
 import config from "../config";
 import { IUser } from "../interfaces/user.interface";
-import { getUserByEmail } from "./user.services";
 import * as UserServices from "../services/user.services";
-import { permission } from "process";
+import { getUserByEmail } from "./user.services";
+import loggerWithNameSpace from "../utils/logger";
+
+const logger = loggerWithNameSpace("AuthServices");
 
 export function logIn(body: Pick<IUser, "email" | "password">) {
+  logger.info("log in");
   const existingUser = getUserByEmail(body.email);
   if (!existingUser) {
     return {
@@ -39,6 +42,7 @@ export function logIn(body: Pick<IUser, "email" | "password">) {
 }
 
 export async function signUp(user: IUser) {
+  logger.info("sign up");
   const hashedPassword = await bcrypt.hash(user.password, 10);
   const updatedUser = { ...user, password: hashedPassword };
 
@@ -46,6 +50,7 @@ export async function signUp(user: IUser) {
 }
 
 export function refreshToken(refresh: string) {
+  logger.info("refresh token");
   const decoded: any = verify(refresh, config.jwt.secret!);
 
   const payload = {

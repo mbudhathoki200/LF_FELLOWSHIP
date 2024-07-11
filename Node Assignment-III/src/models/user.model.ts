@@ -1,4 +1,7 @@
 import { IUser } from "../interfaces/user.interface";
+import loggerWithNameSpace from "../utils/logger";
+
+const logger = loggerWithNameSpace("UserModel");
 
 let users: IUser[] = [
   {
@@ -20,6 +23,7 @@ let users: IUser[] = [
 export function createUser(
   newUser: Pick<IUser, "name" | "email" | "password" | "permissions">
 ) {
+  logger.info("create user");
   const user = getUserByEmail(newUser.email);
 
   if (user) {
@@ -37,6 +41,7 @@ export function createUser(
 }
 
 export function getUser() {
+  logger.info("get user");
   if (users.length == 0) {
     return {
       error: "No users Registered!!",
@@ -46,14 +51,17 @@ export function getUser() {
 }
 
 export function getUserById(id: string) {
+  logger.info("get user by id");
   return users.find(({ id: userId }) => userId == id);
 }
 
 export function getUserByEmail(email: string) {
+  logger.info("get user by email");
   return users.find(({ email: userEmail }) => userEmail === email);
 }
 
 export function updateUser(id: string, newUserDetails: IUser) {
+  logger.info("uppate user");
   users = users.map((user) => {
     return user.id === id ? { ...newUserDetails, id: user.id } : user;
   });
@@ -61,5 +69,6 @@ export function updateUser(id: string, newUserDetails: IUser) {
 }
 
 export function deleteUser(id: string) {
+  logger.info("delete user");
   users = users.filter((user) => user.id !== id);
 }

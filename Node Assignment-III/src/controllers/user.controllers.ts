@@ -2,20 +2,26 @@ import { NextFunction, Request, Response } from "express";
 import HttpStatusCodes from "http-status-codes";
 import { BadRequest } from "../error/BadRequest";
 import * as UserService from "../services/user.services";
+import loggerWithNameSpace from "../utils/logger";
+
+const logger = loggerWithNameSpace("UserController");
 
 export function getUser(req: Request, res: Response) {
+  logger.info("get user");
   const data = UserService.getUser();
   console.log(data);
   res.send(data);
 }
 
 export function createUser(req: Request, res: Response) {
+  logger.info("create user");
   const userDetails = req.body;
   UserService.createUser(userDetails);
   return res.status(200).send("User Succesfully Signed Up");
 }
 
 export function updateUser(req: Request, res: Response) {
+  logger.info("update user");
   const { id } = req.params;
   const newUserDetails = req.body;
 
@@ -27,6 +33,7 @@ export function updateUser(req: Request, res: Response) {
 }
 
 export function deleteUser(req: Request, res: Response, next: NextFunction) {
+  logger.info("delete user");
   const { id } = req.params;
   console.log(id);
   const user = UserService.deleteUser(id);
@@ -38,6 +45,7 @@ export function deleteUser(req: Request, res: Response, next: NextFunction) {
 }
 
 export function getUserById(req: Request, res: Response) {
+  logger.info("get user by id");
   const { id } = req.params;
   console.log(id);
   const user = UserService.getUserById(id);
