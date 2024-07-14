@@ -17,19 +17,37 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
   res.status(HttpStatusCodes.OK).send(users);
 }
 
-export function createUser(req: Request, res: Response) {
+export async function createUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   logger.info("create user");
-  const userDetails = req.body;
-  UserService.createUser(userDetails);
-  return res.status(HttpStatusCodes.OK).send("User Succesfully Signed Up");
+  const { body } = req;
+  const data = await UserService.createUser(body);
+
+  if (!data) {
+    next(new BadRequest("User with that email already exists"));
+    return;
+  }
+
+  res.status(HttpStatusCodes.CREATED).json({
+    message: "User created Successfully",
+    data,
+  });
 }
 
-export function updateUser(req: Request, res: Response) {
+export function updateUser(req: Request, res: Response, next: NextFunction) {
   logger.info("update user");
   const { id } = req.params;
   const newUserDetails = req.body;
 
   const data = UserService.updateUser(id, newUserDetails);
+
+  if (!data) {
+    next(new NotFoundError(`User with id: ${id} not found`));
+    return;
+  }
   res.status(HttpStatusCodes.OK).send({
     message: "Upated Succesfully",
     todos: data,

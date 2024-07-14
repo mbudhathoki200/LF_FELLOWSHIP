@@ -21,23 +21,14 @@ export let users: IUser[] = [
 ];
 
 export function createUser(
-  newUser: Pick<IUser, "name" | "email" | "password" | "permissions">
+  user: Pick<IUser, "name" | "email" | "password" | "permissions">
 ) {
   logger.info("create user");
-  const user = getUserByEmail(newUser.email);
+  const newUser = { ...user, id: `${users.length + 1}` };
 
-  if (user) {
-    return {
-      error: "User with this email already exists",
-    };
-  }
+  users.push(newUser);
 
-  users.push({
-    ...newUser,
-    id: `${users.length + 1}`,
-  });
-
-  return users;
+  return newUser;
 }
 
 export function getUser() {
@@ -55,12 +46,19 @@ export function getUserByEmail(email: string) {
   return users.find(({ email: userEmail }) => userEmail === email);
 }
 
-export function updateUser(id: string, newUserDetails: IUser) {
+export function updateUser(id: string, user: IUser) {
   logger.info("uppate user");
-  users = users.map((user) => {
-    return user.id === id ? { ...newUserDetails, id: user.id } : user;
-  });
-  return users;
+  let updatedValue;
+
+  users = users.map((userElement) =>
+    userElement.id !== id
+      ? userElement
+      : (updatedValue = {
+          ...userElement,
+          ...user,
+        })
+  );
+  return updatedValue;
 }
 
 export function deleteUser(id: string) {

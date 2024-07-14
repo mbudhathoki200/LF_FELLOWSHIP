@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { NotFoundError } from "./../error/NotFoundError";
 import * as UserModel from "../models/user.model";
 import { IUser } from "./../interfaces/user.interface";
@@ -16,9 +17,14 @@ export function getUser() {
   }
   return data;
 }
-export function createUser(user: IUser) {
+export async function createUser(user: IUser) {
   logger.info("create user");
-  return UserModel.createUser(user);
+  const data = UserModel.getUserByEmail(user.email);
+  if (data) {
+    return;
+  }
+  const password = await bcrypt.hash(user.password, 10);
+  return UserModel.createUser({ ...user, password });
 }
 
 export function getUserByEmail(email: string) {
@@ -27,9 +33,19 @@ export function getUserByEmail(email: string) {
   return data;
 }
 
-export function updateUser(id: string, newUserDetails: IUser) {
+export async function updateUser(id: string, user: IUser) {
   logger.info("update user");
-  return UserModel.updateUser(id, newUserDetails);
+  const data = UserModel.getUserById(id);
+
+  if (!data) {
+    return;
+  }
+  if (user.password) {
+    const password = await bcrypt.hash(user.password, 10);
+    return UserModel.updateUser(id, { ...user, password });
+  }
+
+  return UserModel.updateUser(id, user);
 }
 
 export function getUserById(id: string) {
