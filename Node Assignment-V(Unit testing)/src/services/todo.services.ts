@@ -35,5 +35,10 @@ export function updateTodo(id: string, newTodo: ITODO, userId: string) {
 }
 export function deleteTodo(id: string, userId: string) {
   logger.info("deleteTodo");
-  return TodoModel.deleteTodo(id, userId);
+  const data = TodoModel.getTodosById(id, userId);
+  if (!data) {
+    return null;
+  }
+
+  TodoModel.deleteTodo(id, userId);
 }

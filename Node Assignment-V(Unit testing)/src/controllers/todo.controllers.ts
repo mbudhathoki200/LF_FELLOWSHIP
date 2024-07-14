@@ -62,16 +62,15 @@ export function updateTodo(req: Request, res: Response, next: NextFunction) {
   });
 }
 
-export function deleteTodo(req: Request, res: Response) {
+export function deleteTodo(req: Request, res: Response, next: NextFunction) {
   logger.info("delete todo");
   const { id } = req.params;
   const userId = req.user?.id;
-  const errorMessage = todoServices.deleteTodo(id, userId!);
+  const data = todoServices.deleteTodo(id, userId!);
 
-  if (errorMessage) {
-    res.status(HttpStatusCodes.BAD_REQUEST).send({
-      errorMessage,
-    });
+  if (data === null) {
+    next(new NotFoundError(`Todo with id: ${id} doesnt exist`));
+    return;
   }
   res.status(HttpStatusCodes.OK).send({
     message: `Todo with id: ${id} deleted succesfully`,

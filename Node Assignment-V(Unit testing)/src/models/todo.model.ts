@@ -51,6 +51,7 @@ export function getTodosById(id: string, userId: string) {
 
   return todo;
 }
+
 export function createTodo(userId: string, todo: ITODO) {
   logger.info("create todo");
   todos.push({
@@ -74,20 +75,6 @@ export function updateTodo(id: string, newTodo: ITODO, userId: string) {
 
 export function deleteTodo(id: string, userId: string) {
   logger.info("delete todo");
-  const todo = todos.find((todo) => todo.id == id);
-  if (!todo) {
-    return {
-      message: `Todo with the id ${id} does not exists`,
-    };
-  }
-
-  const isOwnerOfTodo = todo.userId === userId;
-
-  if (!isOwnerOfTodo) {
-    return {
-      message: "Unauthorized deletion",
-    };
-  }
 
   todos = todos.filter((todo) => todo.id !== id);
 }

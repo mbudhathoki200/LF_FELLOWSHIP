@@ -19,7 +19,7 @@ describe("User Integration Test Suite", () => {
           password:
             "$2b$10$MaHbU9Fp4HKtMqF.vNZ94./M.UJjbYd3McHeXa1bzGdg5MbHq3zsm",
           id: "1",
-          permissions: ["users.get"],
+          permissions: ["superAdmin"],
         });
       console.log(users);
     });
