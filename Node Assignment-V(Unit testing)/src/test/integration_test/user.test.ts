@@ -1,9 +1,13 @@
+import bcrypt from "bcrypt";
+import HttpStatusCodes from "http-status-codes";
 import request from "supertest";
 
 import express from "express";
 import router from "../../routes";
 import { users } from "../../models/user.model";
-
+import expect from "expect";
+import config from "../../config";
+const { test } = config;
 describe("User Integration Test Suite", () => {
   const app = express();
   app.use(express.json());
@@ -22,6 +26,22 @@ describe("User Integration Test Suite", () => {
           permissions: ["superAdmin"],
         });
       console.log(users);
+    });
+  });
+
+  describe("deleteUser", async () => {
+    it("should delete the user", async () => {
+      const id = "1";
+      const response = await request(app)
+        .delete(`/users/delete/${id}`)
+        .set("Authorization", `Bearer ${test.accessTokenSuperAdmin}`)
+        .expect(HttpStatusCodes.OK);
+
+      expect(response.body.message).toBe(`User with id:${id} deleted`);
+
+      // checking if user is deleted
+      // const user = users.find((user) => user.id === id);
+      // expect(user).toBeUndefined;
     });
   });
 });

@@ -19,7 +19,7 @@ A simple Express-based CRUD API for managing TODO items.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/mbudhathoki200/LF_FELLOWSHIP/tree/master/Node%20Assignment-III
+   git clone https://github.com/mbudhathoki200/LF_FELLOWSHIP/tree/master/Node%20Assignment-V(Unit%20testing)
    ```
 2. Install dependencies:
    ```bash
@@ -29,14 +29,6 @@ A simple Express-based CRUD API for managing TODO items.
    ```bash
    npm start
    ```
-
-OR
-
-1. With docker
-
-```bash
-  docker docker push manishbudhathoki/node-assignment-iii:latest
-```
 
 ## API Endpoints
 

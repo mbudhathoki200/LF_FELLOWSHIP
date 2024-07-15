@@ -9,6 +9,10 @@ const config = {
     accessTokenExpiryMS: 3000,
     refreshTokenExpiryMS: 30000,
   },
+  test: {
+    accessToken: process.env.TEST_ACCESS_TOKEN,
+    accessTokenSuperAdmin: process.env.TEST_ACCESS_TOKEN_SUPER_ADMIN,
+  },
 };
 
 export default config;
