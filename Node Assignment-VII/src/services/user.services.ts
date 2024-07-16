@@ -30,25 +30,27 @@ export async function createUser(user: IUser) {
   return UserModel.UserModel.createUser({ ...user, password });
 }
 
-export function getUserByEmail(email: string) {
+export async function getUserByEmail(email: string) {
+  console.log(email);
   logger.info("get user by email");
-  const data = UserModel.getUserByEmail(email);
+  const data = await UserModel.UserModel.getUserByEmail(email);
   return data;
 }
 
 export async function updateUser(id: string, user: IUser) {
   logger.info("update user");
-  const data = UserModel.getUserById(id);
+  const data = UserModel.UserModel.getUserById(id);
 
   if (!data) {
     return;
   }
   if (user.password) {
     const password = await bcrypt.hash(user.password, 10);
-    return UserModel.updateUser(id, { ...user, password });
+
+    return UserModel.UserModel.updateUser(id, { ...user, password });
   }
 
-  return UserModel.updateUser(id, user);
+  return await UserModel.UserModel.updateUser(id, user);
 }
 
 export async function getUserById(id: string) {
@@ -64,11 +66,12 @@ export async function getUserById(id: string) {
   return data;
 }
 
-export function deleteUser(id: string) {
+export async function deleteUser(id: string) {
   logger.info("delete user");
-  const data = UserModel.getUserById(id);
-  if (!data) {
+  const data = await UserModel.UserModel.getUserById(id);
+  console.log(data);
+  if (data.length == 0) {
     return null;
   }
-  UserModel.deleteUser(id);
+  UserModel.UserModel.deleteUser(id);
 }

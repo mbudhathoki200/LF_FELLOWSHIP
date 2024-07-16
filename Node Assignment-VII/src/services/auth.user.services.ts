@@ -3,14 +3,13 @@ import { sign, verify } from "jsonwebtoken";
 import config from "../config";
 import { IUser } from "../interfaces/user.interface";
 import * as UserServices from "../services/user.services";
-import { getUserByEmail } from "./user.services";
 import loggerWithNameSpace from "../utils/logger";
 
 const logger = loggerWithNameSpace("AuthServices");
 
-export function logIn(body: Pick<IUser, "email" | "password">) {
+export async function logIn(body: Pick<IUser, "email" | "password">) {
   logger.info("log in");
-  const existingUser = getUserByEmail(body.email);
+  const existingUser = await UserServices.getUserByEmail(body.email);
   if (!existingUser) {
     return {
       error: "Invalid Username or Password",

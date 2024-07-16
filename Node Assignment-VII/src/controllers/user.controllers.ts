@@ -37,12 +37,16 @@ export async function createUser(
   });
 }
 
-export function updateUser(req: Request, res: Response, next: NextFunction) {
+export async function updateUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   logger.info("update user");
   const { id } = req.params;
   const newUserDetails = req.body;
 
-  const data = UserService.updateUser(id, newUserDetails);
+  const data = await UserService.updateUser(id, newUserDetails);
 
   if (!data) {
     next(new NotFoundError(`User with id: ${id} not found`));
@@ -54,16 +58,21 @@ export function updateUser(req: Request, res: Response, next: NextFunction) {
   });
 }
 
-export function deleteUser(req: Request, res: Response, next: NextFunction) {
+export async function deleteUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   logger.info("delete user");
   const { id } = req.params;
-  console.log(id);
-  const user = UserService.deleteUser(id);
+  const user = await UserService.deleteUser(id);
+
   if (user === null) {
     next(new BadRequest(`User with id: ${id} not found`));
     return;
   }
-  res.status(HttpStatusCodes.OK).send(`User with id:${id} deleted`);
+
+  res.status(HttpStatusCodes.OK).send(`User with id: ${id} deleted`);
 }
 
 export async function getUserById(

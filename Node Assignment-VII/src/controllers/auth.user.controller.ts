@@ -4,10 +4,11 @@ import * as AuthServices from "../services/auth.user.services";
 import loggerWithNameSpace from "../utils/logger";
 
 const logger = loggerWithNameSpace("AuthController");
-export function logIn(req: Request, res: Response) {
+
+export async function logIn(req: Request, res: Response) {
   logger.info("login");
   const { body } = req;
-  const data = AuthServices.logIn(body);
+  const data = await AuthServices.logIn(body);
   return res.status(HttpStatusCodes.OK).send(data);
 }
 
