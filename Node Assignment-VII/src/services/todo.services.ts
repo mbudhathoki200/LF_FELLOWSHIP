@@ -2,19 +2,24 @@ import * as TodoModel from "../models/todo.model";
 
 import ITODO from "../interfaces/todo.interface";
 
-import loggerWithaNameSpace from "../utils/logger";
 import { NotFoundError } from "../error/NotFoundError";
-import { BadRequest } from "../error/BadRequest";
-import { log } from "console";
-import { notFoundError } from "../middlewares/errorHandler.middleware";
+import loggerWithaNameSpace from "../utils/logger";
+import { GetUserQuery } from "../interfaces/user.interface";
 
 const logger = loggerWithaNameSpace("TodoServices");
 
-export async function getTodos(userId: string) {
+export async function getTodos(userId: string, query: GetUserQuery) {
   logger.info("getTodos");
-  const data = await TodoModel.TodoModel.getTodos(userId);
+  const data = await TodoModel.TodoModel.getTodos(userId, query);
+  const count = await TodoModel.TodoModel.count(query);
 
-  return data;
+  const meta = {
+    page: query.page,
+    size: data.length,
+    total: +count.count,
+  };
+
+  return { data, meta };
 }
 
 export async function getTodoById(id: string, userId: string) {

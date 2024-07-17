@@ -10,11 +10,14 @@ const logger = loggerWithNameSpace("TodoController");
 
 export async function getTodo(req: Request, res: Response, next: NextFunction) {
   logger.info("get todo");
+
   const userId = req.user?.id;
 
-  const data = await TodoServices.getTodos(userId!);
+  const { query } = req;
 
-  if (data.length == 0) {
+  const data = await TodoServices.getTodos(userId!, query);
+
+  if (!data) {
     next(new NotFoundError("No todos Exists"));
     return;
   }

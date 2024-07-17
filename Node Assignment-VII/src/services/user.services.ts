@@ -1,23 +1,30 @@
 import bcrypt from "bcrypt";
 import * as UserModel from "../models/user.model";
 import loggerWithNameSpace from "../utils/logger";
-import { IUser } from "./../interfaces/user.interface";
+import { GetUserQuery, IUser } from "./../interfaces/user.interface";
 import { NotFoundError } from "../error/NotFoundError";
 
 const logger = loggerWithNameSpace("UserServices");
 
-export async function getUser() {
+export async function getUser(query: GetUserQuery) {
   logger.info("get user");
 
-  const data = await UserModel.UserModel.getUser();
+  const data = await UserModel.UserModel.getUser(query);
+
+  const count = await UserModel.UserModel.count(query);
 
   if (!data) {
     return {
       error: "No users Found!!",
     };
   }
+  const meta = {
+    page: query.page,
+    size: data.length,
+    total: +count.count,
+  };
 
-  return data;
+  return { data, meta };
 }
 
 export async function createUser(user: IUser) {

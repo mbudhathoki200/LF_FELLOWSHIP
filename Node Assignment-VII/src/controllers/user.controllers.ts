@@ -1,15 +1,21 @@
 import { NextFunction, Request, Response } from "express";
 import HttpStatusCodes from "http-status-codes";
 import { BadRequest } from "../error/BadRequest";
+import { NotFoundError } from "../error/NotFoundError";
 import * as UserService from "../services/user.services";
 import loggerWithNameSpace from "../utils/logger";
-import { NotFoundError } from "../error/NotFoundError";
+import { GetUserQuery } from "../interfaces/user.interface";
 
 const logger = loggerWithNameSpace("UserController");
 
-export async function getUser(req: Request, res: Response, next: NextFunction) {
+export async function getUser(
+  req: Request<any, any, any, GetUserQuery>,
+  res: Response,
+  next: NextFunction
+) {
   logger.info("get user");
-  const users = await UserService.getUser();
+  const { query } = req;
+  const users = await UserService.getUser(query);
   if (!users) {
     next(new NotFoundError(`No users Found`));
     return;

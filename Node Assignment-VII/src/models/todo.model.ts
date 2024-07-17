@@ -1,4 +1,5 @@
 import ITODO from "../interfaces/todo.interface";
+import { GetUserQuery } from "../interfaces/user.interface";
 import loggerWithNameSpace from "../utils/logger";
 import { BaseModel } from "./base.model";
 
@@ -32,7 +33,8 @@ let todos = [
 ];
 
 export class TodoModel extends BaseModel {
-  static getTodos(userId: string) {
+  static getTodos(userId: string, filter: GetUserQuery) {
+    const { q } = filter;
     const todo = this.queryBuilder()
       .select(
         "todos.id",
@@ -42,9 +44,27 @@ export class TodoModel extends BaseModel {
         "todos.created_at"
       )
       .table("todos")
-      .where("userId", userId);
+      .where("userId", userId)
+      .limit(filter.size)
+      .offset((filter.page - 1) * filter.size);
+
+    if (q) {
+      // query.where({ name: q });
+      todo.whereLike("title", `%${q}%`);
+    }
 
     return todo;
+  }
+  static count(filter: GetUserQuery) {
+    const { q } = filter;
+
+    const query = this.queryBuilder().count("*").table("users").first();
+
+    if (q) {
+      query.whereLike("title", `%${q}%`);
+    }
+
+    return query;
   }
   static async getTodosById(todoId: string, ownerId: string) {
     const todos = this.queryBuilder()
@@ -94,52 +114,4 @@ export class TodoModel extends BaseModel {
   static async deleteTodo(todoId: string) {
     await this.queryBuilder().table("todos").del().where({ id: todoId });
   }
-}
-export function getTodos(userId: string) {
-  logger.info("get todos");
-
-  const todo = todos.filter((todo) => todo.userId == userId);
-
-  if (!todo) {
-    error: "Todos with the user Id doesnot exists";
-  }
-
-  return todo;
-}
-
-export function getTodosById(id: string, userId: string) {
-  logger.info("get todo by id");
-
-  const todo = todos.find(
-    ({ id: todoId, userId: owner }) => todoId === id && userId === owner
-  );
-
-  return todo;
-}
-
-export function createTodo(userId: string, todo: ITODO) {
-  logger.info("create todo");
-  todos.push({
-    ...todo,
-    id: `${todos.length + 1}`,
-    userId: `${userId}`,
-  });
-  return todos;
-}
-
-export function updateTodo(id: string, newTodo: ITODO, userId: string) {
-  logger.info("update todos");
-  const updatedTodo = todos.map((todo) => {
-    return todo.id === id
-      ? { ...newTodo, id: todo.id, userId: todo.userId }
-      : todo;
-  });
-  const authTodos = updatedTodo.filter((todo) => todo.userId == userId);
-  return authTodos;
-}
-
-export function deleteTodo(id: string, userId: string) {
-  logger.info("delete todo");
-
-  todos = todos.filter((todo) => todo.id !== id);
 }

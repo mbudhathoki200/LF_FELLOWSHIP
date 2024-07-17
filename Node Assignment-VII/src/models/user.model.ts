@@ -1,4 +1,4 @@
-import { IUser } from "../interfaces/user.interface";
+import { GetUserQuery, IUser } from "../interfaces/user.interface";
 import loggerWithNameSpace from "../utils/logger";
 import { BaseModel } from "./base.model";
 
@@ -35,7 +35,8 @@ export class UserModel extends BaseModel {
     return user;
   }
   //get user
-  static getUser() {
+  static getUser(filter: GetUserQuery) {
+    const { q } = filter;
     const query = this.queryBuilder()
       .select(
         "users.id",
@@ -46,10 +47,28 @@ export class UserModel extends BaseModel {
         "permissions.permissions"
       )
       .table("users")
-      .leftJoin("permissions", "users.id", "permissions.userId");
+      .leftJoin("permissions", "users.id", "permissions.userId")
+      .limit(filter.size)
+      .offset((filter.page - 1) * filter.size);
+    if (q) {
+      // query.where({ name: q });
+      query.whereLike("name", `%${q}%`);
+    }
+    return query;
+  }
+
+  static count(filter: GetUserQuery) {
+    const { q } = filter;
+
+    const query = this.queryBuilder().count("*").table("users").first();
+
+    if (q) {
+      query.whereLike("name", `%${q}%`);
+    }
 
     return query;
   }
+
   //get user by id
   static getUserById(userId: string) {
     const query = this.queryBuilder()

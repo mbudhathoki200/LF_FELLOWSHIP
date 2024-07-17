@@ -13,10 +13,11 @@ import {
 } from "../middlewares/validator.middleware";
 import { todoBodySchema } from "../schema/todo.schema";
 import { getQuerySchema } from "../schema/query.schema";
+import { getUserQuerySchema } from "../schema/user.schema";
 
 const router = express.Router();
 
-router.get("/get", authenticate, getTodo);
+router.get("/", validateReqQuery(getUserQuerySchema), authenticate, getTodo);
 
 router.get(
   "/get/:id",
