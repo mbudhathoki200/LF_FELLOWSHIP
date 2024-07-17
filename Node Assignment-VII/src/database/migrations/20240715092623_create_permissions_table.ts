@@ -17,7 +17,7 @@ export async function up(knex: Knex): Promise<void> {
     table.timestamp("created_at").notNullable().defaultTo(knex.raw("now()"));
 
     table
-      .bigInteger("user_id")
+      .bigInteger("userId")
       .unsigned()
       .notNullable()
       .references("id")

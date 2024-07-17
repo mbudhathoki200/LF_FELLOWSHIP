@@ -1,5 +1,6 @@
 import ITODO from "../interfaces/todo.interface";
 import loggerWithNameSpace from "../utils/logger";
+import { BaseModel } from "./base.model";
 
 const logger = loggerWithNameSpace("TodoModel");
 
@@ -30,6 +31,66 @@ let todos = [
   },
 ];
 
+export class TodoModel extends BaseModel {
+  static getTodos(userId: string) {
+    const todo = this.queryBuilder()
+      .select(
+        "todos.id",
+        "todos.title",
+        "todos.description",
+        "todos.userId",
+        "todos.created_at"
+      )
+      .table("todos")
+      .where("userId", userId);
+
+    return todo;
+  }
+  static getTodosById(todoId: string, ownerId: string) {
+    const todos = this.queryBuilder()
+      .select(
+        "todos.id",
+        "todos.title",
+        "todos.description",
+        "todos.userId",
+        "todos.created_at"
+      )
+      .table("todos")
+      .where({ id: todoId, userId: ownerId });
+    return todos;
+  }
+
+  static async createTodo(ownerId: string, todo: ITODO) {
+    const todoToCreate = {
+      title: todo.title,
+      description: todo.description,
+      userId: ownerId,
+    };
+
+    const [createdTodo] = await this.queryBuilder()
+      .insert(todoToCreate)
+      .into("todos")
+      .returning("*");
+
+    return createdTodo;
+  }
+
+  static async updateTodo(todoId: string, newTodo: ITODO, userId: string) {
+    const todoToUpdate = {
+      title: newTodo.title,
+      description: newTodo.description,
+      updatedAt: new Date(),
+      updatedBy: userId,
+    };
+    const [updatedTodo] = await this.queryBuilder()
+      .update(todoToUpdate)
+      .table("todos")
+      .where({ id: todoId })
+      .returning("*");
+
+    return updatedTodo;
+  }
+}
 export function getTodos(userId: string) {
   logger.info("get todos");
 

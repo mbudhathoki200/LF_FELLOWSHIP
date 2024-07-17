@@ -5,6 +5,7 @@ import { BaseModel } from "./base.model";
 const logger = loggerWithNameSpace("UserModel");
 
 export class UserModel extends BaseModel {
+  //create user
   static async createUser(
     user: Pick<IUser, "name" | "email" | "password" | "permissions">
   ) {
@@ -26,14 +27,14 @@ export class UserModel extends BaseModel {
 
       await this.queryBuilder()
         .insert({
-          user_id: id.id,
+          userId: id.id,
           permissions: user.permissions,
         })
         .table("permissions");
     }
     return user;
   }
-
+  //get user
   static getUser() {
     const query = this.queryBuilder()
       .select(
@@ -45,11 +46,11 @@ export class UserModel extends BaseModel {
         "permissions.permissions"
       )
       .table("users")
-      .leftJoin("permissions", "users.id", "permissions.id");
+      .leftJoin("permissions", "users.id", "permissions.userId");
 
     return query;
   }
-
+  //get user by id
   static getUserById(userId: string) {
     const query = this.queryBuilder()
       .select(
@@ -66,7 +67,7 @@ export class UserModel extends BaseModel {
 
     return query;
   }
-
+  //get user by email
   static async getUserByEmail(email: string) {
     logger.info("get user by email");
     const query = await this.queryBuilder()
@@ -82,10 +83,11 @@ export class UserModel extends BaseModel {
       .where("users.email", email)
       .leftJoin("permissions", "users.id", "permissions.id")
       .first();
+    console.log(query);
 
     return query;
   }
-
+  //update user
   static async updateUser(id: string, user: IUser) {
     const userToUpdate = {
       name: user.name,
@@ -102,15 +104,15 @@ export class UserModel extends BaseModel {
     await this.queryBuilder()
       .update({ permissions: user.permissions })
       .table("permissions")
-      .where({ user_id: id });
+      .where({ userId: id });
 
     return userToUpdate;
   }
-
+  //delete user
   static async deleteUser(userId: string) {
     await this.queryBuilder()
       .table("permissions")
-      .where({ user_id: userId })
+      .where({ userId: userId })
       .del();
     await this.queryBuilder().table("users").where({ id: userId }).del();
   }

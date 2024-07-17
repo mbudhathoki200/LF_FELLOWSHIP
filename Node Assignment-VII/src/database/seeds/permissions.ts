@@ -15,11 +15,11 @@ export function seed(knex: Knex): Promise<void> {
       return knex(TABLE_NAME).insert([
         {
           permissions: "superAdmin",
-          user_id: "1",
+          userId: "1",
         },
         {
           permissions: "superAdmin",
-          user_id: "2",
+          userId: "2",
         },
       ]);
     });

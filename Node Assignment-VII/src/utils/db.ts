@@ -10,6 +10,9 @@ const KnexConfig: Knex.Config = {
     if (value == "*") {
       return originalImpl(value);
     }
+    if (value == "userId") {
+      return originalImpl(value);
+    }
 
     return originalImpl(toSnakeCase(value));
   },
