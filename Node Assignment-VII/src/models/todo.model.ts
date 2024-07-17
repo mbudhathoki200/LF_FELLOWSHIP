@@ -46,7 +46,7 @@ export class TodoModel extends BaseModel {
 
     return todo;
   }
-  static getTodosById(todoId: string, ownerId: string) {
+  static async getTodosById(todoId: string, ownerId: string) {
     const todos = this.queryBuilder()
       .select(
         "todos.id",
@@ -57,7 +57,7 @@ export class TodoModel extends BaseModel {
       )
       .table("todos")
       .where({ id: todoId, userId: ownerId });
-    return todos;
+    return await todos;
   }
 
   static async createTodo(ownerId: string, todo: ITODO) {
@@ -89,6 +89,10 @@ export class TodoModel extends BaseModel {
       .returning("*");
 
     return updatedTodo;
+  }
+
+  static async deleteTodo(todoId: string) {
+    await this.queryBuilder().table("todos").del().where({ id: todoId });
   }
 }
 export function getTodos(userId: string) {

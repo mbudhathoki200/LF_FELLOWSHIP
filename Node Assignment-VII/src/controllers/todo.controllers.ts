@@ -77,17 +77,20 @@ export async function updateTodo(
   }
 }
 
-export function deleteTodo(req: Request, res: Response, next: NextFunction) {
+export async function deleteTodo(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   logger.info("delete todo");
   const { id } = req.params;
   const userId = req.user?.id;
-  const data = TodoServices.deleteTodo(id, userId!);
-
-  if (data === null) {
-    next(new NotFoundError(`Todo with id: ${id} doesnt exist`));
-    return;
+  try {
+    const data = await TodoServices.deleteTodo(id, userId!);
+    res.status(HttpStatusCodes.OK).send({
+      message: `Todo with id: ${id} deleted succesfully`,
+    });
+  } catch (error) {
+    next(error);
   }
-  res.status(HttpStatusCodes.OK).send({
-    message: `Todo with id: ${id} deleted succesfully`,
-  });
 }

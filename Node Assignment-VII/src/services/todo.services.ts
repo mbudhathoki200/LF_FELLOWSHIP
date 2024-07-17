@@ -5,6 +5,8 @@ import ITODO from "../interfaces/todo.interface";
 import loggerWithaNameSpace from "../utils/logger";
 import { NotFoundError } from "../error/NotFoundError";
 import { BadRequest } from "../error/BadRequest";
+import { log } from "console";
+import { notFoundError } from "../middlewares/errorHandler.middleware";
 
 const logger = loggerWithaNameSpace("TodoServices");
 
@@ -41,17 +43,19 @@ export async function updateTodo(
   console.log(existingTodo);
 
   if (existingTodo.length == 0) {
-    throw new BadRequest("Todo not found or user not authorized");
+    throw new NotFoundError(`Todo with id: ${todoId} not found`);
   }
 
   return await TodoModel.TodoModel.updateTodo(todoId, newTodo, userId);
 }
-export function deleteTodo(id: string, userId: string) {
+export async function deleteTodo(id: string, userId: string) {
   logger.info("deleteTodo");
-  const data = TodoModel.getTodosById(id, userId);
-  if (!data) {
-    return null;
+  const data = await TodoModel.TodoModel.getTodosById(id, userId);
+
+  console.log({ data });
+  if (data.length == 0) {
+    throw new NotFoundError(`Todo with id: ${id} not found`);
   }
 
-  TodoModel.deleteTodo(id, userId);
+  TodoModel.TodoModel.deleteTodo(id);
 }
